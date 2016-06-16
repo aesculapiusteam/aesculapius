@@ -36,3 +36,6 @@ coverage.xml
 
 #SQLite database
 *.sqlite3
+
+#DB Migrations
+migrations/
