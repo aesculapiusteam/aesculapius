@@ -15,14 +15,14 @@ class PacientSerializer(models.Model):
 class EmployeeSerializer(models.Model):
     class Meta:
         model = Employe
-        fields =
+        fields = ('user', 'password')
 
 class DoctorSerializer(models.Model):
     class Meta:
         model = Doctor
-        fields =
+        fields = ('horario')
 
 class SecretarySerializer(models.Model):
     class Meta:
         model = Secretary
-        fields =
+        fields = ('doctors')
