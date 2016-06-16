@@ -35,7 +35,7 @@ class Picture(models.Model):
 class Pacient(models.Model):
     clinic_history = None #TODO
 
-class Employe(models.Model):
+class Employee(models.Model):
     #TODO Importar de django auth
     user = models.CharField(max_length=128)
     password = models.CharField(max_length=128)
