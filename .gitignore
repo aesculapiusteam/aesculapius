@@ -42,3 +42,7 @@ migrations/
 
 #Pip
 pip-selfcheck.json
+
+#Archivos de mauro
+include/
+local/
