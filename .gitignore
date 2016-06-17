@@ -39,3 +39,6 @@ coverage.xml
 
 #DB Migrations
 migrations/
+
+#Pip
+pip-selfcheck.json
