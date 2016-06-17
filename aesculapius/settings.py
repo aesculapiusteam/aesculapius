@@ -37,11 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'django_extensions',
     'app_users',
     'app_stock',
     'app_clinic_history',
     'app_contributions',
+    'app_design',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -124,3 +126,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR + '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR + '/media/'

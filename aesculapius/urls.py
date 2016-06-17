@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-
+from aesculapius import views
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^', views.home, name="home"),
+    # url(r'^users/', include('app_users.urls', namespace='app_users')),
 ]
+urlpatterns.append(url(r'^admin/', admin.site.urls))
