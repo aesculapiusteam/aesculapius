@@ -3,21 +3,20 @@ from app_users.models import Profile, Secretary, Employee, Doctor
 from django.contrib.auth.models import User
 
 
-class ProfileSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.ReadOnlyField(source='employee.username')
+class ProfileSerializer(serializers.ModelSerializer):
+    # employee = serializers.ReadOnlyField(source='employee')
     class Meta:
         model = Profile
-        fields = ('url', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
+        fields = ('url', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
             'adress', 'phone', 'cellphone', 'creation_date')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    employee = serializers.HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
-
+    # employee = serializers.HyperlinkedRelatedField(view_name='user-detail', read_only=True)
     class Meta:
         model = User
-        fields = ('url', 'username', 'employee')
+        fields = ('url', 'username', 'email')
 
-class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
+class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         fields = ('url', 'user', 'profile')

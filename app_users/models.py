@@ -18,6 +18,8 @@ class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
+    # TODO Use __init__ instead of create. using init normally makes
+    #"profile.employee" or "user.employee" commands to not work properly
     def create(self, username, password, email, first_name, last_name, **kwargs):
         super(Employee, self).__init__(**kwargs)
         user = User(username = username, email = email)
