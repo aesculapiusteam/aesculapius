@@ -26,6 +26,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
 
 # Application definition
 EXTERNAL_APPS = [
@@ -37,6 +40,7 @@ EXTERNAL_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
+    'rest_framework'
 ]
 
 INTERNAL_APPS =[

@@ -1,28 +1,33 @@
 from rest_framework import serializers
-from app_users.models import Profile, Secretary, Pacient, Employe, Doctor
+from app_users.models import Profile, Secretary, Employee, Doctor
+from django.contrib.auth.models import User
 
 
-class ProfileSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.ReadOnlyField(source='employee.username')
     class Meta:
         model = Profile
-        fields = ('dni', 'birth_date', 'adress', 'phone_number', 'create_date', 'user_type', 'user_id', 'content_object')
+        fields = ('url', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
+            'adress', 'phone', 'cellphone', 'creation_date')
 
-class PacientSerializer(models.Model):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    employee = serializers.HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
+
     class Meta:
-        model = Pacient
-        fields = ('clinic_history')
+        model = User
+        fields = ('url', 'username', 'employee')
 
-class EmployeeSerializer(models.Model):
+class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Employe
-        fields = ('user', 'password')
+        model = Employee
+        fields = ('url', 'user', 'profile')
 
-class DoctorSerializer(models.Model):
+class DoctorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Doctor
-        fields = ('horario')
+        fields = ('url', 'user', 'profile', 'hours')
 
-class SecretarySerializer(models.Model):
+class SecretarySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Secretary
-        fields = ('doctors')
+        fields = ('url', 'user', 'profile', 'doctors')
