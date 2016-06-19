@@ -21,11 +21,11 @@ class Employee(models.Model):
     # TODO Use __init__ instead of create. using init normally makes
     #"profile.employee" or "user.employee" commands to not work properly
     def create(self, username, password, email, first_name, last_name, **kwargs):
-        super(Employee, self).__init__(**kwargs)
+        # super(Employee, self).__init__(**kwargs)
         user = User(username = username, email = email)
         user.set_password(password)
         self.user = user
-        profile = Profile(first_name=first_name, last_name=last_name, **kwargs)
+        profile = Profile(first_name=first_name, last_name=last_name, email = email, **kwargs)# TODO Email replicado en profile y en user
         self.profile = profile
         return self
 
