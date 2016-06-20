@@ -11,9 +11,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
             'adress', 'phone', 'cellphone', 'creation_date')
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    profile = serializers.HyperlinkedRelatedField(view_name='profile-detail', read_only=True)
+    # profile = serializers.HyperlinkedRelatedField(view_name='profile-detail', read_only=True)
     class Meta:
         model = Employee
         fields = ('url', 'user', 'profile')
-        # ('url','username', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
-        #     'adress', 'phone', 'cellphone', 'creation_date')

@@ -14,10 +14,10 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
         # Write permissions are only allowed to the owner of the snippet.
 
-        if isinstance(obj, Profile):
-            if hasattr(obj, 'employee'):
-                if obj.employee.user == request.user:
+        if isinstance(obj, Profile): # Is a profile
+            if hasattr(obj, 'employee'): # Is a employee profile
+                if obj.employee.user == request.user: # Is the current user profile
                     return True
                 return False
             return True
-        return obj.user == request.user
+        return obj.user == request.user # Is the current user employee

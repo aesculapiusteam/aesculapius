@@ -3,7 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User, UserManager
 
 class Profile(models.Model):
-    #TODO hacer que firstname, lastname y email se repliquen de user
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128, null=True)
     email = models.CharField(max_length=128, null=True)
@@ -14,18 +13,27 @@ class Profile(models.Model):
     cellphone = models.CharField(max_length=50, null=True)
     creation_date = models.DateField(auto_now_add = True)
 
+    def __unicode__(self):
+        last = ""
+        if self.last_name != None:
+            last = " " + self.last_name
+        return self.first_name + last
+
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
 
     # TODO Use __init__ instead of create. using init normally makes
-    #"profile.employee" or "user.employee" commands to not work properly
+    #"profile.employee" or "user.employee" commands to not work
+    def __unicode__(self):
+        return self.profile.first_name + " " + self.profile.last_name
+
     def create(self, username, password, email, first_name, last_name, **kwargs):
         # super(Employee, self).__init__(**kwargs)
-        user = User(username = username, email = email)
+        user = User(username = username)
         user.set_password(password)
         self.user = user
-        profile = Profile(first_name=first_name, last_name=last_name, email = email, **kwargs)# TODO Email replicado en profile y en user
+        profile = Profile(first_name=first_name, last_name=last_name, email = email, **kwargs)
         self.profile = profile
         return self
 
