@@ -1,17 +1,17 @@
 from rest_framework import serializers
 from app_users.models import Profile, Employee
-from django.contrib.auth.models import User
-
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
-    # employee = serializers.ReadOnlyField(source='employee')
+    # employee = serializers.ReadOnlyField(required=False, allow_null=True)
+    employee = serializers.HyperlinkedRelatedField(view_name='employee-detail', required=False, read_only=True)
     class Meta:
         model = Profile
         fields = ('url', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
-            'adress', 'phone', 'cellphone', 'creation_date')
+        'adress', 'phone', 'cellphone', 'creation_date')
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    # profile = serializers.HyperlinkedRelatedField(view_name='profile-detail', read_only=True)
+    profile = ProfileSerializer()
+    # username = serializers.CharField(source="user.username", required=True)
     class Meta:
         model = Employee
-        fields = ('url', 'user', 'profile')
+        fields = ('url', 'profile')
