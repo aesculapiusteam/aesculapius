@@ -22,11 +22,6 @@ class EmployeeSerializer(serializers.ModelSerializer):
         profile = validated_data["profile"]
         user = validated_data["user"]
 
-        print 'username' + str(user['username'])
-        print 'password' + str(user['password'])
-        print 'first_name' + str(profile['first_name'])
-        print 'last_name' + str(profile['last_name'])
-        print 'email' + str(profile['email'])
         employee = Employee().create(
             username = user['username'],
             password = user['password'],

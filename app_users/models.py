@@ -19,9 +19,14 @@ class Profile(models.Model):
             last = " " + self.last_name
         return self.first_name + last
 
+    def delete(self):
+        if hasattr(self, 'employee'): # Is a employee profile
+            User.objects.get(pk=self.employee.user.pk).delete()
+        super(Profile, self).delete()
+
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    user = models.OneToOneField(User)
+    profile = models.OneToOneField(Profile)
 
     # TODO Use __init__ instead of create. using init normally makes
     #"profile.employee" or "user.employee" commands to not work
@@ -46,6 +51,11 @@ class Employee(models.Model):
         self.profile_id = self.profile.id
         self.user_id = self.user.id
         super(Employee, self).save(**kwargs)
+
+    def delete(self):
+        User.objects.get(pk=self.user.pk).delete()
+        Profile.objects.get(pk=self.profile.pk).delete()
+        super(Employee, self).delete()
 
 class Doctor(Employee):
     hours = 3 #TODO Add working shifts
