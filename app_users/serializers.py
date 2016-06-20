@@ -3,11 +3,12 @@ from app_users.models import Profile, Employee
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     # employee = serializers.ReadOnlyField(required=False, allow_null=True)
-    employee = serializers.HyperlinkedRelatedField(view_name='employee-detail', required=False, read_only=True)
+    employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
     class Meta:
         model = Profile
         fields = ('url', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
         'address', 'phone', 'cellphone', 'creation_date')
+        extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
 class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
@@ -16,8 +17,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         fields = ('url', 'username', 'password', 'profile')
-        # extra_kwargs = {'password': {'write_only': True}}
-        # read_only_fields = ('password',)
+        extra_kwargs = {'url': {'view_name': 'api:employee-detail'}}
+
     def create(self, validated_data):
         profile = validated_data["profile"]
         user = validated_data["user"]
