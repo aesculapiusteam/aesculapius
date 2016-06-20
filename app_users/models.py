@@ -8,7 +8,7 @@ class Profile(models.Model):
     email = models.CharField(max_length=128, null=True)
     dni = models.IntegerField(null=True)
     birth_date = models.DateField(null=True)
-    adress = models.CharField(max_length=256, null=True)
+    address = models.CharField(max_length=256, null=True)
     phone = models.CharField(max_length=50, null=True)
     cellphone = models.CharField(max_length=50, null=True)
     creation_date = models.DateField(auto_now_add = True)
@@ -26,7 +26,10 @@ class Employee(models.Model):
     # TODO Use __init__ instead of create. using init normally makes
     #"profile.employee" or "user.employee" commands to not work
     def __unicode__(self):
-        return self.profile.first_name + " " + self.profile.last_name
+        last = ""
+        if self.profile.last_name != None:
+            last = " " + self.profile.last_name
+        return self.profile.first_name + last
 
     def create(self, username, password, email, first_name, last_name, **kwargs):
         # super(Employee, self).__init__(**kwargs)
@@ -38,10 +41,10 @@ class Employee(models.Model):
         return self
 
     def save(self, **kwargs):
-        self.user.save()
-        self.user_id = self.user.id
         self.profile.save()
+        self.user.save()
         self.profile_id = self.profile.id
+        self.user_id = self.user.id
         super(Employee, self).save(**kwargs)
 
 class Doctor(Employee):
