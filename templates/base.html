@@ -4,7 +4,7 @@
     <head>
         <title>{% block title %}Aesculapius{% endblock %}</title>
         <link rel="icon" type=".png" href="{% static 'img/title.png' %}">
-
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -21,13 +21,12 @@
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/init.js' %}"></script>
 
-        <nav>
-            <div class="nav-wrapper blue darken-3">
-                <a href="#" class="brand-logo">Aesculapius</a>
+
+        <nav class="nav-wrapper blue darken-3" role="navigation">
+            <div class="nav-wrapper"><a href="#" class="brand-logo">Aesculapius</a>
                 <ul id="nav" class="right hide-on-med-and-down">
-
-
                     <div class="tooltipped left input-field" data-position="bottom" data-delay="50" data-tooltip="Ingrese su email">
                         <input id="search" placeholder="Email" type="search" required>
                         <label for="search"><i class="material-icons">perm_identity</i></label>
@@ -38,53 +37,69 @@
                         <label for="search"><i class="material-icons">vpn_key</i></label>
                     </div>
                     <a class="waves-effect waves-light darken-2 btn-flat"><i class="material-icons left">done</i>Log In</a>
+                </ul>
+
+                <ul id="nav-mobile" class="side-nav blue darken-3">
+                    <div class="tooltipped left input-field" data-position="bottom" data-delay="50" data-tooltip="Ingrese su email">
+                        <input id="search" placeholder="Email" type="search" required>
+                        <label for="search"><i class="material-icons">perm_identity</i></label>
                     </div>
-                </nav>
+
+                    <div class="tooltipped left input-field" data-position="bottom" data-delay="50" data-tooltip="Ingrese su contraseña">
+                        <input id="search" placeholder="Password" type="search" required>
+                        <label for="search"><i class="material-icons">vpn_key</i></label>
+                    </div>
+                    <a class="waves-effect waves-light darken-2 btn-flat"><i class="material-icons left">done</i>Log In</a>
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
 
 
 
-            <!--        <nav>
+
+        <!--     <nav>
 <div class="nav-wrapper blue darken-3">
 <a href="#" class="brand-logo">Aesculapius</a>
 <ul id="nav" class="right hide-on-med-and-down">
 <a class="waves-effect btn-flat"><i class="material-icons left">person_pin</i>Profile</a>
-<a class="btn-floating btn-tiny waves-effect  light-blue darken-4"><i class="material-icons">exit_to_app</i></a>
+<a class="btn-flat btn-tiny waves-effect "><i class="material-icons">exit_to_app</i></a>
 </div>
 
 
 </nav>-->
 
-            <main>
-                {% block content %}
-                {% endblock %}
-            </main>
-
-            <footer class="page-footer indigo lighten-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col l9 s12">
-                            <h5 class="white-text">Aesculapius</h5>
-                            <p class="grey-text text-lighten-4">Software de consultoría médica - Parroquia Santa María de la Paz</p>
-
-
-                        </div>
-                        <div class="col l3 s12">
-                            <h5 class="white-text">Links</h5>
-                            <ul>
-                                <li><a class="white-text" href="http://github.com/aesculapiusteam/aesculapius">GitHub</a></li>
-                                <li><a class="white-text" href="https://www.facebook.com/Parroquia-Santa-Maria-de-la-Paz-495991100463679/">Facebook</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-copyright">
-                    <div class="container">
-                        <a href="http://github.com/aesculapiusteam/" class="white-text">Made by Aesculapius Team</a>
-                    </div>
-                </div>
-            </footer>
-
-            {% block scripts %}
+        <main>
+            {% block content %}
             {% endblock %}
-            </body>
-        </html>
+        </main>
+
+        <footer class="page-footer indigo lighten-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col l9 s12">
+                        <h5 class="white-text">Aesculapius</h5>
+                        <p class="grey-text text-lighten-4">Software de consultoría médica - Parroquia Santa María de la Paz</p>
+
+
+                    </div>
+                    <div class="col l3 s12">
+                        <h5 class="white-text">Links</h5>
+                        <ul>
+                            <li><a class="white-text" href="http://github.com/aesculapiusteam/aesculapius">GitHub</a></li>
+                            <li><a class="white-text" href="https://www.facebook.com/Parroquia-Santa-Maria-de-la-Paz-495991100463679/">Facebook</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <a href="http://github.com/aesculapiusteam/" class="white-text">Made by Aesculapius Team</a>
+                </div>
+            </div>
+        </footer>
+
+        {% block scripts %}
+        {% endblock %}
+    </body>
+</html>
