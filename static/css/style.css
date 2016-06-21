@@ -54,3 +54,7 @@ nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul 
   left: 1rem;
   top: 0.8rem;
 }
+
+.side-nav a.btn-flat {
+  color: white;
+}
