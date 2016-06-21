@@ -1,0 +1,60 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+
+nav .brand-logo {
+  position: absolute;
+  color: white;
+  display: inline-block;
+  font-size: 1.9rem;
+  padding-left: 30px;
+  white-space: nowrap;
+}
+
+
+::-moz-placeholder {
+  color: #d1d1d1;
+  font-size: 1rem;
+}
+
+elemento {
+line-height: 40px;
+}
+
+.btn-flat {
+  box-shadow: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+nav [class^="mdi-"], nav [class*="mdi-"],
+nav i.material-icons {
+  display: block;
+  font-size: 2rem;
+  height: 60px;
+  line-height: 35px;
+}
+
+nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul a.btn-floating {
+  margin-top: -2px;
+  margin-left: 15px;
+  margin-right: 20px;
+}
+
+.btn, .btn-large {
+  text-decoration: none;
+  color: #fff;
+  background-color: transparent;
+  text-align: center;
+  letter-spacing: .5px;
+  transition: .2s ease-out;
+  cursor: pointer;
+}
