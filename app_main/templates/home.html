@@ -1,38 +1,33 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-
+{% block head %}
+<script src="{% static 'js/angular.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+{% endblock %}
 <div ng-app="peopleModule">
-    <br>
-        <a href="{% static 'js/angular-1.5.6/angular.min.js' %}"></a>
-        <a href="{% static 'js/app.js' %}"></a>
+  <br>
+  <div class="row center s3">
+    <a href="{% url 'api:api-root' %}" class="btn-large indigo waves-effect waves-light">
+      <i class="material-icons right">arrow_forward</i>API
+    </a>
+  </div>
 
-    <div class="row center s3">
-      <a href="{% url 'api:api-root' %}" class="btn-large indigo waves-effect waves-light">
-        <i class="materitial-icons right">arrow_forward</i>API
+  <div class="row center s3">
+    <a class="waves-effect waves-light btn">Empleados</a>
+    <a class="waves-effect waves-light btn">Perfiles</a>
 
-      </a>
-
-
+    {% verbatim angular %}
+    <div ng-controller="EmployeesController as emplCntr">
+      <h5 class="container">
+        <ul class="collection">
+          <li class="collection-item" ng-repeat="employee in emplCntr.employees">{{ employee.username }}</li>
+        </ul>
+      </h5>
     </div>
+    {% endverbatim angular %}
 
-    <div class="row center s3">
-        <a class="waves-effect waves-light btn">Empleados</a>
-        <a class="waves-effect waves-light btn">Perfiles</a>
-
-        {% verbatim angular %}
-        <div ng-controller="EmployeesController as emplCntr">
-            <h5 class="container">
-                <ul class="collection">
-                      <li class="collection-item" ng-repeat="employee in emplCntr.employees">{{ employee.username }}</li>
-                      <li class="collection-item">Alvin {{"Hello, Angular!"}}</li>
-                      <li class="collection-item">Alvin</li>
-                    </ul>
-            </h5>
-        </div>
-        {% endverbatim angular %}
-
-    </div>
+  </div>
 
 </div>
 
