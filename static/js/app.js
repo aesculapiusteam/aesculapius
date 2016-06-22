@@ -62,7 +62,7 @@ var employees = [
       "creation_date": "2016-06-21"
     }
   }
-]
+];
 var profiles = [
   {
     "url": "http://localhost:8000/api/profiles/1/",
@@ -129,8 +129,6 @@ var profiles = [
     "cellphone": null,
     "creation_date": "2016-06-21"
   }
-]
+];
 
 })();
-
-
