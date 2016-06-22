@@ -1,0 +1,639 @@
+/* Custom Stylesheet */
+/**
+* Use this file to override Materialize files so you can update
+* the core Materialize files in the future
+*
+* Made By MaterializeCSS.com
+*/
+
+nav ul a,
+nav .brand-logo {
+    color: #444;
+}
+
+body{
+    background-color: #04242f;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+p {
+    line-height: 2rem;
+}
+
+/*
+.button-collapse {
+color: #26a69a;
+}
+*/
+
+.parallax-container {
+    min-height: 128px;
+    line-height: 0;
+    height: 128px;
+    color: rgba(255,255,255,.9);
+}
+.parallax-container .section {
+    width: 100%;
+}
+
+@media only screen and (max-width : 992px) {
+    .parallax-container .section {
+        position: absolute;
+        top: 40%;
+    }
+    #index-banner .section {
+        top: 10%;
+    }
+}
+
+@media only screen and (max-width : 600px) {
+    #index-banner .section {
+        top: 0;
+
+    }
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+
+footer.page-footer {
+    margin: 0;
+    background-color:#2299AA;
+}
+
+.waves-effect.waves-brown .waves-ripple {
+    background-color: rgba(121, 85, 72, 0.65);
+}
+.waves-effect.waves-cyan .waves-ripple {
+    background-color: rgba(81, 165, 224 , 0.25);
+}
+.cyan-text {
+    color: #2299AA !important;
+}
+
+.cyan-light-text{
+    color:#00CCEE !important;
+}
+
+.dark-text{
+    color: rgba(255, 255, 255, 0.3);
+}
+
+nav ul li:hover, nav ul li.active{
+    /*#51a5e0*/
+    background-color: rgba(81, 165, 224 , 0.25);
+}
+
+.imgProfundidad{
+    -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all ease 200ms;}
+
+.imgProfundidad:hover {
+    -webkit-box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+    -moz-box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+    transition: all ease 200ms;}
+
+.progress .determinate {
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    bottom: 0;
+    background-color: #26a69a;
+}
+
+.blue {
+    background-color: #0b324b !important; }
+
+.lightblue {
+    background-color: #0f4668 !important; }
+
+.darkblue {
+    background-color: #04242f !important; }
+
+.selectblue {
+    background-color: rgb(15, 104, 138) !important; }
+
+.green{
+    background-color: #3ea400 !important;}
+
+.red{
+    background-color: #a43600 !important;}
+
+.side-nav {
+    position: fixed;
+    width: 96px;
+    left: -105%;
+    top: 0;
+    margin: 0;
+    height: 100%;
+    height: calc(100% + 60px);
+    height: -moz-calc(100%);
+    padding-bottom: 60px;
+    background-color: #fff;
+    z-index: 999;
+    overflow-y: auto;
+    will-change: left; }
+
+.side-nav li:hover, .side-nav li.active {
+    background-color:rgba(81, 165, 224 , 0.25);}
+
+.input-field {
+    position: relative;
+    margin-top: 1rem; }
+
+.input-field input[type=search]:focus {
+    background-color: rgba(81, 165, 224 , 0.25);
+    border: 0;
+    box-shadow: none;
+    color: #fff; }
+
+.input-field input[type=search]:focus + label i, .input-field input[type=search]:focus ~ .mdi-navigation-close, .input-field input[type=search]:focus ~ .material-icons {
+    color: #fff; }
+
+.tabs{
+    display: flex;
+    position: relative;
+    height: 48px;
+    background-color: #04242f;
+    margin: 0px auto;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.tabs .tab a {
+    color: #ddd;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: color 0.28s ease 0s;
+    transition: background-color 0.28s ease 0s;
+}
+.tabs .tab a:hover {
+    background-color: #0f4668;
+    /*    color: rgba(81, 165, 224 , 0.25);*/
+    color: white;
+
+}
+.tabs .indicator {
+    position: absolute;
+    bottom: 0px;
+    height: 2px;
+    background-color: #0f4668;
+    will-change: left, right;
+}
+
+.summonerImg{
+    border-radius:32px;
+}
+
+.summonerName{
+    position: relative;
+    bottom: 40px;
+}
+
+.summonerDescription{
+    position: relative;
+    bottom: 46px;
+    left: 102px;
+    font-size: 20px;
+}
+
+.summonerLeagueImg{
+    position: absolute;
+    bottom: 26px;
+    left: 84px;
+    height: 32px;
+    width: 32px;
+}
+
+#kda{
+    position: relative;
+    text-align: right;
+    top:-10px;
+}
+
+#killdeathassist{
+    position: relative;
+    text-align: right;
+    top: 20px;
+    right: -186px;
+}
+
+.hMostPlayedChamp{
+    position: relative;
+    bottom: 16px;
+}
+
+.card .card-content {
+    padding: 20px;
+    border-radius: 0px 0px 2px 2px;
+    height: 110px;
+    cursor: pointer;
+}
+
+.listImg{
+    height: 32px;
+    width: 32px;
+    margin-right: 8px
+}
+
+.top{
+    padding-top: 12px;
+    vertical-align: top;
+}
+
+.mid{
+    vertical-align: middle;
+}
+
+.bot{
+    vertical-align: bottom;
+}
+
+.clase{
+    background-image: url("../img/rivenbaner.jpg");
+}
+
+@media only screen and (max-width : 992px) {
+    .hide-on-med-and-down {
+        display: none !important; } }
+
+@media only screen and (min-width : 1099px) {
+    nav a.button-collapse {
+        display: none; } }
+
+@media only screen and (min-width : 64px) {
+    nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+        height: 64px;
+        line-height: 64px; }
+        .navbar-fixed {
+            height: 64px; } }
+
+table.striped > tbody > tr:nth-child(odd) {
+    background-color: rgba(81, 165, 224 , 0.25); }
+
+.large-text{
+    font-size: 1.5rem;
+}
+
+.mid-text{
+    font-size: 1.0rem;
+}
+
+.dropdown-content {
+    background-color: #0b324b;
+    margin: 0;
+    display: none;
+    min-width: 10px;
+    max-height: 650px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 999;
+    will-change: width, height; }
+.dropdown-content li:hover, .dropdown-content li.active {
+    background-color: rgba(81, 165, 224 , 0.25);
+}
+.dropdown-content li > a, .dropdown-content li > span {
+  font-size: 1.2rem;
+  color: #ffffff;
+  display: block;
+  padding: 1rem 1rem; }
+
+.historyCard {
+    height: 142px;
+    padding: 0px !important;
+}
+
+.hLabel{
+    width: 2%;
+    height: 100%;
+    float: left;
+
+}
+
+.hImg{
+    height: 100%;
+    padding-top: 22px;
+    padding-left: 2%;
+    width:13.5%;
+    float:left;
+/*    background-color: aqua;*/
+}
+
+.hSum{
+    height: 100%;
+    float: left;
+/*    background-color:red;*/
+    width: 6%;
+    padding-top: 22px;
+
+}
+
+.hMatch{
+    height: 100%;
+    float: left;
+    width: 20%;
+}
+.hStats{
+    height: 100%;
+    float: left;
+    width: 43.5%;
+    padding-top: 22px;
+}
+
+.hInfo{
+    height: 100%;
+    float: left;
+    padding-top:22px;
+    width: 15%;
+}
+
+.hItem{
+    border-radius: 8px;
+    width:49px;
+}
+.rune{
+    position: relative;
+    width: 69px;
+    margin-bottom: -14px;
+}
+
+
+#slot1 {
+    top:155px;
+    left:36px;
+}
+
+#slot2 {
+    top:155px;
+    left:55px;
+}
+
+#slot3 {
+    top:157px;
+    left:87px;
+}
+
+#slot4 {
+    top:70px;
+    left:-202px;
+}
+
+#slot5 {
+    top:65px;
+    left:-185px;
+}
+
+#slot6 {
+    top:86px;
+    left:-180px;
+}
+
+#slot7 {
+    top:0px;
+    left:-390px;
+}
+
+#slot8 {
+    top:5px;
+    left:-345px;
+}
+
+#slot9 {
+    top:-56px;
+    left:-470px;
+}
+
+#slot10 {
+    top:-120px;
+    left:-600px;
+}
+
+#slot11 {
+    top:-130px;
+    left:-570px;
+}
+
+#slot12 {
+    top:-190px;
+    left:-700px;
+}
+
+#slot13 {
+    top:-225px;
+    left:-695px;
+}
+
+#slot14 {
+    top:-362px;
+    left:222px;
+}
+
+#slot15 {
+    top:-402px;
+    left:233px;
+}
+
+#slot16 {
+    top:-427px;
+    left:240px;
+}
+
+#slot17 {
+    top:-455px;
+    left:265px;
+}
+
+#slot18 {
+    top:-380px;
+    left:225px;
+}
+
+#slot19 {
+    top:-452px;
+    left:214px;
+}
+
+#slot20 {
+    top:-380px;
+    left:190px;
+}
+
+#slot21 {
+    top:-450px;
+    left:166px;
+}
+
+#slot22 {
+    top:-325px;
+    left:115px;
+}
+
+#slot23 {
+    top:-390px;
+    left:86px;
+}
+
+#slot24 {
+    top:-450px;
+    left:68px;
+}
+
+#slot25 {
+    top:-400px;
+    left:62px;
+}
+
+#slot26 {
+    top:-340px;
+    right:70px;
+}
+
+#slot27 {
+    top:-380px;
+    left:840px;
+}
+
+#slot28 {
+    top:-490px;
+    right:15px;
+    width: 120px;
+}
+
+#slot29 {
+    top:-210px;
+    right:-85px;
+    width: 120px;
+}
+
+#slot30 {
+    top:-280px;
+    left:300px;
+    width: 120px;
+}
+.dropshadowed {
+    -webkit-filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.9));
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 5px;
+    border: 0;
+    width: 80%;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0),rgb(0, 102, 204), rgba(0, 0, 0, 0));
+}
+
+
+
+#hImgChamp {
+    border-radius:24px;
+    text-align:center;
+    padding-top:74px;
+    width:96px;
+    height:96px;
+    background: transparent none repeat scroll center center / 100px auto;
+    background-image: url('img/hRiven.png');
+}
+
+.chatImg {
+    width: 40px;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.nameChat {
+    margin-top: -5px;
+    color:cyan;
+}
+
+.messageChat {
+    color:white;
+}
+
+.messageChat {
+    color:white;
+}
+
+#chatBox {
+    color:white;
+}
+
+#nameChat {
+    margin-top: -10px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+
+}
+::-webkit-scrollbar-thumb {
+    background-color: #053A65;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #2196f3;
+}
+scrollbar {
+/*  clear useragent default style*/
+   -moz-appearance: none !important;
+}
+/* buttons at two ends */
+scrollbarbutton {
+   -moz-appearance: none !important;
+}
+/* the sliding part*/
+thumb{
+   -moz-appearance: none !important;
+}
+scrollcorner {
+   -moz-appearance: none !important;
+   resize:both;
+}
+/* vertical or horizontal */
+scrollbar[orient="vertical"] {
+    color:silver;
+}
+.borderBlue {
+    border-color:#04242f;
+}
+.pad {
+    padding-left: 20px;
+}
+.sendButton:focus{
+  background-color: #04242f;
+}
+.conversacion {
+    overflow-y:scroll;
+}
+.contact:hover {
+    background-color: #17699c !important;
+}
+#perfil {
+    background-color: #17699c;
+}
+
+.likemodal {
+    display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: #fafafa;
+  padding: 0;
+  max-height: 70%;
+  width: 55%;
+  margin: auto;
+  overflow-y: auto;
+  border-radius: 2px;
+box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
