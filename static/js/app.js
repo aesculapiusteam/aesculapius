@@ -9,6 +9,18 @@
        this.profiles = profiles;
     });
 
+    app.controller("TabController", function() {
+    this.tab = 1;
+
+    this.isSet = function(checkTab) {
+      return this.tab === checkTab;
+    };
+
+    this.setTab = function(setTab) {
+      this.tab = setTab;
+    };
+  });
+
 
 var employees = [
   {
@@ -20,7 +32,7 @@ var employees = [
       "first_name": "Doctor Romero",
       "last_name": "Doctor",
       "email": "doctor@doctor.com",
-      "dni": 123123123123,
+      "dni": 40815251,
       "birth_date": "1980-05-03",
       "address": "Mi casa 1 piso 1",
       "phone": "351623213",
@@ -37,7 +49,7 @@ var employees = [
       "first_name": "Doctor 1",
       "last_name": "Doctor",
       "email": "doctor@doctor.com",
-      "dni": null,
+      "dni": 40815252,
       "birth_date": "1980-05-03",
       "address": null,
       "phone": "351623213",
@@ -54,7 +66,7 @@ var employees = [
       "first_name": "Marta",
       "last_name": "Mocha",
       "email": null,
-      "dni": null,
+      "dni": 40815253,
       "birth_date": null,
       "address": null,
       "phone": null,

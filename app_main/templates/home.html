@@ -13,22 +13,54 @@
       <i class="material-icons right">arrow_forward</i>API
     </a>
   </div>
-
-  <div class="row center s3">
-    <a class="waves-effect waves-light btn">Empleados</a>
-    <a class="waves-effect waves-light btn">Perfiles</a>
-
     {% verbatim angular %}
-    <div ng-controller="EmployeesController as emplCntr">
-      <h5 class="container">
-        <ul class="collection">
-          <li class="collection-item" ng-repeat="employee in emplCntr.employees">{{ employee.username }}</li>
-        </ul>
-      </h5>
+
+
+
+
+    <div ng-controller="EmployeesController as emplCntr" class='container'>
+        <div class='card'>
+            <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#test1">Test 1</a></li>
+        <li class="tab col s3"><a class="active" href="#test2">Test 2</a></li>
+      </ul>
+    </div>
+    <div id="test1" class="col s12">Test 1</div>
+    <div id="test2" class="col s12">
+
+                  <table  class="bordered centered">
+        <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>DNI</th>
+              <th>E-mail</th>
+              <th>Telefono</th>
+              <th></th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="employee in emplCntr.employees">
+          <tr>
+            <td>{{ employee.username }}</td>
+            <td>{{ employee.profile.dni }}</td>
+            <td>{{ employee.profile.email }}</td>
+            <td>4336234</td>
+            <td><a class="waves-effect waves-light btn"><i class="material-icons">info</i></a></td>
+          </tr>
+        </tbody>
+      </table>
+
+            </div>
+
+
+
+
+
+        </div>
+
     </div>
     {% endverbatim angular %}
 
-  </div>
 
 </div>
 
