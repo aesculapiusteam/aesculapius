@@ -4,7 +4,13 @@
     app.controller('PeopleController', function(){
         this.employees = employees;
         this.profiles = profiles;
+        this.current = 0;
+
+        this.setCurrent = function(ModalNumber){
+            this.current = ModalNumber || 0;
+        };
     });
+
 
 var employees = [
   {

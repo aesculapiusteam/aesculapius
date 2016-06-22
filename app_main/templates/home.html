@@ -30,7 +30,7 @@
                             <th>DNI</th>
                             <th>E-mail</th>
                             <th>Telefono</th>
-                            <th></th>
+                            <th>Detalles</th>
                         </tr>
                     </thead>
                     <tbody ng-repeat="profile in plpCtrl.profiles">
@@ -52,7 +52,7 @@
                             <th>DNI</th>
                             <th>E-mail</th>
                             <th>Telefono</th>
-                            <th></th>
+                            <th>Detalles</th>
                         </tr>
                     </thead>
                     <tbody ng-repeat="employee in plpCtrl.employees">
@@ -61,7 +61,7 @@
                             <td>{{employee.profile.dni}}</td>
                             <td>{{employee.profile.email}}</td>
                             <td>{{employee.profile.phone}}</td>
-                            <td><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a></td>
+                            <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -69,10 +69,10 @@
         </div>
 
   <!-- Modal Structure -->
-        <div id="modal1" class="modal">
+        <div id="modalEmployee" class="modal">
             <div class="modal-content">
                 <h4>Modal Header</h4>
-                <p>A bunch of text</p>
+                <p>{{plpCtrl.employees[plpCtrl.current].username}}</p>
             </div>
             <div class="modal-footer">
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
