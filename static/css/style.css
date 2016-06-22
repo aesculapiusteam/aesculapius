@@ -2,62 +2,62 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  }
+}
 
-  main {
+main {
     flex: 1 0 auto;
-  }
+}
 
 
 nav .brand-logo {
-  position: absolute;
-  color: white;
-  display: inline-block;
-  font-size: 1.9rem;
-  padding-left: 30px;
-  white-space: nowrap;
+    position: absolute;
+    color: white;
+    display: inline-block;
+    font-size: 1.9rem;
+    padding-left: 30px;
+    white-space: nowrap;
 }
 
 
 ::-moz-placeholder {
-  color: #d1d1d1;
-  font-size: 1rem;
+    color: #d1d1d1;
+    font-size: 1rem;
 }
 
 elemento {
-line-height: 40px;
+    line-height: 40px;
 }
 
 .btn-flat {
-  box-shadow: none;
-  background-color: transparent;
-  color: white;
-  cursor: pointer;
-  text-align: center;
+    box-shadow: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    text-align: center;
 }
 
 nav [class^="mdi-"], nav [class*="mdi-"],
 nav i.material-icons {
-  display: block;
-  font-size: 2rem;
-  height: 60px;
-  line-height: 35px;
+    display: block;
+    font-size: 2rem;
+    height: 60px;
+    line-height: 35px;
 }
 
 nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul a.btn-floating {
-  margin-top: -2px;
-  margin-left: 15px;
-  margin-right: 20px;
+    margin-top: -2px;
+    margin-left: 15px;
+    margin-right: 20px;
 }
 
 
 .input-field input[type=search] + label {
-  left: 1rem;
-  top: 0.9rem;
+    left: 1rem;
+    top: 0.9rem;
 }
 
 .side-nav a.btn-flat {
-  color: white;
+    color: white;
 }
 
 .input-field input[type=search]:focus {
@@ -69,5 +69,18 @@ nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul 
 #login{
     height: 56px;
     line-height: 56px;
+}
+
+nav .button-collapse {
+    float: left;
+    position: relative;
+    z-index: 1;
+    height: 56px;
+    padding-left: 30px;
+}
+
+nav .input-field label i {
+  color: white;
+  transition: color .3s;
 }
 
