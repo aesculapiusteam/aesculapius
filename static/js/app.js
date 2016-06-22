@@ -1,26 +1,10 @@
 (function() {
     var app = angular.module('peopleModule', []);
 
-    app.controller('EmployeesController', function(){
-       this.employees = employees;
+    app.controller('PeopleController', function(){
+        this.employees = employees;
+        this.profiles = profiles;
     });
-
-    app.controller('ProfilesController', function(){
-       this.profiles = profiles;
-    });
-
-    app.controller("TabController", function() {
-    this.tab = 1;
-
-    this.isSet = function(checkTab) {
-      return this.tab === checkTab;
-    };
-
-    this.setTab = function(setTab) {
-      this.tab = setTab;
-    };
-  });
-
 
 var employees = [
   {
