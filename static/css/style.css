@@ -61,7 +61,7 @@ nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul 
 }
 
 .input-field input[type=search]:focus {
-    background-color: rgba(81, 165, 224 , 0.25);
+    background-color: #009688;
     border: 0;
     box-shadow: none;
     color: #fff; }
@@ -80,7 +80,9 @@ nav .button-collapse {
 }
 
 nav .input-field label i {
-  color: white;
-  transition: color .3s;
+    color: white;
+    transition: color .3s;
 }
 
+.input-field input[type=search]:focus + label i, .input-field input[type=search]:focus ~ .mdi-navigation-close, .input-field input[type=search]:focus ~ .material-icons {
+    color: #fff; }
