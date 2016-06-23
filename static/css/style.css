@@ -115,3 +115,14 @@ i.left {
     will-change: left, right;
 }
 
+.input-field input[type=search] {
+    display: inline-block;
+    line-height: inherit;
+    padding-left: 4rem;
+    width: calc(100% - 4rem);
+}
+
+nav .input-field {
+    height: 64px;
+    line-height: 56px;
+}
