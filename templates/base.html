@@ -40,7 +40,8 @@
                         <input id="search" placeholder="Contraseña" type="search" required>
                         <label for="search"><i class="material-icons">vpn_key</i></label>
                     </div>
-                    <a id="login" class="waves-effect waves-light btn-flat"><i class="material-icons left">send</i>Log In</a>
+
+                    <a id="login" href="{% url 'rest_framework:login' %}" class="waves-effect waves-light btn-flat"><i class="material-icons left">send</i>Log In</a>
                 </ul>
 
                 <ul id="nav-mobile" class="side-nav teal darken-3">
@@ -53,7 +54,7 @@
                         <input id="search" placeholder="Contraseña" type="search" required>
                         <label for="search"><i class="material-icons">vpn_key</i></label>
                     </div>
-                    <a id="login" class="waves-effect waves-light btn-flat"><i class="material-icons left">send</i>Log In</a>
+                    <a id="login" href="{% url 'rest_framework:login' %}" class="waves-effect waves-light btn-flat"><i class="material-icons left">send</i>Log In</a>
                 </ul>
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
@@ -92,6 +93,8 @@
                         <ul>
                             <li><a class="white-text" href="http://github.com/aesculapiusteam/aesculapius">GitHub</a></li>
                             <li><a class="white-text" href="https://www.facebook.com/Parroquia-Santa-Maria-de-la-Paz-495991100463679/">Facebook</a></li>
+                            <li><a class="white-text" href="{% url 'api:api-root' %}">API</a></li>
+
                         </ul>
                     </div>
                 </div>
