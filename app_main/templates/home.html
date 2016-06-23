@@ -7,12 +7,7 @@
 <script src="{% static 'js/app.js' %}"></script>
 {% endblock %}
 <div ng-app="peopleModule">
-    <br>
-    <div class="row center s3">
-        <a href="{% url 'api:api-root' %}" class="btn-large indigo waves-effect waves-light">
-            <i class="material-icons right">arrow_forward</i>API
-        </a>
-    </div>
+
     {% verbatim angular %}
     <div class='container' ng-controller="PeopleController as plpCtrl">
         <div class='card'>
