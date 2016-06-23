@@ -39,7 +39,7 @@
                             <td>{{profile.dni}}</td>
                             <td>{{profile.email}}</td>
                             <td>{{profile.phone}}</td>
-                            <td><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a></td>
+                            <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalProfile" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -78,6 +78,18 @@
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
             </div>
         </div>
+
+        <div id="modalProfile" class="modal">
+            <div class="modal-content">
+                <h4>Modal Header</h4>
+                <p>{{plpCtrl.profiles[plpCtrl.current].first_name}}</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
+        </div>
+
+
     </div>
     {% endverbatim angular %}
 </div>
