@@ -19,7 +19,7 @@
             <div class="col s12">
                 <ul class="tabs">
                     <li class="tab col s3"><a href="#test1">Perfiles</a></li>
-                    <li class="tab col s3"><a class="active" href="#test2">Empleados</a></li>
+                    <li class="tab col s3"><a href="#test2">Empleados</a></li>
                 </ul>
             </div>
             <div id="test1" class="col s12">
@@ -68,28 +68,83 @@
             </div>
         </div>
 
-  <!-- Modal Structure -->
-        <div id="modalEmployee" class="modal">
-            <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>{{plpCtrl.employees[plpCtrl.current].username}}</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
+        <!-- Modal Structure -->
+        <div id="modalEmployee" class="modal modal-fixed-footer">
+            <form class="col s12">
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" value="{{plpCtrl.employees[plpCtrl.current].profile.first_name}} {{plpCtrl.employees[plpCtrl.current].profile.last_name}}"  type="text" >
+                            <label for="first_name">Nombre y Apellido</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.dni}}" type="text" >
+                            <label for="last_name">DNI</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.address}}" type="text" >
+                            <label for="last_name">Direccion</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.phone}}" type="text" >
+                            <label for="last_name">Telefono</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.cellphone}}" type="text" >
+                            <label for="last_name">Celular</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.email}}" type="text" >
+                            <label for="last_name">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].username}}" type="text" disabled="dissabled">
+                            <label for="last_name">Nombre de Usuario</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
+                    <a href="#!" class=" modal-action black-text modal-close waves-effect waves-red btn-flat">Eliminar</a>
+                </div>
+            </form>
         </div>
-
-        <div id="modalProfile" class="modal">
-            <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>{{plpCtrl.profiles[plpCtrl.current].first_name}}</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
+        <div id="modalProfile" class="modal modal-fixed-footer">
+            <form class="col s12">
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="first_name" value="{{plpCtrl.profiles[plpCtrl.current].first_name}} {{plpCtrl.profiles[plpCtrl.current].last_name}}"  type="text" >
+                            <label for="first_name">Nombre y Apellido</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].dni}}" type="text" >
+                            <label for="last_name">DNI</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].address}}" type="text" >
+                            <label for="last_name">Direccion</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].phone}}" type="text" >
+                            <label for="last_name">Telefono</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].cellphone}}" type="text" >
+                            <label for="last_name">Celular</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].email}}" type="text" >
+                            <label for="last_name">Email</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
+                    <a href="#!" class=" modal-action black-text modal-close waves-effect waves-red btn-flat">Eliminar</a>
+                </div>
+            </form>
         </div>
-
-
     </div>
     {% endverbatim angular %}
 </div>
