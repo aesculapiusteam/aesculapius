@@ -86,3 +86,10 @@ nav .input-field label i {
 
 .input-field input[type=search]:focus + label i, .input-field input[type=search]:focus ~ .mdi-navigation-close, .input-field input[type=search]:focus ~ .material-icons {
     color: #fff; }
+
+i.left {
+    float: left;
+    margin-right: 15px;
+    margin-top: 10.4px;
+}
+
