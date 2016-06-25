@@ -3,29 +3,30 @@ from app_users.models import Profile, Employee
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     # employee = serializers.ReadOnlyField(required=False, allow_null=True)
-    employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
+    # employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
+    employee = serializers.ReadOnlyField(source="employee.id", required=False, read_only=True)
     class Meta:
         model = Profile
-        fields = ('url', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
+        fields = ('id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
         'address', 'phone', 'cellphone', 'creation_date')
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
 class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     username = serializers.CharField(source="user.username", required=True)
-    password = serializers.CharField(source="user.password", write_only=True, required=True, style={'input_type': 'password'})
+    password = serializers.CharField(source="user.password", write_only=True, required=False, style={'input_type': 'password'})
     class Meta:
         model = Employee
-        fields = ('url', 'username', 'password', 'profile')
+        fields = ('id', 'username', 'password', 'charge', 'profile')
         extra_kwargs = {'url': {'view_name': 'api:employee-detail'}}
 
     def create(self, validated_data):
         profile = validated_data["profile"]
         user = validated_data["user"]
-
         employee = Employee().create(
             username = user['username'],
             password = user['password'],
+            charge = validated_data['charge'],
             first_name = profile['first_name'],
             last_name = profile['last_name'],
             email = profile['email'],
@@ -42,8 +43,10 @@ class EmployeeSerializer(serializers.ModelSerializer):
         profile = validated_data["profile"]
         user = validated_data["user"]
         employee.user.username = user['username']
-        if not employee.user.password == user['password']:
-            employee.user.set_password(user['password'])
+        if 'password' in user:
+            if not (employee.user.password == user['password']):
+                employee.user.set_password(user['password'])
+        employee.charge = validated_data['charge']
         employee.profile.first_name = profile['first_name']
         employee.profile.last_name = profile['last_name']
         employee.profile.email = profile['email']

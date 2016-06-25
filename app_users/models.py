@@ -25,10 +25,16 @@ class Profile(models.Model):
         super(Profile, self).delete()
 
 class Employee(models.Model):
+    CHARGES = (
+        ("doctor", "Doctor"),
+        ("secretary", "Secretary"),
+    )
+
     user = models.OneToOneField(User)
+    charge = models.CharField(choices=CHARGES, default='doctor', max_length=100)
     profile = models.OneToOneField(Profile)
 
-    # TODO Use __init__ instead of create. using init normally makes
+    # TODO Use __init__ instead of create. not using init because it makes
     #"profile.employee" or "user.employee" commands to not work
     def __unicode__(self):
         last = ""
@@ -36,13 +42,14 @@ class Employee(models.Model):
             last = " " + self.profile.last_name
         return self.profile.first_name + last
 
-    def create(self, username, password, email, first_name, last_name, **kwargs):
+    def create(self, username, password, charge, email, first_name, last_name, **kwargs):
         # super(Employee, self).__init__(**kwargs)
         user = User(username = username)
         user.set_password(password)
         self.user = user
         profile = Profile(first_name=first_name, last_name=last_name, email = email, **kwargs)
         self.profile = profile
+        self.charge = charge
         return self
 
     def save(self, **kwargs):
@@ -56,9 +63,3 @@ class Employee(models.Model):
         User.objects.get(pk=self.user.pk).delete()
         Profile.objects.get(pk=self.profile.pk).delete()
         super(Employee, self).delete()
-
-class Doctor(Employee):
-    hours = 3 #TODO Add working shifts
-
-class Secretary(Employee):
-    doctors = models.ManyToManyField(Doctor, related_name="secretary")
