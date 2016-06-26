@@ -71,7 +71,13 @@ class EmployeeSerializer(serializers.ModelSerializer):
         return employee
 
 class VisitSerializer(serializers.ModelSerializer):
+    doctor = serializers.ReadOnlyField(source="doctor.id")
     datetime = serializers.DateTimeField(read_only=False, required=False)
     class Meta:
         model = Visit
         fields = ('id', 'pacient', 'doctor', 'datetime', 'detail')
+
+    def create(self, validated_data):
+        validated_data['doctor'] = self.context['request'].user.employee
+        res = super(VisitSerializer, self).create(validated_data)
+        return res
