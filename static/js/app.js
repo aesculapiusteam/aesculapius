@@ -1,17 +1,44 @@
 (function() {
-    var app = angular.module('peopleModule', []);
 
-    app.controller('PeopleController', ['$scope',function($scope){
-        $scope.employees = employees;
-        $scope.profiles = profiles;
-        this.current = 0;
+  var app = angular.module('peopleModule', [
+    'ui.router',
+    'restangular'
+  ]).config(function(RestangularProvider){
+    //set the base url for api calls on our RESTful services
+    var newBaseUrl = "";
+    if (window.location.hostname == "localhost") {
+      newBaseUrl = "http://localhost:8000/api/";
+    } else {
+      var deployedAt = window.location.href.substring(0, window.location.href);
+      newBaseUrl = deployedAt + "/api/";
+    }
+    RestangularProvider.setBaseUrl(newBaseUrl);
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+      var extractedData;
+      if (operation === "getList") {
+        extractedData = data.results;
+      } else {
+        extractedData = data;
+      }
+      return extractedData;
+    });
+  });
 
-        this.setCurrent = function(ModalNumber){
-            this.current = ModalNumber || 0;
-        };
-    }]);
+  app.controller("PeopleController", ['$scope', 'Restangular', function($scope, Restangular){
+    this.employees = employees;
+    this.profiles = profiles;
+    this.current = 0;
 
-var employees = [
+    this.setCurrent = function(ModalNumber){
+        this.current = ModalNumber || 0;
+    };
+    var allEmployees = Restangular.all('employees/').getList().then(function(response){
+      $scope.employees = response;
+    });
+  }]);
+
+
+  var employees = [
     {
       "id": 1,
       "username": "doctor",
@@ -68,7 +95,7 @@ var employees = [
     }
   ];
 
-var profiles = [
+  var profiles = [
     {
       "id": 1,
       "employee": null,
