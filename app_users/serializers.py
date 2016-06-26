@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app_users.models import Profile, Employee, Assist
+from app_users.models import Profile, Employee, Assist, Visit
 
 
 class AssistsField(serializers.RelatedField):#TODO hacer writable
@@ -14,8 +14,8 @@ class AssistsField(serializers.RelatedField):#TODO hacer writable
     #     print data
     #     print "---------"
     #
-    def get_queryset(self): # TODO preguntar a matias
-        return Employee.objects.filter(charge="doctor")
+    # def get_queryset(self): # TODO preguntar a matias
+    #     return Employee.objects.filter(charge="doctor")
 
 
 class IsAssistedField(serializers.RelatedField):#TODO hacer writable
@@ -39,6 +39,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     username = serializers.CharField(source="user.username", required=True)
     password = serializers.CharField(source="user.password", write_only=True, required=False, style={'input_type': 'password'})
+    # assists = AssistsField(many=True, queryset=Employee.objects.filter(charge="doctor"))
     assists = AssistsField(many=True, read_only=True)
     is_assisted = IsAssistedField(many=True, read_only=True)
 
@@ -84,3 +85,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
         employee.profile.cellphone = profile['cellphone']
         employee.save()
         return employee
+
+class VisitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Visit
+        fields = ('id', 'pacient', 'doctor', 'datetime', 'detail')

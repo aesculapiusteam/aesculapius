@@ -74,3 +74,12 @@ class Assist(models.Model):
 
     def __unicode__(self):
         return self.secretary.__unicode__() + " assists " + self.doctor.__unicode__()
+
+class Visit(models.Model):
+    doctor = models.ForeignKey(Employee, unique=False, related_name='visits')
+    pacient = models.ForeignKey(Profile, unique=False, related_name='visits')
+    datetime = models.DateTimeField(auto_now_add = True)
+    detail = models.TextField()
+
+    def __unicode__(self):
+        return self.pacient.__unicode__() + " assists " + self.doctor.__unicode__()

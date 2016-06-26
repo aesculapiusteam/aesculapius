@@ -24,3 +24,16 @@ class IsAdminOrOwnerOrReadOnly(permissions.BasePermission):
                 return False
             return True
         return obj.user == request.user # Is the current user employee
+
+
+class IsDoctor(permissions.BasePermission):
+    """
+    Custom permission to only allow owners of an object to edit it.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS or request.user.is_superuser:
+            return True
+        if request.user.employee.charge == "doctor":
+            return True
+        return False
