@@ -33,6 +33,7 @@ class Employee(models.Model):
     user = models.OneToOneField(User)
     profile = models.OneToOneField(Profile)
     charge = models.CharField(choices=CHARGES, default='doctor', max_length=100)
+    assist_ed = models.ManyToManyField('self', blank=True)
 
     def __unicode__(self):
         last = ""
@@ -40,10 +41,13 @@ class Employee(models.Model):
             last = " " + self.profile.last_name
         return self.profile.first_name + last
 
-    def assist(self, doctor):
+    def set_assist_ed(self, who):
         """if it is a secretary use this function to set a doctor to assist"""
-        assistance = Assist(secretary=self, doctor=doctor)
-        assistance.save()
+        if (self.charge == "doctor" and who.charge == "secretary") or (self.charge == "secretary" and who.charge == "doctor"):
+            self.assist_ed.add(who)
+            return self.assist_ed
+        else:
+            print("ERROR: Types of employees for assist relation are not compatible")
 
     # TODO Use __init__ instead of create. not using init because it makes
     #"profile.employee" or "user.employee" commands to not work
@@ -67,13 +71,7 @@ class Employee(models.Model):
         User.objects.get(pk=self.user.pk).delete()
         Profile.objects.get(pk=self.profile.pk).delete()
         super(Employee, self).delete()
-
-class Assist(models.Model):
-    secretary = models.ForeignKey(Employee, unique=False, related_name='assists')
-    doctor = models.ForeignKey(Employee, unique=False, related_name='is_assisted')
-
-    def __unicode__(self):
-        return self.secretary.__unicode__() + " assists " + self.doctor.__unicode__()
+        
 
 class Visit(models.Model):
     doctor = models.ForeignKey(Employee, unique=False, related_name='visits')

@@ -1,26 +1,5 @@
 from rest_framework import serializers
-from app_users.models import Profile, Employee, Assist, Visit
-
-
-class AssistsField(serializers.RelatedField):#TODO hacer writable
-    def to_representation(self, value):
-        print "#######"
-        print value
-        print "#######"
-        if isinstance(value,Assist):
-            return value.doctor.id
-    # def to_internal_value(self, data):
-    #     print "---------"
-    #     print data
-    #     print "---------"
-    #
-    # def get_queryset(self): # TODO preguntar a matias
-    #     return Employee.objects.filter(charge="doctor")
-
-
-class IsAssistedField(serializers.RelatedField):#TODO hacer writable
-    def to_representation(self, value):
-        return value.secretary.id
+from app_users.models import Profile, Employee, Visit
 
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
@@ -39,18 +18,16 @@ class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     username = serializers.CharField(source="user.username", required=True)
     password = serializers.CharField(source="user.password", write_only=True, required=False, style={'input_type': 'password'})
-    # assists = AssistsField(many=True, queryset=Employee.objects.filter(charge="doctor"))
-    assists = AssistsField(many=True, read_only=True)
-    is_assisted = IsAssistedField(many=True, read_only=True)
 
     class Meta:
         model = Employee
-        fields = ('id', 'username', 'password', 'charge', 'assists', 'is_assisted', 'profile')
+        fields = ('id', 'username', 'password', 'charge', 'assist_ed', 'profile')
         extra_kwargs = {'url': {'view_name': 'api:employee-detail'}}
 
     def create(self, validated_data):
         profile = validated_data["profile"]
         user = validated_data["user"]
+        assist_ed = validated_data['assist_ed']
         employee = Employee().create(
             username = user['username'],
             password = user['password'],
@@ -65,11 +42,14 @@ class EmployeeSerializer(serializers.ModelSerializer):
             cellphone = profile['cellphone'],
         )
         employee.save()
+        for i in assist_ed:
+            employee.set_assist_ed(i)
         return employee
 
     def update(self, employee, validated_data):
         profile = validated_data["profile"]
         user = validated_data["user"]
+        assist_ed = validated_data['assist_ed']
         employee.user.username = user['username']
         if 'password' in user:
             if not (employee.user.password == user['password']):
@@ -84,6 +64,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
         employee.profile.phone = profile['phone']
         employee.profile.cellphone = profile['cellphone']
         employee.save()
+        employee.assist_ed.clear()
+        for i in assist_ed:
+            employee.set_assist_ed(i)
         return employee
 
 class VisitSerializer(serializers.ModelSerializer):
