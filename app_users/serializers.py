@@ -1,23 +1,50 @@
 from rest_framework import serializers
-from app_users.models import Profile, Employee
+from app_users.models import Profile, Employee, Assist
+
+
+class AssistsField(serializers.RelatedField):#TODO hacer writable
+    def to_representation(self, value):
+        print "#######"
+        print value
+        print "#######"
+        if isinstance(value,Assist):
+            return value.doctor.id
+    # def to_internal_value(self, data):
+    #     print "---------"
+    #     print data
+    #     print "---------"
+    #
+    def get_queryset(self): # TODO preguntar a matias
+        return Employee.objects.filter(charge="doctor")
+
+
+class IsAssistedField(serializers.RelatedField):#TODO hacer writable
+    def to_representation(self, value):
+        return value.secretary.id
+
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     # employee = serializers.ReadOnlyField(required=False, allow_null=True)
     # employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
     employee = serializers.ReadOnlyField(source="employee.id", required=False, read_only=True)
+
     class Meta:
         model = Profile
         fields = ('id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
         'address', 'phone', 'cellphone', 'creation_date')
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
+
 class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     username = serializers.CharField(source="user.username", required=True)
     password = serializers.CharField(source="user.password", write_only=True, required=False, style={'input_type': 'password'})
+    assists = AssistsField(many=True, read_only=True)
+    is_assisted = IsAssistedField(many=True, read_only=True)
+
     class Meta:
         model = Employee
-        fields = ('id', 'username', 'password', 'charge', 'profile')
+        fields = ('id', 'username', 'password', 'charge', 'assists', 'is_assisted', 'profile')
         extra_kwargs = {'url': {'view_name': 'api:employee-detail'}}
 
     def create(self, validated_data):

@@ -1,4 +1,4 @@
-from app_users.models import Profile, Employee, Doctor
+from app_users.models import Profile, Employee
 from app_users.serializers import ProfileSerializer, EmployeeSerializer
 from rest_framework.response import Response
 from rest_framework import viewsets
