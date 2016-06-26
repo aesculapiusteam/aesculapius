@@ -3,7 +3,6 @@
 {% block content %}
 {% block head %}
 <script src="{% static 'external/js/angular.min.js' %}"></script>
-<script src="{% static 'external/angular-resource.min.js' %}"></script>
 <script src="{% static 'js/app.js' %}"></script>
 {% endblock %}
 <div ng-app="peopleModule">
@@ -38,7 +37,7 @@
                                 <th>Detalles</th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="employee in plpCtrl.employees">
+                        <tbody ng-repeat="employee in employees">
                             <tr ng-show="employee.charge == 'secretary'">
                                 <td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
                                 <td>{{employee.profile.dni}}</td>
@@ -61,7 +60,7 @@
                                 <th>Detalles</th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="employee in plpCtrl.employees">
+                        <tbody ng-repeat="employee in employees">
                             <tr ng-show="employee.charge == 'doctor'">
                                 <td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
                                 <td>{{employee.profile.dni}}</td>
@@ -84,7 +83,7 @@
                             <th>Detalles</th>
                         </tr>
                     </thead>
-                    <tbody ng-repeat="profile in plpCtrl.profiles">
+                    <tbody ng-repeat="profile in profiles">
                         <tr ng-hide="profile.employee">
                             <td>{{profile.first_name}} {{profile.last_name}}</td>
                             <td>{{profile.dni}}</td>
@@ -103,31 +102,31 @@
                 <div class="modal-content">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="first_name" value="{{plpCtrl.employees[plpCtrl.current].profile.first_name}} {{plpCtrl.employees[plpCtrl.current].profile.last_name}}"  type="text" >
+                            <input id="first_name" value="{{employees[plpCtrl.current].profile.first_name}} {{employees[plpCtrl.current].profile.last_name}}"  type="text" >
                             <label for="first_name">Nombre y Apellido</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.dni}}" type="text" >
+                            <input id="last_name" value="{{employees[plpCtrl.current].profile.dni}}" type="text" >
                             <label for="last_name">DNI</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.address}}" type="text" >
+                            <input id="last_name" value="{{employees[plpCtrl.current].profile.address}}" type="text" >
                             <label for="last_name">Direccion</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.phone}}" type="text" >
+                            <input id="last_name" value="{{employees[plpCtrl.current].profile.phone}}" type="text" >
                             <label for="last_name">Telefono</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.cellphone}}" type="text" >
+                            <input id="last_name" value="{{employees[plpCtrl.current].profile.cellphone}}" type="text" >
                             <label for="last_name">Celular</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].profile.email}}" type="text" >
+                            <input id="last_name" value="{{employees[plpCtrl.current].profile.email}}" type="text" >
                             <label for="last_name">Email</label>
                         </div>
                         <div class="input-field col s12">
-                            <input id="last_name" value="{{plpCtrl.employees[plpCtrl.current].username}}" type="text" disabled="dissabled">
+                            <input id="last_name" value="{{employees[plpCtrl.current].username}}" type="text" disabled="dissabled">
                             <label for="last_name">Nombre de Usuario</label>
                         </div>
                     </div>
@@ -152,27 +151,27 @@
                     <div class="modal-content">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="first_name" value="{{plpCtrl.profiles[plpCtrl.current].first_name}} {{plpCtrl.profiles[plpCtrl.current].last_name}}"  type="text" >
+                            <input id="first_name" value="{{profiles[plpCtrl.current].first_name}} {{profiles[plpCtrl.current].last_name}}"  type="text" >
                             <label for="first_name">Nombre y Apellido</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].dni}}" type="text" >
+                            <input id="last_name" value="{{profiles[plpCtrl.current].dni}}" type="text" >
                             <label for="last_name">DNI</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].address}}" type="text" >
+                            <input id="last_name" value="{{profiles[plpCtrl.current].address}}" type="text" >
                             <label for="last_name">Direccion</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].phone}}" type="text" >
+                            <input id="last_name" value="{{profiles[plpCtrl.current].phone}}" type="text" >
                             <label for="last_name">Telefono</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].cellphone}}" type="text" >
+                            <input id="last_name" value="{{profiles[plpCtrl.current].cellphone}}" type="text" >
                             <label for="last_name">Celular</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].email}}" type="text" >
+                            <input id="last_name" value="{{profiles[plpCtrl.current].email}}" type="text" >
                             <label for="last_name">Email</label>
                         </div>
                         <div class="input-field col s12">
