@@ -43,7 +43,6 @@ class EmployeeSerializer(serializers.ModelSerializer):
         )
         employee.save()
         for i in assist_ed:
-            import ipdb; ipdb.set_trace()
             employee.set_assist_ed(i)
         return employee
 
