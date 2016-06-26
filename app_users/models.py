@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User, UserManager
+from django.utils import timezone
 
 class Profile(models.Model):
     first_name = models.CharField(max_length=128)
@@ -71,12 +72,12 @@ class Employee(models.Model):
         User.objects.get(pk=self.user.pk).delete()
         Profile.objects.get(pk=self.profile.pk).delete()
         super(Employee, self).delete()
-        
+
 
 class Visit(models.Model):
     doctor = models.ForeignKey(Employee, unique=False, related_name='visits')
     pacient = models.ForeignKey(Profile, unique=False, related_name='visits')
-    datetime = models.DateTimeField(auto_now_add = True)
+    datetime = models.DateTimeField(default=timezone.now)
     detail = models.TextField()
 
     def __unicode__(self):

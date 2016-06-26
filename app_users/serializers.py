@@ -43,6 +43,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         )
         employee.save()
         for i in assist_ed:
+            import ipdb; ipdb.set_trace()
             employee.set_assist_ed(i)
         return employee
 
@@ -70,6 +71,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         return employee
 
 class VisitSerializer(serializers.ModelSerializer):
+    datetime = serializers.DateTimeField(read_only=False, required=False)
     class Meta:
         model = Visit
         fields = ('id', 'pacient', 'doctor', 'datetime', 'detail')
