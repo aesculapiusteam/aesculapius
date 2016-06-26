@@ -9,15 +9,80 @@
 <div ng-app="peopleModule">
 
     {% verbatim angular %}
+
+        <ul id="slide-out" class="side-nav fixed teal darken-4">
+        <li><a href="#!" class="waves-effect waves-light btn teal lighten-4">EMPLEADOS</a></li>
+        <li><a href="#!" class="waves-effect waves-light btn teal lighten-4">PACIENTES</a></li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+
+    <br>
+    <br>
+
+
     <div class='container' ng-controller="PeopleController as plpCtrl">
         <div class='card'>
             <div class="col s12">
                 <ul class="tabs">
-                    <li class="tab col s3"><a href="#test1">Perfiles</a></li>
-                    <li class="tab col s3"><a href="#test2">Empleados</a></li>
+                    <li class="tab col s3 teal darken-4"><a href="#test1">EMPLEADOS</a></li>
+                    <li class="tab col s3 teal darken-4"><a href="#test2">PACIENTES</a></li>
                 </ul>
             </div>
             <div id="test1" class="col s12">
+                <div class="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s3"><a href="#test_secretary">SECRETARIAS</a></li>
+                        <li class="tab col s3"><a href="#test_doctor">DOCTORES</a></li>
+                    </ul>
+                </div>
+
+                <div id="test_secretary" class="col s12">
+                    <table class="bordered centered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>DNI</th>
+                                <th>E-mail</th>
+                                <th>Telefono</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="employee in plpCtrl.employees">
+                            <tr ng-show="employee.charge == 'secretary'">
+                                <td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
+                                <td>{{employee.profile.dni}}</td>
+                                <td>{{employee.profile.email}}</td>
+                                <td>{{employee.profile.phone}}</td>
+                                <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="test_doctor" class="col s12">
+                    <table class="bordered centered">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>DNI</th>
+                                <th>E-mail</th>
+                                <th>Telefono</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="employee in plpCtrl.employees">
+                            <tr ng-show="employee.charge == 'doctor'">
+                                <td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
+                                <td>{{employee.profile.dni}}</td>
+                                <td>{{employee.profile.email}}</td>
+                                <td>{{employee.profile.phone}}</td>
+                                <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="test2" class="col s12">
                 <table class="bordered centered">
                     <thead>
                         <tr>
@@ -35,28 +100,6 @@
                             <td>{{profile.email}}</td>
                             <td>{{profile.phone}}</td>
                             <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalProfile" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="test2" class="col s12">
-                <table  class="bordered centered">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>DNI</th>
-                            <th>E-mail</th>
-                            <th>Telefono</th>
-                            <th>Detalles</th>
-                        </tr>
-                    </thead>
-                    <tbody ng-repeat="employee in plpCtrl.employees">
-                        <tr>
-                            <td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
-                            <td>{{employee.profile.dni}}</td>
-                            <td>{{employee.profile.email}}</td>
-                            <td>{{employee.profile.phone}}</td>
-                            <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -100,7 +143,8 @@
                 </div>
                 <div class="modal-footer">
                     <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
-                    <a href="#!" class=" modal-action black-text modal-close waves-effect waves-red btn-flat">Eliminar</a>
+                    <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                    <div class="left"><a href="#!" class=" modal-action red-text modal-close waves-effect waves-red btn-flat">Eliminar</a></div>
                 </div>
             </form>
         </div>
@@ -138,7 +182,6 @@
                     <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
                     <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
                     <div class="left"><a href="#!" class=" modal-action red-text modal-close waves-effect waves-red btn-flat">Eliminar</a></div>
-
                 </div>
             </form>
         </div>
