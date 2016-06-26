@@ -25,15 +25,18 @@
   });
 
   app.controller("PeopleController", ['$scope', 'Restangular', function($scope, Restangular){
-    this.employees = employees;
-    this.profiles = profiles;
     this.current = 0;
 
     this.setCurrent = function(ModalNumber){
         this.current = ModalNumber || 0;
     };
+
     var allEmployees = Restangular.all('employees/').getList().then(function(response){
       $scope.employees = response;
+    });
+    
+    var allProfiles = Restangular.all('profiles/').getList().then(function(response){
+      $scope.profiles = response;
     });
   }]);
 
