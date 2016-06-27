@@ -11,6 +11,11 @@
         };
     }]);
 
+    app.controller('VisitsController', [function(){
+        this.visits = visits;
+    }]);
+
+
 var employees = [
     {
       "id": 1,
@@ -135,5 +140,43 @@ var profiles = [
       "creation_date": "2016-06-21"
     }
   ];
+
+var visits = [
+        {
+            "id": 1,
+            "pacient": 10,
+            "doctor": 7,
+            "datetime": "2016-06-26T16:31:08.018697Z",
+            "detail": "El brayan trajo una navaja metida en el pesguezo, se la saque y le di una bayaspirina,"
+        },
+        {
+            "id": 2,
+            "pacient": 10,
+            "doctor": 1,
+            "datetime": "2016-06-26T16:31:33.462942Z",
+            "detail": "Otra vez vino el brayan con una navaja clavada en la pierna"
+        },
+        {
+            "id": 3,
+            "pacient": 10,
+            "doctor": 3,
+            "datetime": "2016-06-26T16:32:19.131782Z",
+            "detail": "OTRA VEZ BRAYAN BASTA!!! le di una psicoinmunoneuroendomorfinacalmante"
+        },
+        {
+            "id": 4,
+            "pacient": 11,
+            "doctor": 1,
+            "datetime": "2016-06-26T16:40:35.797589Z",
+            "detail": "Otra vez vino el robin"
+        },
+        {
+            "id": 5,
+            "pacient": 11,
+            "doctor": 1,
+            "datetime": "2016-06-26T16:41:17.305309Z",
+            "detail": "el robin se hizo atender por cancer"
+        }
+    ];
 
 })();

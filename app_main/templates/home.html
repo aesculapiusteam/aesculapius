@@ -181,35 +181,22 @@
                     </div>
                 </form>
             </div>
-            <div id="test_historial" class="modal-fixed-footer">
-                <form class="col s12">
-                    <div class="modal-content">
-                        <div class="row">
-                            <ul class="collection">
-                                <li class="collection-item">
-                                    <p>Fecha</p>
-                                    <p>Dr. Peralta</p>
-                                    <p>Descripicon de la ficha</p>
-                                </li>
-                                <li class="collection-item">
-                                    <p>Fecha</p>
-                                    <p>Dr. Peralta</p>
-                                    <p>Descripicon de la ficha</p>
-                                </li>
-                                <li class="collection-item">
-                                    <p>Fecha</p>
-                                    <p>Dr. Peralta</p>
-                                    <p>Descripicon de la ficha</p>
-                                </li>
-                                <li class="collection-item">
-                                    <p>Fecha</p>
-                                    <p>Dr. Peralta</p>
-                                    <p>Descripicon de la ficha</p>
-                                </li>
-                            </ul>
+            <div>
+                <div id="test_historial" class="modal-fixed-footer">
+                    <form class="col s12">
+                        <div class="modal-content" ng-controller="VisitsController as visCtrl">
+                            <div class="row">
+                                <ul class="collection">
+                                    <li ng-repeat="x in visCtrl.visits" class="collection-item">
+                                        <p class="right">{{x.datetime | date}}</p>
+                                        <p>{{x.doctor}}</p>
+                                        <p>{{x.detail}}</p>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
             <div class="modal-footer">
                 <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
