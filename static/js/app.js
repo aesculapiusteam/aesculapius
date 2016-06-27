@@ -28,18 +28,33 @@
     this.current = 0;
 
     this.setCurrent = function(ModalNumber){
-        this.current = ModalNumber || 0;
+      this.current = ModalNumber || 0;
     };
 
     var allEmployees = Restangular.all('employees/').getList().then(function(response){
       $scope.employees = response;
     });
-    
+
     var allProfiles = Restangular.all('profiles/').getList().then(function(response){
       $scope.profiles = response;
     });
+
+    $scope.$broadcast('dataloaded');
+
   }]);
 
+  app.directive('modalRefresh', ['$timeout', function ($timeout) {
+    return {
+      link: function ($scope, element, attrs) {
+        $scope.$on('dataloaded', function () {
+          $timeout(function () {
+            console.log("PATO");
+            $('.modal-trigger').leanModal();
+          }, 0, false);
+        });
+      }
+    };
+  }]);
 
   var employees = [
     {
