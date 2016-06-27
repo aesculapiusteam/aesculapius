@@ -147,50 +147,79 @@
                     <li class="tab col s3"><a href="#test_historial">HISTORIAL</a></li>
                 </ul>
             </div>
-            <div id="test_infomacion" class="col s12">
+            <div id="test_infomacion" class="modal-fixed-footer">
                 <form class="col s12">
                     <div class="modal-content">
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="first_name" value="{{plpCtrl.profiles[plpCtrl.current].first_name}} {{plpCtrl.profiles[plpCtrl.current].last_name}}"  type="text" >
-                            <label for="first_name">Nombre y Apellido</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].dni}}" type="text" >
-                            <label for="last_name">DNI</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].address}}" type="text" >
-                            <label for="last_name">Direccion</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].phone}}" type="text" >
-                            <label for="last_name">Telefono</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].cellphone}}" type="text" >
-                            <label for="last_name">Celular</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].email}}" type="text" >
-                            <label for="last_name">Email</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <textarea id="textarea1" class="materialize-textarea"></textarea>
-                            <label for="textarea1">FICHA NUEVA</label>
-                            <div class="right"><a href="#!" class="green-text waves-effect waves-green btn-flat"><i class="material-icons">note_add</i></a></div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="first_name" value="{{plpCtrl.profiles[plpCtrl.current].first_name}} {{plpCtrl.profiles[plpCtrl.current].last_name}}"  type="text" >
+                                <label for="first_name">Nombre y Apellido</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].dni}}" type="text" >
+                                <label for="last_name">DNI</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].address}}" type="text" >
+                                <label for="last_name">Direccion</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].phone}}" type="text" >
+                                <label for="last_name">Telefono</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].cellphone}}" type="text" >
+                                <label for="last_name">Celular</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="last_name" value="{{plpCtrl.profiles[plpCtrl.current].email}}" type="text" >
+                                <label for="last_name">Email</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                <label for="textarea1">FICHA NUEVA</label>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </form>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
+                    <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                    <div class="left">
+                    <a href="#!" class=" modal-action red-text modal-close waves-effect waves-red btn-flat">Eliminar</a>
+                    </div>
+                </div>
             </div>
-            <div id="test_historial" class="col s12">
-                ACA VA EL HISTORIAL XD
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
-                <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
-                <div class="left"><a href="#!" class=" modal-action red-text modal-close waves-effect waves-red btn-flat">Eliminar</a></div>
+            <div id="test_historial" class="modal-fixed-footer">
+                <ul class="collection">
+                    <li class="collection-item">
+                        <p>Fecha</p>
+                        <p>Dr. Peralta</p>
+                        <p>Descripicon de la ficha</p>
+                    </li>
+                    <li class="collection-item">
+                        <p>Fecha</p>
+                        <p>Dr. Peralta</p>
+                        <p>Descripicon de la ficha</p>
+                    </li>
+                    <li class="collection-item">
+                        <p>Fecha</p>
+                        <p>Dr. Peralta</p>
+                        <p>Descripicon de la ficha</p>
+                    </li>
+                    <li class="collection-item">
+                        <p>Fecha</p>
+                        <p>Dr. Peralta</p>
+                        <p>Descripicon de la ficha</p>
+                    </li>
+                    <div class="footer">
+                        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
+                        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                        <div class="left">
+                        <a href="#!" class=" modal-action red-text modal-close waves-effect waves-red btn-flat">Eliminar</a>
+                        </div>
+                    </div>
+                </ul>
             </div>
         </div>
     </div>
