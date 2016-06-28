@@ -61,7 +61,7 @@ nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul 
 }
 
 .input-field input[type=search]:focus {
-    background-color: #c5cae9;
+    background-color: #bdbdbd;
     border: 0;
     box-shadow: none;
     color: black; }
@@ -146,4 +146,25 @@ nav .input-field label.active i {
 
 nav a {
     color: black;
+}
+
+.slider .slides li .caption {
+    color: #424242;
+    position: absolute;
+    top: 65%;
+    left: 1%;
+    width: 40%;
+    opacity: 10;
+}
+
+h3 {
+    font-size: 2.5rem;
+    line-height: 80%;
+    margin: 1.46rem 0 1.168rem 0;
+}
+
+h5 {
+    font-size: 1.40rem;
+    line-height: 110%;
+    margin: 0.82rem 0 0.656rem 0;
 }

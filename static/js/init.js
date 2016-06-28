@@ -10,5 +10,6 @@
 
 $(document).ready(function(){
     $('.slider').slider({full_width: true});
-    $('.slider').slider({indicators: false, height: 574});
+    $('.slider').slider({height: 574});
 });
+
