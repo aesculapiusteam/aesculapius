@@ -184,13 +184,13 @@
             <div>
                 <div id="test_historial" class="modal-fixed-footer">
                     <form class="col s12">
-                        <div class="modal-content" ng-controller="VisitsController as visCtrl">
+                        <div class="modal-content">
                             <div class="row">
                                 <ul class="collection">
-                                    <li ng-repeat="x in visCtrl.visits" class="collection-item">
-                                        <p class="right">{{x.datetime | date}}</p>
-                                        <p>{{x.doctor}}</p>
-                                        <p>{{x.detail}}</p>
+                                    <li ng-repeat="visit in visits" ng-show="visit.pacient == profiles[plpCtrl.current].id" class="collection-item">
+                                        <p class="right">{{visit.datetime | date}}</p>
+                                        <p>{{employees[visit.doctor].profile.first_name}}</p>
+                                        <p>{{visit.detail}}</p>
                                     </li>
                                 </ul>
                             </div>

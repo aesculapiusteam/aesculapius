@@ -4,17 +4,13 @@
     app.controller('PeopleController', ['$scope',function($scope){
         $scope.employees = employees;
         $scope.profiles = profiles;
+        $scope.visits = visits;
         this.current = 0;
 
         this.setCurrent = function(ModalNumber){
             this.current = ModalNumber || 0;
         };
     }]);
-
-    app.controller('VisitsController', [function(){
-        this.visits = visits;
-    }]);
-
 
 var employees = [
     {
@@ -144,38 +140,38 @@ var profiles = [
 var visits = [
         {
             "id": 1,
-            "pacient": 10,
-            "doctor": 7,
+            "pacient": 1,
+            "doctor": 1,
             "datetime": "2016-06-26T16:31:08.018697Z",
             "detail": "El brayan trajo una navaja metida en el pesguezo, se la saque y le di una bayaspirina,"
         },
         {
             "id": 2,
-            "pacient": 10,
+            "pacient": 1,
             "doctor": 1,
             "datetime": "2016-06-26T16:31:33.462942Z",
             "detail": "Otra vez vino el brayan con una navaja clavada en la pierna"
         },
         {
             "id": 3,
-            "pacient": 10,
-            "doctor": 3,
+            "pacient": 1,
+            "doctor": 2,
             "datetime": "2016-06-26T16:32:19.131782Z",
             "detail": "OTRA VEZ BRAYAN BASTA!!! le di una psicoinmunoneuroendomorfinacalmante"
         },
         {
             "id": 4,
-            "pacient": 11,
-            "doctor": 1,
+            "pacient": 2,
+            "doctor": 2,
             "datetime": "2016-06-26T16:40:35.797589Z",
-            "detail": "Otra vez vino el robin"
+            "detail": "Otra vez vino el mocaco"
         },
         {
             "id": 5,
-            "pacient": 11,
-            "doctor": 1,
+            "pacient": 2,
+            "doctor": 2,
             "datetime": "2016-06-26T16:41:17.305309Z",
-            "detail": "el robin se hizo atender por cancer"
+            "detail": "el mocaco se hizo atender por cancer"
         }
     ];
 
