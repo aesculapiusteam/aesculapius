@@ -43,10 +43,16 @@
       $scope.profiles = response;
     });
 
-    this.save = function(employeePos){
+    this.employeeSave = function(employeePos){
       var employee = $scope.employees[employeePos];
       employee.save();
     };
+
+    this.profileSave = function(profilePos){
+      var profile = $scope.profiles[profilePos];
+      profile.save();
+    };
+
     $rootScope.$broadcast('dataloaded');
 
   }]);
