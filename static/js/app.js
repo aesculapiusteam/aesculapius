@@ -3,7 +3,10 @@
   var app = angular.module('peopleModule', [
     'ui.router',
     'restangular'
-  ]).config(function(RestangularProvider){
+  ]).config(function(RestangularProvider, $httpProvider){
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+
     //set the base url for api calls on our RESTful services
     var newBaseUrl = "";
     if (window.location.hostname == "localhost") {
@@ -24,7 +27,7 @@
     });
   });
 
-  app.controller("PeopleController", ['$scope', 'Restangular', function($scope, Restangular){
+  app.controller("PeopleController", ['$scope', '$rootScope', 'Restangular', function($scope, $rootScope, Restangular){
     this.current = 0;
 
     this.setCurrent = function(ModalNumber){
@@ -32,15 +35,19 @@
       this.current = ModalNumber || 0;
     };
 
-    var allEmployees = Restangular.all('employees/').getList().then(function(response){
+    var allEmployees = Restangular.all('employees').getList().then(function(response){
       $scope.employees = response;
     });
 
-    var allProfiles = Restangular.all('profiles/').getList().then(function(response){
+    var allProfiles = Restangular.all('profiles').getList().then(function(response){
       $scope.profiles = response;
     });
 
-    $scope.$broadcast('dataloaded');
+    this.save = function(employeePos){
+      var marta = $scope.employees[employeePos];
+      marta.save();
+    };
+    $rootScope.$broadcast('dataloaded');
 
   }]);
 

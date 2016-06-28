@@ -47,6 +47,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         return employee
 
     def update(self, employee, validated_data):
+        print validated_data
         profile = validated_data["profile"]
         user = validated_data["user"]
         assist_ed = validated_data['assist_ed']

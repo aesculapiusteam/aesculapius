@@ -3,7 +3,7 @@ from app_users import views
 from rest_framework.routers import DefaultRouter
 
 # Create a router and register our viewsets with it.
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.register(r'profiles', views.ProfileViewSet)
 router.register(r'employees', views.EmployeeViewSet)
 router.register(r'visits', views.VisitViewSet)
