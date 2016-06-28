@@ -28,6 +28,7 @@
     this.current = 0;
 
     this.setCurrent = function(ModalNumber){
+      $('.modal-trigger').leanModal();
       this.current = ModalNumber || 0;
     };
 
