@@ -44,8 +44,8 @@
     });
 
     this.save = function(employeePos){
-      var marta = $scope.employees[employeePos];
-      marta.save();
+      var employee = $scope.employees[employeePos];
+      employee.save();
     };
     $rootScope.$broadcast('dataloaded');
 
