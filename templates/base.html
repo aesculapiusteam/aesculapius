@@ -26,7 +26,7 @@
   <script type="text/javascript" src="{% static 'js/init.js' %}"></script>
 
   <nav class="nav-wrapper grey lighten-3" role="navigation">
-    <div class="nav-wrapper"><a id="logo-container" href="#" class="brand-logo"><img src="{% static 'img/logo.png' %}" width="250px" height="55px" VSPACE=4 ></a>
+    <div class="nav-wrapper"><a id="logo-container" href="{% url 'main:home' %}" class="brand-logo"><img src="{% static 'img/logo.png' %}" width="250px" height="55px" VSPACE=4 ></a>
       <ul id="nav" class="right hide-on-med-and-down">
         <div class="tooltipped left input-field" data-position="bottom" data-delay="50" data-tooltip="Ingrese su usuario">
           <input id="search" placeholder="Usuario" type="search" required>
@@ -42,12 +42,12 @@
       </ul>
 
       <ul id="nav-mobile" class="side-nav grey lighten-3">
-        <div class="tooltipped left input-field" data-position="bottom" data-delay="50" data-tooltip="Ingrese su usuario">
+        <div class="tooltipped left input-field" data-position="right" data-delay="50" data-tooltip="Ingrese su usuario">
           <input id="search" placeholder="Usuario" type="search" required>
           <label for="search"><i class="material-icons">perm_identity</i></label>
         </div>
 
-        <div class="tooltipped left input-field" data-position="bottom" data-delay="50" data-tooltip="Ingrese su contraseña">
+        <div class="tooltipped left input-field" data-position="right" data-delay="50" data-tooltip="Ingrese su contraseña">
           <input id="search" placeholder="Contraseña" type="search" required>
           <label for="search"><i class="material-icons">vpn_key</i></label>
         </div>
