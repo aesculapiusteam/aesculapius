@@ -153,8 +153,8 @@ nav a {
 #text2 {
     color: #fff;
     position: absolute;
-    top: 70%;
-    left: 59%;
+    top: 60%;
+    left: 4%;
     width: 40%;
     opacity: 10;
 }
@@ -162,7 +162,7 @@ nav a {
 #text1 {
     color: #fff;
     position: absolute;
-    top: 70%;
+    top: 10%;
     left: 4%;
     width: 40%;
     opacity: 10;
