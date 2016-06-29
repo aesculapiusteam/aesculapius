@@ -1,7 +1,9 @@
 body {
     display: flex;
-    min-height: 100vh;
+    min-height: 100%;
     flex-direction: column;
+    padding: 0;
+    margin: 0;
 }
 
 main {
@@ -149,7 +151,7 @@ nav a {
 }
 
 #text2 {
-    color: #424242;
+    color: #fff;
     position: absolute;
     top: 70%;
     left: 59%;
@@ -158,7 +160,7 @@ nav a {
 }
 
 #text1 {
-    color: #424242;
+    color: #fff;
     position: absolute;
     top: 70%;
     left: 4%;
@@ -176,4 +178,22 @@ h5 {
     font-size: 1.40rem;
     line-height: 110%;
     margin: 0.82rem 0 0.656rem 0;
+}
+
+/*#wrapper {
+    padding: 50px 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}*/
+
+/*#content{
+    min-height: 100%;
+}*/
+
+.slider .slides li .caption {
+    color: #000;
+    background-color: rgba(0,0,0,0.3);
 }
