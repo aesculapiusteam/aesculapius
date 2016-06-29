@@ -33,19 +33,19 @@
                     <table class="bordered centered">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>DNI</th>
-                                <th>E-mail</th>
-                                <th>Telefono</th>
-                                <th>Detalles</th>
+                                <th> Nombre </th>
+                                <th> DNI </th>
+                                <th> E-mail </th>
+                                <th> Telefono </th>
+                                <th> Detalles </th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="employee in employees">
                             <tr ng-show="employee.charge == 'secretary'">
-                                <td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
-                                <td>{{employee.profile.dni}}</td>
-                                <td>{{employee.profile.email}}</td>
-                                <td>{{employee.profile.phone}}</td>
+                                <td> {{employee.profile.first_name}} {{employee.profile.last_name}} </td>
+                                <td> {{employee.profile.dni}} </td>
+                                <td> {{employee.profile.email}} </td>
+                                <td> {{employee.profile.phone}} </td>
                                 <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
                             </tr>
                         </tbody>
@@ -56,19 +56,19 @@
                     <table class="bordered centered">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>DNI</th>
-                                <th>E-mail</th>
-                                <th>Telefono</th>
-                                <th>Detalles</th>
+                                <th> Nombre </th>
+                                <th> DNI </th>
+                                <th> E-mail </th>
+                                <th> Telefono </th>
+                                <th> Detalles </th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="employee in employees">
                             <tr ng-show="employee.charge == 'doctor'">
-                                <td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
-                                <td>{{employee.profile.dni}}</td>
-                                <td>{{employee.profile.email}}</td>
-                                <td>{{employee.profile.phone}}</td>
+                                <td> {{employee.profile.first_name}} {{employee.profile.last_name}} </td>
+                                <td> {{employee.profile.dni}} </td>
+                                <td> {{employee.profile.email}} </td>
+                                <td> {{employee.profile.phone}} </td>
                                 <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
                             </tr>
                         </tbody>
@@ -79,19 +79,19 @@
                 <table class="bordered centered">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>DNI</th>
-                            <th>E-mail</th>
-                            <th>Telefono</th>
-                            <th>Detalles</th>
+                            <th> Nombre </th>
+                            <th> DNI </th>
+                            <th> E-mail </th>
+                            <th> Telefono </th>
+                            <th> Detalles </th>
                         </tr>
                     </thead>
                     <tbody ng-repeat="profile in profiles">
                         <tr ng-hide="profile.employee">
-                            <td>{{profile.first_name}} {{profile.last_name}}</td>
-                            <td>{{profile.dni}}</td>
-                            <td>{{profile.email}}</td>
-                            <td>{{profile.phone}}</td>
+                            <td> {{profile.first_name}} {{profile.last_name}} </td>
+                            <td> {{profile.dni}} </td>
+                            <td> {{profile.email}} </td>
+                            <td> {{profile.phone}} </td>
                             <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalProfile" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
                         </tr>
                     </tbody>
@@ -105,35 +105,35 @@
                 <div class="modal-content">
                     <div class="row">
                         <div class="input-field col s4">
-                            <input id="first_name" ng-model="employees[plpCtrl.current].profile.first_name"  type="text">
+                            <input id="first_name" ng-model="plpCtrl.editEmployee.profile.first_name"  type="text">
                             <label for="first_name">Nombre</label>
                         </div>
                         <div class="input-field col s4">
-                            <input id="first_name" ng-model="employees[plpCtrl.current].profile.last_name"type="text">
+                            <input id="first_name" ng-model="plpCtrl.editEmployee.profile.last_name"type="text">
                             <label for="first_name">Apellido</label>
                         </div>
                         <div class="input-field col s4">
-                            <input id="last_name" ng-model="employees[plpCtrl.current].profile.dni" type="text" >
+                            <input id="last_name" ng-model="plpCtrl.editEmployee.profile.dni" type="text" >
                             <label for="last_name">DNI</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" ng-model="employees[plpCtrl.current].profile.address" type="text" >
+                            <input id="last_name" ng-model="plpCtrl.editEmployee.profile.address" type="text" >
                             <label for="last_name">Direccion</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" ng-model="employees[plpCtrl.current].profile.phone" type="text" >
+                            <input id="last_name" ng-model="plpCtrl.editEmployee.profile.phone" type="text" >
                             <label for="last_name">Telefono</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" ng-model="employees[plpCtrl.current].profile.cellphone" type="text" >
+                            <input id="last_name" ng-model="plpCtrl.editEmployee.profile.cellphone" type="text" >
                             <label for="last_name">Celular</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" ng-model="employees[plpCtrl.current].profile.email" type="text" >
+                            <input id="last_name" ng-model="plpCtrl.editEmployee.profile.email" type="text" >
                             <label for="last_name">Email</label>
                         </div>
                         <div class="input-field col s12">
-                            <input id="last_name" ng-model="employees[plpCtrl.current].username" type="text" disabled="dissabled">
+                            <input id="last_name" ng-model="plpCtrl.editEmployee.username" type="text" disabled="dissabled">
                             <label for="last_name">Nombre de Usuario</label>
                         </div>
                     </div>
@@ -157,31 +157,31 @@
                     <div class="modal-content">
                         <div class="row">
                             <div class="input-field col s4">
-                                <input id="first_name" ng-model="profiles[plpCtrl.current].first_name"  type="text" >
+                                <input id="first_name" ng-model="plpCtrl.editProfile.first_name"  type="text" >
                                 <label for="first_name">Nombre</label>
                             </div>
                             <div class="input-field col s4">
-                                <input id="first_name" ng-model="profiles[plpCtrl.current].last_name"  type="text" >
+                                <input id="first_name" ng-model="plpCtrl.editProfile.last_name"  type="text" >
                                 <label for="first_name">Apellido</label>
                             </div>
                             <div class="input-field col s4">
-                                <input id="last_name" ng-model="profiles[plpCtrl.current].dni" type="text" >
+                                <input id="last_name" ng-model="plpCtrl.editProfile.dni" type="text" >
                                 <label for="last_name">DNI</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="last_name" ng-model="profiles[plpCtrl.current].address" type="text" >
+                                <input id="last_name" ng-model="plpCtrl.editProfile.address" type="text" >
                                 <label for="last_name">Direccion</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="last_name" ng-model="profiles[plpCtrl.current].phone" type="text" >
+                                <input id="last_name" ng-model="plpCtrl.editProfile.phone" type="text" >
                                 <label for="last_name">Telefono</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="last_name" ng-model="profiles[plpCtrl.current].cellphone" type="text" >
+                                <input id="last_name" ng-model="plpCtrl.editProfile.cellphone" type="text" >
                                 <label for="last_name">Celular</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="last_name" ng-model="profiles[plpCtrl.current].email" type="text" >
+                                <input id="last_name" ng-model="plpCtrl.editProfile.email" type="text" >
                                 <label for="last_name">Email</label>
                             </div>
                             <div class="input-field col s12">
@@ -198,10 +198,10 @@
                         <div class="modal-content">
                             <div class="row">
                                 <ul class="collection">
-                                    <li ng-repeat="visit in visits" ng-show="visit.pacient == profiles[plpCtrl.current].id" class="collection-item">
-                                        <p class="right">{{visit.datetime | date}}</p>
-                                        <p>{{employees[visit.doctor].profile.first_name}}</p>
-                                        <p>{{visit.detail}}</p>
+                                    <li ng-repeat="visit in visits" ng-show="visit.pacient == plpCtrl.editProfile.id" class="collection-item">
+                                        <p class="right"> {{visit.datetime | date}} </p>
+                                        <p> {{employees[visit.doctor].profile.first_name}} </p>
+                                        <p> {{visit.detail}} </p>
                                     </li>
                                 </ul>
                             </div>

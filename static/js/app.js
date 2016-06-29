@@ -34,6 +34,8 @@
       $('.modal-trigger').leanModal();
       Materialize.updateTextFields();
       this.current = ModalNumber || 0;
+      this.editEmployee = Restangular.copy($scope.employees[this.current]);
+      this.editProfile = Restangular.copy($scope.profiles[this.current]);
     };
 
     var allEmployees = Restangular.all('employees').getList().then(function(response){
@@ -45,13 +47,18 @@
     });
 
     this.saveEmployee = function(employeePos){
-      var employee = $scope.employees[employeePos];
-      employee.save();
+      var employee = this.editEmployee;
+      
+      employee.save().then(function (response){
+        $scope.employees[employeePos] = employee;
+      });
     };
 
     this.saveProfile = function(profilePos){
-      var profile = $scope.profiles[profilePos];
-      profile.save();
+      var profile = this.editProfile;
+      profile.save().then(function (response){
+        $scope.profiles[profilePos] = profile;
+      });
     };
 
     this.deleteEmployee = function(employeePos){
