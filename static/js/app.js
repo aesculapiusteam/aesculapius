@@ -12,6 +12,13 @@
         };
     }]);
 
+
+    app.filter('getEmployeePosById', function(){
+    return function(employeeId, $scope){
+        return $scope.employees.find(x=> x.id === employeeId);
+  }
+})
+
 var employees = [
     {
       "id": 1,
