@@ -32,6 +32,7 @@
 
     this.setCurrent = function(ModalNumber){
       $('.modal-trigger').leanModal();
+      Materialize.updateTextFields();
       this.current = ModalNumber || 0;
     };
 
