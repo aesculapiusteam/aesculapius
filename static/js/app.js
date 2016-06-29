@@ -43,14 +43,28 @@
       $scope.profiles = response;
     });
 
-    this.employeeSave = function(employeePos){
+    this.saveEmployee = function(employeePos){
       var employee = $scope.employees[employeePos];
       employee.save();
     };
 
-    this.profileSave = function(profilePos){
+    this.saveProfile = function(profilePos){
       var profile = $scope.profiles[profilePos];
       profile.save();
+    };
+
+    this.deleteEmployee = function(employeePos){
+      var employee = $scope.employees[employeePos];
+      employee.remove().then(function() {
+        $scope.employees = _.without($scope.employees, employee);
+      });
+    };
+
+    this.deleteProfile = function(profilePos){
+      var profile = $scope.profiles[profilePos];
+      profile.remove().then(function() {
+        $scope.profiles = _.without($scope.profiles, profile);
+      });
     };
 
     $rootScope.$broadcast('dataloaded');
@@ -195,42 +209,42 @@
     }
   ];
 
-var visits = [
-        {
-            "id": 1,
-            "pacient": 1,
-            "doctor": 1,
-            "datetime": "2016-06-26T16:31:08.018697Z",
-            "detail": "El brayan trajo una navaja metida en el pesguezo, se la saque y le di una bayaspirina,"
-        },
-        {
-            "id": 2,
-            "pacient": 1,
-            "doctor": 1,
-            "datetime": "2016-06-26T16:31:33.462942Z",
-            "detail": "Otra vez vino el brayan con una navaja clavada en la pierna"
-        },
-        {
-            "id": 3,
-            "pacient": 1,
-            "doctor": 2,
-            "datetime": "2016-06-26T16:32:19.131782Z",
-            "detail": "OTRA VEZ BRAYAN BASTA!!! le di una psicoinmunoneuroendomorfinacalmante"
-        },
-        {
-            "id": 4,
-            "pacient": 2,
-            "doctor": 2,
-            "datetime": "2016-06-26T16:40:35.797589Z",
-            "detail": "Otra vez vino el mocaco"
-        },
-        {
-            "id": 5,
-            "pacient": 2,
-            "doctor": 2,
-            "datetime": "2016-06-26T16:41:17.305309Z",
-            "detail": "el mocaco se hizo atender por cancer"
-        }
-    ];
+  var visits = [
+    {
+      "id": 1,
+      "pacient": 1,
+      "doctor": 1,
+      "datetime": "2016-06-26T16:31:08.018697Z",
+      "detail": "El brayan trajo una navaja metida en el pesguezo, se la saque y le di una bayaspirina,"
+    },
+    {
+      "id": 2,
+      "pacient": 1,
+      "doctor": 1,
+      "datetime": "2016-06-26T16:31:33.462942Z",
+      "detail": "Otra vez vino el brayan con una navaja clavada en la pierna"
+    },
+    {
+      "id": 3,
+      "pacient": 1,
+      "doctor": 2,
+      "datetime": "2016-06-26T16:32:19.131782Z",
+      "detail": "OTRA VEZ BRAYAN BASTA!!! le di una psicoinmunoneuroendomorfinacalmante"
+    },
+    {
+      "id": 4,
+      "pacient": 2,
+      "doctor": 2,
+      "datetime": "2016-06-26T16:40:35.797589Z",
+      "detail": "Otra vez vino el mocaco"
+    },
+    {
+      "id": 5,
+      "pacient": 2,
+      "doctor": 2,
+      "datetime": "2016-06-26T16:41:17.305309Z",
+      "detail": "el mocaco se hizo atender por cancer"
+    }
+  ];
 
 })();
