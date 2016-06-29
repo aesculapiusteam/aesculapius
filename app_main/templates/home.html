@@ -19,15 +19,15 @@
                 </ul>
             </div>
             <div id="test1" class="col s12 center">
-                <nav class="grey">
+                <nav class="teal lighten-1">
                     <div class="row">
-                        <div class="input-field col s7">
-                            <input id="searchEmployee" type="search" required>
-                            <label for="searchEmployee"><i class="material-icons">search</i></label>
+                        <div class="input-field col s8">
+                            <input id="searchEmployee" placeholder="Buscar empleados" type="search" required>
+                            <label for="searchEmployee"></label>
                         </div>
-                            <ul class="right">
-                                <li><a class="waves-effect waves-light btn-flat">Buscar</a></li>
-                                <li><a class="waves-effect waves-light btn-flat">Agregar</a></li>
+                            <ul class="right ">
+                                <li><a class="waves-effect waves-light btn-flat teal lighten-1"><i class="material-icons">search</i></a></li>
+                                <li><a class="waves-effect waves-light btn-flat teal lighten-1">Agregar</a></li>
                             </ul>
                     </div>
                 </nav>
@@ -82,15 +82,15 @@
                 </div>
             </div>
             <div id="test2" class="col s12">
-                <nav class="white">
+                <nav class="teal lighten-1">
                     <div class="row">
-                        <div class="input-field col s7">
-                            <input id="searchEmployee" type="search" required>
-                            <label for="searchEmployee"><i class="material-icons">search</i></label>
+                        <div class="input-field col s8">
+                            <input id="searchEmployee" placeholder="Buscar empleados" type="search" required>
+                            <label for="searchEmployee"></label>
                         </div>
-                            <ul class="right">
-                                <li><a class="waves-effect waves-dark btn-flat black-text">Buscar</a></li>
-                                <li><a class="waves-effect waves-dark btn-flat black-text">Agregar</a></li>
+                            <ul class="right ">
+                                <li><a class="waves-effect waves-light btn-flat teal lighten-1"><i class="material-icons">search</i></a></li>
+                                <li><a class="waves-effect waves-light btn-flat teal lighten-1">Agregar</a></li>
                             </ul>
                     </div>
                 </nav>
@@ -218,7 +218,7 @@
                                 <ul class="collection">
                                     <li ng-repeat="visit in visits" ng-show="visit.pacient == profiles[plpCtrl.current].id" class="collection-item">
                                         <p class="right">{{visit.datetime | date}}</p>
-                                        <p>{{employees[visit.doctor].profile.first_name}}</p>
+                                        <p>{{(visit.doctor|getEmployeePosById:this).profile.first_name}}</p>
                                         <p>{{visit.detail}}</p>
                                     </li>
                                 </ul>
