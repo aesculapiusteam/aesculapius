@@ -36,6 +36,7 @@
   app.controller("PeopleController", ['$scope', '$rootScope', 'Restangular', function($scope, $rootScope, Restangular){
     this.current = 0;
     $scope.visits = visits;
+    $scope.employees = [];
 
     this.addPerson = {};
 
@@ -71,7 +72,7 @@
 
     this.saveEmployee = function(employeePos){
       var employee = this.editEmployee;
-      employee.profile = prepareJson(employee.profile);
+      employee.profile = this.prepareJson(employee.profile);
       employee.save().then(function (response){
         $scope.employees[employeePos] = employee;
       });
@@ -79,7 +80,7 @@
 
     this.saveProfile = function(profilePos){
       var profile = this.editProfile;
-      profile = prepareJson(profile);
+      profile = this.prepareJson(profile);
       profile.save().then(function (response){
         $scope.profiles[profilePos] = profile;
       });

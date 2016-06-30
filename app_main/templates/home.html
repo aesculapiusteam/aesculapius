@@ -6,358 +6,358 @@
 {% endblock %}
 <div ng-app="peopleModule">
 
-  {% verbatim angular %}
+	{% verbatim angular %}
 	<br>
-  <div class='container' ng-controller="PeopleController as plpCtrl">
-    <div class='card'>
-      <div class="col s12">
-        <ul class="tabs">
+	<div class='container' ng-controller="PeopleController as plpCtrl">
+		<div class='card'>
+			<div class="col s12">
+				<ul class="tabs">
 					<li class="tab col s3 grey lighten-3"><a href="#test1">EMPLEADOS</a></li>
 					<li class="tab col s3 grey lighten-3"><a href="#test2">PACIENTES</a></li>
 					<li class="tab col s3 grey lighten-3 disabled"><a href="#test2">STOCK</a></li>
-        </ul>
-      </div>
+				</ul>
+			</div>
 			<div id="test1" class="col s12 center">
 				<nav class="grey lighten-3">
-          <div class="row">
-            <div class="input-field col s8">
+					<div class="row">
+						<div class="input-field col s8">
 							<input id="searchEmployee" ng-model="searchEmp" placeholder="Buscar empleados" type="search" required>
-            </div>
-            <ul class="right">
+						</div>
+						<ul class="right">
 							<li><a class="waves-effect waves-light btn-flat grey lighten-3"><i class="grey-text text-darken-2 material-icons">search</i></a></li>
 							<li><a class="waves-effect waves-light btn-flat grey lighten-3 modal-trigger grey-text text-darken-2" href="#modalAddEmployee">Agregar</a></li>
-            </ul>
-          </div>
-        </nav>
-        <div class="col s12">
-          <ul class="tabs">
+						</ul>
+					</div>
+				</nav>
+				<div class="col s12">
+					<ul class="tabs">
 						<li id="tab-text1" class="tab col s3"><a href="#test_secretary">SECRETARIAS</a></li>
 						<li id="tab-text1" class="tab col s3"><a href="#test_doctor">DOCTORES</a></li>
-          </ul>
-        </div>
+					</ul>
+				</div>
 
-        <div id="test_secretary" class="col s12">
-          <table class="bordered centered">
-            <thead>
-              <tr>
-                <th> Nombre </th>
-                <th> DNI </th>
-                <th> E-mail </th>
-                <th> Telefono </th>
-                <th> Detalles </th>
-              </tr>
-            </thead>
+				<div id="test_secretary" class="col s12">
+					<table class="bordered centered">
+						<thead>
+							<tr>
+								<th> Nombre </th>
+								<th> DNI </th>
+								<th> E-mail </th>
+								<th> Telefono </th>
+								<th> Detalles </th>
+							</tr>
+						</thead>
 						<tbody ng-repeat="employee in employees| filter:searchEmp">
-              <tr ng-show="employee.charge == 'secretary'">
-                <td> {{employee.profile.first_name}} {{employee.profile.last_name}} </td>
-                <td> {{employee.profile.dni}} </td>
-                <td> {{employee.profile.email}} </td>
-                <td> {{employee.profile.phone}} </td>
-                <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+							<tr ng-show="employee.charge == 'secretary'">
+								<td> {{employee.profile.first_name}} {{employee.profile.last_name}} </td>
+								<td> {{employee.profile.dni}} </td>
+								<td> {{employee.profile.email}} </td>
+								<td> {{employee.profile.phone}} </td>
+								<td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
-        <div id="test_doctor" class="col s12">
-          <table class="bordered centered">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>DNI</th>
-                <th>E-mail</th>
-                <th>Telefono</th>
-                <th>Detalles</th>
-              </tr>
-            </thead>
+				<div id="test_doctor" class="col s12">
+					<table class="bordered centered">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>DNI</th>
+								<th>E-mail</th>
+								<th>Telefono</th>
+								<th>Detalles</th>
+							</tr>
+						</thead>
 						<tbody ng-repeat="employee in employees| filter:searchEmp">
-              <tr ng-show="employee.charge == 'doctor'">
-                <td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
-                <td>{{employee.profile.dni}}</td>
-                <td>{{employee.profile.email}}</td>
-                <td>{{employee.profile.phone}}</td>
-                <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div id="test2" class="col s12">
+							<tr ng-show="employee.charge == 'doctor'">
+								<td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
+								<td>{{employee.profile.dni}}</td>
+								<td>{{employee.profile.email}}</td>
+								<td>{{employee.profile.phone}}</td>
+								<td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalEmployee" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="test2" class="col s12">
 				<nav class="grey lighten-3">
-          <div class="row">
-            <div class="input-field col s8">
+					<div class="row">
+						<div class="input-field col s8">
 							<input id="searchPacient" ng-model="searchPaci" placeholder="Buscar pacientes" type="search" required>
-            </div>
-            <ul class="right">
+						</div>
+						<ul class="right">
 							<li><a class="waves-effect waves-light btn-flat grey lighten-3"><i class="grey-text text-darken-2 material-icons">search</i></a></li>
-							<li><a class="waves-effect waves-light btn-flat grey lighten-3 modal-trigger grey-text text-darken-2" href="#modalAddEmployee">Agregar</a></li>
-            </ul>
-          </div>
-        </nav>
-        <table class="bordered centered">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>DNI</th>
-              <th>E-mail</th>
-              <th>Telefono</th>
-              <th>Detalles</th>
+							<li><a class="waves-effect waves-light btn-flat grey lighten-3 modal-trigger grey-text text-darken-2" href="#modalAddPacient">Agregar</a></li>
+						</ul>
+					</div>
+				</nav>
+				<table class="bordered centered">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>DNI</th>
+							<th>E-mail</th>
+							<th>Telefono</th>
+							<th>Detalles</th>
 							<th>Consultas</th>
-            </tr>
-          </thead>
+						</tr>
+					</thead>
 					<tbody ng-repeat="profile in profiles| filter:searchPaci">
-            <tr ng-hide="profile.employee">
-              <td>{{profile.first_name}} {{profile.last_name}}</td>
-              <td>{{profile.dni}}</td>
-              <td>{{profile.email}}</td>
-              <td>{{profile.phone}}</td>
+						<tr ng-hide="profile.employee">
+							<td>{{profile.first_name}} {{profile.last_name}}</td>
+							<td>{{profile.dni}}</td>
+							<td>{{profile.email}}</td>
+							<td>{{profile.phone}}</td>
 							<td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalProfile" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
 							<td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalAddVisit" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">note_add</i></a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
-    <!-- Modal Structure -->
-    <div id="modalEmployee" class="modal modal-fixed-footer">
-      <form class="col s12">
-        <div class="modal-content">
-          <div class="row">
-            <div class="input-field col s4">
-              <input id="first_name" ng-model="plpCtrl.editEmployee.profile.first_name" type="text">
-              <label for="first_name">Nombre</label>
-            </div>
-            <div class="input-field col s4">
-              <input id="last_name" ng-model="plpCtrl.editEmployee.profile.last_name"type="text">
-              <label for="last_name">Apellido</label>
-            </div>
-            <div class="input-field col s4">
-              <input id="dni" ng-model="plpCtrl.editEmployee.profile.dni" type="text" >
-              <label for="dni">DNI</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="address" ng-model="plpCtrl.editEmployee.profile.address" type="text" >
-              <label for="address">Direccion</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="phone" ng-model="plpCtrl.editEmployee.profile.phone" type="text" >
-              <label for="phone">Telefono</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="cellphone" ng-model="plpCtrl.editEmployee.profile.cellphone" type="text" >
-              <label for="cellphone">Celular</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="email" ng-model="plpCtrl.editEmployee.profile.email" type="text" >
-              <label for="email">Email</label>
-            </div>
-            <div class="input-field col s12">
-              <input id="username" ng-model="plpCtrl.editEmployee.username" type="text" disabled="dissabled">
-              <label for="username">Nombre de Usuario</label>
-            </div>
-          </div>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.saveEmployee(plpCtrl.current)">Guardar</a>
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
-        <div class="left"><a href=#modalDeleteEmployee class=" modal-action red-text modal-close waves-effect waves-red btn-flat modal-trigger" >Eliminar</a></div>
-      </div>
-    </div>
-    <div id="modalProfile" class="modal modal-fixed-footer">
-      <div class="col s12">
-        <ul class="tabs">
-          <li class="tab col s3"><a href="#test_infomacion">INFORMACION</a></li>
-          <li class="tab col s3"><a href="#test_historial">HISTORIAL</a></li>
-        </ul>
-      </div>
-      <div id="test_infomacion" class="modal-fixed-footer">
-        <form class="col s12">
-          <div class="modal-content">
-            <div class="row">
-              <div class="input-field col s4">
-                <input id="first_name" ng-model="plpCtrl.editProfile.first_name" type="text" >
-                <label for="first_name">Nombre</label>
-              </div>
-              <div class="input-field col s4">
-                <input id="last_name" ng-model="plpCtrl.editProfile.last_name" type="text" >
-                <label for="last_name">Apellido</label>
-              </div>
-              <div class="input-field col s4">
-                <input id="dni" ng-model="plpCtrl.editProfile.dni" type="text" >
-                <label for="dni">DNI</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="address" ng-model="plpCtrl.editProfile.address" type="text" >
-                <label for="address">Direccion</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="phone" ng-model="plpCtrl.editProfile.phone" type="text" >
-                <label for="phone">Telefono</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="cellphone" ng-model="plpCtrl.editProfile.cellphone" type="text" >
-                <label for="cellphone">Celular</label>
-              </div>
-              <div class="input-field col s6">
-                <input id="email" ng-model="plpCtrl.editProfile.email" type="text" >
-                <label for="email">Email</label>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div>
-        <div id="test_historial" class="modal-fixed-footer">
-          <form class="col s12">
-            <div class="modal-content">
-              <div class="row">
-                <ul class="collection">
-                  <li ng-repeat="visit in visits" ng-show="visit.pacient == profiles[plpCtrl.current].id" class="collection-item">
-                    <p class="right"> {{visit.datetime | date}} </p>
+		<!-- Modal Structure -->
+		<div id="modalEmployee" class="modal modal-fixed-footer">
+			<form class="col s12">
+				<div class="modal-content">
+					<div class="row">
+						<div class="input-field col s4">
+							<input id="first_name" ng-model="plpCtrl.editEmployee.profile.first_name" type="text">
+							<label for="first_name">Nombre</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="last_name" ng-model="plpCtrl.editEmployee.profile.last_name"type="text">
+							<label for="last_name">Apellido</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="dni" ng-model="plpCtrl.editEmployee.profile.dni" type="text" >
+							<label for="dni">DNI</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="address" ng-model="plpCtrl.editEmployee.profile.address" type="text" >
+							<label for="address">Direccion</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="phone" ng-model="plpCtrl.editEmployee.profile.phone" type="text" >
+							<label for="phone">Telefono</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="cellphone" ng-model="plpCtrl.editEmployee.profile.cellphone" type="text" >
+							<label for="cellphone">Celular</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="email" ng-model="plpCtrl.editEmployee.profile.email" type="text" >
+							<label for="email">Email</label>
+						</div>
+						<div class="input-field col s12">
+							<input id="username" ng-model="plpCtrl.editEmployee.username" type="text" disabled="dissabled">
+							<label for="username">Nombre de Usuario</label>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="modal-footer">
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.saveEmployee(plpCtrl.current)">Guardar</a>
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+				<div class="left"><a href=#modalDeleteEmployee class=" modal-action red-text modal-close waves-effect waves-red btn-flat modal-trigger" >Eliminar</a></div>
+			</div>
+		</div>
+		<div id="modalProfile" class="modal modal-fixed-footer">
+			<div class="col s12">
+				<ul class="tabs">
+					<li class="tab col s3"><a href="#test_infomacion">INFORMACION</a></li>
+					<li class="tab col s3"><a href="#test_historial">HISTORIAL</a></li>
+				</ul>
+			</div>
+			<div id="test_infomacion" class="modal-fixed-footer">
+				<form class="col s12">
+					<div class="modal-content">
+						<div class="row">
+							<div class="input-field col s4">
+								<input id="first_name" ng-model="plpCtrl.editProfile.first_name" type="text" >
+								<label for="first_name">Nombre</label>
+							</div>
+							<div class="input-field col s4">
+								<input id="last_name" ng-model="plpCtrl.editProfile.last_name" type="text" >
+								<label for="last_name">Apellido</label>
+							</div>
+							<div class="input-field col s4">
+								<input id="dni" ng-model="plpCtrl.editProfile.dni" type="text" >
+								<label for="dni">DNI</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="address" ng-model="plpCtrl.editProfile.address" type="text" >
+								<label for="address">Direccion</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="phone" ng-model="plpCtrl.editProfile.phone" type="text" >
+								<label for="phone">Telefono</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="cellphone" ng-model="plpCtrl.editProfile.cellphone" type="text" >
+								<label for="cellphone">Celular</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="email" ng-model="plpCtrl.editProfile.email" type="text" >
+								<label for="email">Email</label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div>
+				<div id="test_historial" class="modal-fixed-footer">
+					<form class="col s12">
+						<div class="modal-content">
+							<div class="row">
+								<ul class="collection">
+									<li ng-repeat="visit in visits" ng-show="visit.pacient == profiles[plpCtrl.current].id" class="collection-item">
+										<p class="right"> {{visit.datetime | date}} </p>
 										<p>{{(visit.doctor|getEmployeePosById:this).profile.first_name}}</p>
-                    <p> {{visit.detail}} </p>
+										<p> {{visit.detail}} </p>
 										<a class="btn-floating right red"><i class="material-icons">delete</i></a>
 										<br>
 										<br>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.saveProfile(plpCtrl.current)">Guardar</a>
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
-        <div class="left">
-          <a href="#modalDeleteProfile" class="modal-action red-text modal-close waves-effect waves-red btn-flat modal-trigger" >Eliminar</a>
-        </div>
-      </div>
-    </div>
-    <div id="modalDeleteProfile" class="modal modal-fixed-footer">
-      <div class="modal-content">
-        <h4>¡Se Eliminará!</h4>
-        <p>Seguro que desea eliminar este paciente</p>
-      </div>
-      <div class="modal-footer">
-        <div class="left"><a href="#!" class=" modal-action red-text modal-close waves-effect waves-red btn-flat" ng-click="plpCtrl.deleteProfile(plpCtrl.current)">Eliminar</a></div>
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
-      </div>
-    </div>
-    <div id="modalDeleteEmployee" class="modal modal-fixed-footer">
-      <div class="modal-content">
-        <h4>¡Se Eliminará!</h4>
-        <p>¿Seguro que desea eliminar este empleado?</p>
-      </div>
-      <div class="modal-footer">
-        <div class="left"><a href="#!" class=" modal-action red-text modal-close waves-effect waves-red btn-flat" ng-click="plpCtrl.deleteEmployee(plpCtrl.current)">Eliminar</a></div>
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
-      </div>
-    </div>
-    <div id="modalAddEmployee" class="modal modal-fixed-footer">
-      <form class="col s12">
-        <div class="modal-content">
-          <div class="row">
-            <div class="input-field col s4">
-              <input id="user_name" type="text" ng-model="plpCtrl.addPerson.username">
-              <label for="user_name">Nombre de Usuario</label>
-            </div>
-            <div class="input-field col s4">
-              <input id="user_pass" type="text" ng-model="plpCtrl.addPerson.password">
-              <label for="user_pass">Contraseña</label>
-            </div>
-            <div class="input-field col s4">
-              <select ng-model="plpCtrl.addPerson.charge">
-                <option value="" disabled selected>Elegí tu cargo</option>
-                <option value="Doctor">Doctor</option>
-                <option value="Secretaria">Secretaria</option>
-              </select>
-              <label>Cargo</label>
-            </div>
-            <div class="col s12">
-              <div class="input-field col s3 row" ng-repeat="employee in employees">
-                <input type="checkbox" id="assist_ed{{$index}}"/>
-                <label for="assist_ed{{$index}}">{{employee.profile.first_name}}</label>
-              </div>
-            </div>
-            <div class="input-field col s4">
-              <input id="first_name" type="text" ng-model="plpCtrl.addPerson.profile.first_name">
-              <label for="first_name">Nombre</label>
-            </div>
-            <div class="input-field col s4">
-              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.profile.last_name">
-              <label for="last_name">Apellido</label>
-            </div>
-            <div class="input-field col s4">
-              <input id="dni" type="text" ng-model="plpCtrl.addPerson.profile.dni">
-              <label for="dni">DNI</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="address" type="text" ng-model="plpCtrl.addPerson.profile.address">
-              <label for="address">Direccion</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="phone" type="text" ng-model="plpCtrl.addPerson.profile.phone">
-              <label for="phone">Telefono</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="cellphone" type="text" ng-model="plpCtrl.addPerson.profile.cellphone">
-              <label for="cellphone">Celular</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="email" type="text" ng-model="plpCtrl.addPerson.profile.email">
-              <label for="email">Email</label>
-            </div>
-          </div>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createEmployee(plpCtrl.addPerson)">Guardar</a>
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
-      </div>
-    </div>
-    <div id="modalAddPacient" class="modal modal-fixed-footer">
-      <form class="col s12">
-        <div class="modal-content">
-          <div class="row">
-            <div class="input-field col s4">
-              <input id="first_name" type="text" ng-model="plpCtrl.addPerson.first_name">
-              <label for="first_name" >Nombre</label>
-            </div>
-            <div class="input-field col s4">
-              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.last_name">
-              <label for="last_name" >Apellido</label>
-            </div>
-            <div class="input-field col s4">
-              <input id="dni" type="text" ng-model="plpCtrl.addPerson.dni">
-              <label for="dni" >DNI</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="address" type="text" ng-model="plpCtrl.addPerson.address">
-              <label for="address">Direccion</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="phone" type="text" ng-model="plpCtrl.addPerson.phone">
-              <label for="phone" >Telefono</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="cellphone" type="text" ng-model="plpCtrl.addPerson.cellphone">
-              <label for="cellphone" >Celular</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="email" type="text" ng-model="plpCtrl.addPerson.email">
-              <label for="email" >Email</label>
-            </div>
-          </div>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createProfile(plpCtrl.addPerson)">Guardar</a>
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
-      </div>
-    </div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.saveProfile(plpCtrl.current)">Guardar</a>
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+				<div class="left">
+					<a href="#modalDeleteProfile" class="modal-action red-text modal-close waves-effect waves-red btn-flat modal-trigger" >Eliminar</a>
+				</div>
+			</div>
+		</div>
+		<div id="modalDeleteProfile" class="modal modal-fixed-footer">
+			<div class="modal-content">
+				<h4>¡Se Eliminará!</h4>
+				<p>Seguro que desea eliminar este paciente</p>
+			</div>
+			<div class="modal-footer">
+				<div class="left"><a href="#!" class=" modal-action red-text modal-close waves-effect waves-red btn-flat" ng-click="plpCtrl.deleteProfile(plpCtrl.current)">Eliminar</a></div>
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+			</div>
+		</div>
+		<div id="modalDeleteEmployee" class="modal modal-fixed-footer">
+			<div class="modal-content">
+				<h4>¡Se Eliminará!</h4>
+				<p>¿Seguro que desea eliminar este empleado?</p>
+			</div>
+			<div class="modal-footer">
+				<div class="left"><a href="#!" class=" modal-action red-text modal-close waves-effect waves-red btn-flat" ng-click="plpCtrl.deleteEmployee(plpCtrl.current)">Eliminar</a></div>
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+			</div>
+		</div>
+		<div id="modalAddEmployee" class="modal modal-fixed-footer">
+			<form class="col s12">
+				<div class="modal-content">
+					<div class="row">
+						<div class="input-field col s4">
+							<input id="user_name" type="text" ng-model="plpCtrl.addPerson.username">
+							<label for="user_name">Nombre de Usuario</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="user_pass" type="text" ng-model="plpCtrl.addPerson.password">
+							<label for="user_pass">Contraseña</label>
+						</div>
+						<div class="input-field col s4">
+							<select ng-model="plpCtrl.addPerson.charge">
+								<option value="" disabled selected>Elegí tu cargo</option>
+								<option value="Doctor">Doctor</option>
+								<option value="Secretaria">Secretaria</option>
+							</select>
+							<label>Cargo</label>
+						</div>
+						<div class="col s12">
+							<div class="input-field col s3 row" ng-repeat="employee in employees">
+								<input type="checkbox" id="assist_ed{{$index}}"/>
+								<label for="assist_ed{{$index}}">{{employee.profile.first_name}}</label>
+							</div>
+						</div>
+						<div class="input-field col s4">
+							<input id="first_name" type="text" ng-model="plpCtrl.addPerson.profile.first_name">
+							<label for="first_name">Nombre</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="last_name" type="text" ng-model="plpCtrl.addPerson.profile.last_name">
+							<label for="last_name">Apellido</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="dni" type="text" ng-model="plpCtrl.addPerson.profile.dni">
+							<label for="dni">DNI</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="address" type="text" ng-model="plpCtrl.addPerson.profile.address">
+							<label for="address">Direccion</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="phone" type="text" ng-model="plpCtrl.addPerson.profile.phone">
+							<label for="phone">Telefono</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="cellphone" type="text" ng-model="plpCtrl.addPerson.profile.cellphone">
+							<label for="cellphone">Celular</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="email" type="text" ng-model="plpCtrl.addPerson.profile.email">
+							<label for="email">Email</label>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="modal-footer">
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createEmployee(plpCtrl.addPerson)">Guardar</a>
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+			</div>
+		</div>
+		<div id="modalAddPacient" class="modal modal-fixed-footer">
+			<form class="col s12">
+				<div class="modal-content">
+					<div class="row">
+						<div class="input-field col s4">
+							<input id="first_name" type="text" ng-model="plpCtrl.addPerson.first_name">
+							<label for="first_name" >Nombre</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="last_name" type="text" ng-model="plpCtrl.addPerson.last_name">
+							<label for="last_name" >Apellido</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="dni" type="text" ng-model="plpCtrl.addPerson.dni">
+							<label for="dni" >DNI</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="address" type="text" ng-model="plpCtrl.addPerson.address">
+							<label for="address">Direccion</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="phone" type="text" ng-model="plpCtrl.addPerson.phone">
+							<label for="phone" >Telefono</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="cellphone" type="text" ng-model="plpCtrl.addPerson.cellphone">
+							<label for="cellphone" >Celular</label>
+						</div>
+						<div class="input-field col s6">
+							<input id="email" type="text" ng-model="plpCtrl.addPerson.email">
+							<label for="email" >Email</label>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="modal-footer">
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createProfile(plpCtrl.addPerson)">Guardar</a>
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+			</div>
+		</div>
 		<div id="modalAddVisit" class="modal modal-fixed-footer">
 			<form class="col s12">
 				<div class="modal-content">
@@ -373,11 +373,8 @@
 				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
 			</div>
 		</div>
-  </div>
-  {% endverbatim angular %}
+	</div>
 </div>
-
-
 
 {% endverbatim angular %}
 
