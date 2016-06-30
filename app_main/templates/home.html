@@ -102,6 +102,7 @@
 							<th>E-mail</th>
 							<th>Telefono</th>
 							<th>Detalles</th>
+                            <th>Consultas</th>
 						</tr>
 					</thead>
 					<tbody ng-repeat="profile in profiles| filter:searchPaci">
@@ -111,6 +112,7 @@
 							<td>{{profile.email}}</td>
 							<td>{{profile.phone}}</td>
 							<td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalProfile" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
+                            <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalAddVisit" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">note_add</i></a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -201,10 +203,6 @@
 								<input id="last_name" ng-model="profiles[plpCtrl.current].email" type="text" >
 								<label for="last_name">Email</label>
 							</div>
-							<div class="input-field col s12">
-								<textarea id="textarea1" class="materialize-textarea"></textarea>
-								<label for="textarea1">FICHA NUEVA</label>
-							</div>
 						</div>
 					</div>
 				</form>
@@ -215,11 +213,14 @@
 						<div class="modal-content">
 							<div class="row">
 								<ul class="collection">
-									<li ng-repeat="visit in visits" ng-show="visit.pacient == profiles[plpCtrl.current].id" class="collection-item">
-										<p class="right">{{visit.datetime | date}}</p>
-										<p>{{(visit.doctor|getEmployeePosById:this).profile.first_name}}</p>
-										<p>{{visit.detail}}</p>
-									</li>
+                                  <li ng-repeat="visit in visits" ng-show="visit.pacient == profiles[plpCtrl.current].id" class="collection-item">
+                                    <p class="right">{{visit.datetime | date}}</p>
+                                    <p>{{(visit.doctor|getEmployeePosById:this).profile.first_name}}</p>
+                                    <p>{{visit.detail}}</p>
+                                    <a class="btn-floating right red"><i class="material-icons">delete</i></a>
+                                    <br>
+                                    <br>
+                                  </li>
 								</ul>
 							</div>
 						</div>
@@ -333,6 +334,21 @@
 				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
 			</div>
 		</div>
+      <div id="modalAddVisit" class="modal modal-fixed-footer">
+        <form class="col s12">
+                <div class="modal-content">
+                    <h4>Nueva consulta</h4>
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <label for="textarea1">Agregar consulta</label>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
+                <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+            </div>
+        </div>
 
 
 	</div>
