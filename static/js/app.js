@@ -27,8 +27,15 @@
     });
   });
 
+  app.filter('getEmployeePosById', function(){
+    return function(employeeId, $scope){
+      return $scope.employees.find(function(x){return x.id === employeeId;});
+    };
+  });
+
   app.controller("PeopleController", ['$scope', '$rootScope', 'Restangular', function($scope, $rootScope, Restangular){
     this.current = 0;
+    $scope.visits = visits;
 
     this.setCurrent = function(ModalNumber){
       $('.modal-trigger').leanModal();
