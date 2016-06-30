@@ -96,7 +96,7 @@ i.left, i.right {
 }
 
 .tabs .tab a {
-    color: #00bfa5;
+    color: #64b5f6 ;
     display: block;
     width: 100%;
     height: 100%;
@@ -106,15 +106,20 @@ i.left, i.right {
 }
 
 .tabs .tab a:hover {
-    color: #00838f;
+    color: #1976d2;
 }
 
 .tabs .indicator {
     position: absolute;
     bottom: 0;
     height: 2px;
-    background-color: #00bfa5;
+    background-color: #64b5f6;
     will-change: left, right;
+}
+
+.tabs .tab.disabled a {
+    color: lightgrey;
+    cursor: default;
 }
 
 .input-field input[type=search], .input-field input[type=password] {
@@ -180,20 +185,8 @@ h5 {
     margin: 0.82rem 0 0.656rem 0;
 }
 
-/*#wrapper {
-    padding: 50px 0;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}*/
-
-/*#content{
-    min-height: 100%;
-}*/
-
 .slider .slides li .caption {
     color: #000;
     background-color: rgba(0,0,0,0.3);
 }
+

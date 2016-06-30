@@ -12,28 +12,28 @@
 	<div class='container' ng-controller="PeopleController as plpCtrl">
 		<div class='card'>
 			<div class="col s12">
-				<ul class="tabs">
-					<li class="tab col s3 teal darken-4"><a href="#test1">EMPLEADOS</a></li>
-					<li class="tab col s3 teal darken-4"><a href="#test2">PACIENTES</a></li>
-					<li class="tab col s3 teal darken-4 disabled"><a href="#test2">STOCK</a></li>
-				</ul>
-			</div>
+        <ul class="tabs">
+          <li class="tab col s3 grey lighten-3"><a href="#test1">EMPLEADOS</a></li>
+          <li class="tab col s3 grey lighten-3"><a href="#test2">PACIENTES</a></li>
+          <li class="tab col s3 grey lighten-3 disabled"><a href="#test2">STOCK</a></li>
+        </ul>
+      </div>
 			<div id="test1" class="col s12 center">
-				<nav class="teal lighten-1">
+				<nav class="grey lighten-3">
 					<div class="row">
 						<div class="input-field col s8">
 							<input id="searchEmployee" ng-model="searchEmp" placeholder="Buscar empleados" type="search" required>
-							
+
 						</div>
 						<ul class="right">
-							<li><a class="waves-effect waves-light btn-flat teal lighten-1"><i class="material-icons">search</i></a></li>
-							<li><a class="waves-effect waves-light btn-flat teal lighten-1 modal-trigger" href="#modalAddEmployee">Agregar</a></li>
+							<li><a class="waves-effect waves-light btn-flat grey lighten-3"><i class="grey-text text-darken-2 material-icons">search</i></a></li>
+							<li><a class="waves-effect waves-light btn-flat grey lighten-3 modal-trigger grey-text text-darken-2" href="#modalAddEmployee">Agregar</a></li>
 						</ul>
 					</div>
 				</nav>
 				<ul class="tabs">
-					<li class="tab col s3"><a href="#test_secretary">SECRETARIAS</a></li>
-					<li class="tab col s3"><a href="#test_doctor">DOCTORES</a></li>
+					<li id="tab-text1" class="tab col s3"><a href="#test_secretary">SECRETARIAS</a></li>
+					<li id="tab-text1" class="tab col s3"><a href="#test_doctor">DOCTORES</a></li>
 				</ul>
 				<div id="test_secretary" class="col s12">
 					<table class="bordered centered">
@@ -82,15 +82,15 @@
 				</div>
 			</div>
 			<div id="test2" class="col s12">
-				<nav class="teal lighten-1">
+				<nav class="grey lighten-3">
 					<div class="row">
 						<div class="input-field col s8">
 							<input id="searchPacient" ng-model="searchPaci" placeholder="Buscar pacientes" type="search" required>
 							<label for="searchEmployee"></label>
 						</div>
 						<ul class="right ">
-							<li><a class="waves-effect waves-light btn-flat teal lighten-1"><i class="material-icons">search</i></a></li>
-							<li><a class="waves-effect waves-light btn-flat teal lighten-1 modal-trigger" href="#modalAddPacient">Agregar</a></li>
+							<li><a class="waves-effect waves-light btn-flat grey lighten-3"><i class="grey-text text-darken-2 material-icons">search</i></a></li>
+							<li><a class="waves-effect waves-light btn-flat grey lighten-3 modal-trigger grey-text text-darken-2" href="#modalAddEmployee">Agregar</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -112,7 +112,7 @@
 							<td>{{profile.email}}</td>
 							<td>{{profile.phone}}</td>
 							<td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalProfile" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">arrow_forward</i></a></td>
-                            <td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalAddVisit" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">note_add</i></a></td>
+							<td><a class="waves-effect btn-flat black-text modal-trigger" href="#modalAddVisit" ng-click="plpCtrl.setCurrent($index)"><i class="material-icons">note_add</i></a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -348,11 +348,43 @@
                 <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
                 <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
             </div>
+            <div class="input-field col s4">
+              <input id="first_name" type="text">
+              <label for="first_name">Apellido</label>
+            </div>
+            <div class="input-field col s4">
+              <input id="last_name" type="text" >
+              <label for="last_name">DNI</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="text" >
+              <label for="last_name">Direccion</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="text" >
+              <label for="last_name">Telefono</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="text" >
+              <label for="last_name">Celular</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="last_name" type="text" >
+              <label for="last_name">Email</label>
+            </div>
+          </div>
         </div>
+      </form>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
+        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
+      </div>
+    </div>
 
 
-	</div>
-	{% endverbatim angular %}
+  </div>
+  {% endverbatim angular %}
+	
 </div>
 {% endblock %}
 
