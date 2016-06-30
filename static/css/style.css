@@ -53,7 +53,7 @@ nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul 
 }
 
 
-.input-field input[type=search] + label {
+.input-field input[type=search] + label, .input-field input[type=password] + label {
     left: 1rem;
     top: 0.9rem;
 }
@@ -62,7 +62,7 @@ nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul 
     color: black;
 }
 
-.input-field input[type=search]:focus {
+.input-field input[type=search]:focus, .input-field input[type=password]:focus {
     background-color: #bdbdbd;
     border: 0;
     box-shadow: none;
