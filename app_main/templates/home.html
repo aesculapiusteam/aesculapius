@@ -268,17 +268,18 @@
         <div class="modal-content">
           <div class="row">
             <div class="input-field col s4">
-              <input id="user_name" type="text">
+              <input id="user_name" type="text" ng-model="plpCtrl.addPerson.username">
               <label for="last_name">Nombre de Usuario</label>
             </div>
             <div class="input-field col s4">
-              <input id="user_pass" type="text">
+              <input id="user_pass" type="text" ng-model="plpCtrl.addPerson.password">
               <label for="user_pass">Contraseña</label>
             </div>
             <div class="input-field col s4">
-              <select>
-                <option value="0">Doctor</option>
-                <option value="1">Secretaria</option>
+              <select ng-model="plpCtrl.addPerson.charge">
+                <option value="" disabled selected>Elegí tu cargo</option>
+                <option value="Doctor">Doctor</option>
+                <option value="Secretaria">Secretaria</option>
               </select>
               <label>Cargo</label>
             </div>
@@ -289,38 +290,38 @@
               </div>
             </div>
             <div class="input-field col s4">
-              <input id="first_name" type="text">
+              <input id="first_name" type="text" ng-model="plpCtrl.addPerson.profile.first_name">
               <label for="first_name">Nombre</label>
             </div>
             <div class="input-field col s4">
-              <input id="first_name" type="text">
+              <input id="first_name" type="text" ng-model="plpCtrl.addPerson.profile.last_name">
               <label for="first_name">Apellido</label>
             </div>
             <div class="input-field col s4">
-              <input id="last_name" type="text" >
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.profile.dni">
               <label for="last_name">DNI</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" >
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.profile.address">
               <label for="last_name">Direccion</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" >
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.profile.phone">
               <label for="last_name">Telefono</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" >
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.profile.cellphone">
               <label for="last_name">Celular</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" >
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.profile.email">
               <label for="last_name">Email</label>
             </div>
           </div>
         </div>
       </form>
       <div class="modal-footer">
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
+        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createEmployee(plpCtrl.addPerson)">Guardar</a>
         <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
       </div>
     </div>
@@ -329,38 +330,38 @@
         <div class="modal-content">
           <div class="row">
             <div class="input-field col s4">
-              <input id="first_name" type="text">
-              <label for="first_name">Nombre</label>
+              <input id="first_name" type="text" ng-model="plpCtrl.addPerson.first_name">
+              <label for="first_name" >Nombre</label>
             </div>
             <div class="input-field col s4">
-              <input id="first_name" type="text">
-              <label for="first_name">Apellido</label>
+              <input id="first_name" type="text" ng-model="plpCtrl.addPerson.last_name">
+              <label for="last_name" >Apellido</label>
             </div>
             <div class="input-field col s4">
-              <input id="last_name" type="text" >
-              <label for="last_name">DNI</label>
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.dni">
+              <label for="dni" >DNI</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" >
-              <label for="last_name">Direccion</label>
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.address">
+              <label for="address">Direccion</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" >
-              <label for="last_name">Telefono</label>
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.phone">
+              <label for="phone" >Telefono</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" >
-              <label for="last_name">Celular</label>
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.cellphone">
+              <label for="cellphone" >Celular</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" >
-              <label for="last_name">Email</label>
+              <input id="last_name" type="text" ng-model="plpCtrl.addPerson.email">
+              <label for="email" >Email</label>
             </div>
           </div>
         </div>
       </form>
       <div class="modal-footer">
-        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
+        <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createProfile(plpCtrl.addPerson)">Guardar</a>
         <a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
       </div>
     </div>

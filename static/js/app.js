@@ -37,6 +37,8 @@
     this.current = 0;
     $scope.visits = visits;
 
+    this.addPerson = {};
+
     this.setCurrent = function(ModalNumber){
       $('.modal-trigger').leanModal();
       this.current = ModalNumber || 0;
@@ -47,15 +49,17 @@
       Materialize.updateTextFields();
     };
 
-    var allEmployees = Restangular.all('employees').getList().then(function(response){
+    var allEmployees = Restangular.all('employees');
+    allEmployees.getList().then(function(response){
       $scope.employees = response;
     });
 
-    var allProfiles = Restangular.all('profiles').getList().then(function(response){
+    var allProfiles = Restangular.all('profiles');
+    allProfiles.getList().then(function(response){
       $scope.profiles = response;
     });
 
-    var prepareJson = function(dic){
+    this.prepareJson = function(dic){
       var i = 0;
       for (i in dic){
 	        if (dic[i] === ""){
@@ -93,6 +97,24 @@
       var profile = $scope.profiles[profilePos];
       profile.remove().then(function() {
         $scope.profiles = _.without($scope.profiles, profile);
+      });
+    };
+
+    this.createProfile = function(){
+      allProfiles.post(this.addPerson).then(function(postedUser) {
+        allProfiles.getList().then(function(response){
+          $scope.profiles = response;
+        });
+      });
+    };
+
+    this.createEmployee = function(){
+      this.addPerson.assist_ed = [];
+      console.log(this.addPerson);
+      allEmployees.post(this.addPerson).then(function(postedUser) {
+        allEmployees.getList().then(function(response){
+          $scope.employees = response;
+        });
       });
     };
 
