@@ -45,7 +45,16 @@ class Command(BaseCommand):
             last_name="Morales",
             email=None
         )
+        d5 = Employee().create(
+            username="nomUser",
+            password="contra",
+            charge="doctor",
+            first_name="Medico Ricardao",
+            last_name="Moraleas",
+            email=None
+        )
 
+        d5.save()
         s.save()
         s1.save()
         d.save()

@@ -1,23 +1,139 @@
 (function() {
-  var app = angular.module('peopleModule', []);
 
-  app.controller('PeopleController', ['$scope',function($scope){
-    $scope.employees = employees;
-    $scope.profiles = profiles;
-    $scope.visits = visits;
-    this.current = 0;
+  var app = angular.module('peopleModule', [
+    'ui.router',
+    'restangular'
+  ]).config(function(RestangularProvider, $httpProvider){
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-    this.setCurrent = function(ModalNumber){
-      this.current = ModalNumber || 0;
-    };
-  }]);
-
+    //set the base url for api calls on our RESTful services
+    var newBaseUrl = "";
+    if (window.location.hostname == "localhost") {
+      newBaseUrl = "http://localhost:8000/api/";
+    } else {
+      var deployedAt = window.location.href.substring(0, window.location.href);
+      newBaseUrl = deployedAt + "/api/";
+    }
+    RestangularProvider.setBaseUrl(newBaseUrl);
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+      var extractedData;
+      if (operation === "getList") {
+        extractedData = data.results;
+      } else {
+        extractedData = data;
+      }
+      return extractedData;
+    });
+  });
 
   app.filter('getEmployeePosById', function(){
     return function(employeeId, $scope){
       return $scope.employees.find(function(x){return x.id === employeeId;});
     };
   });
+
+  app.controller("PeopleController", ['$scope', '$rootScope', 'Restangular', function($scope, $rootScope, Restangular){
+    this.current = 0;
+    $scope.visits = visits;
+
+    this.addPerson = {};
+
+    this.setCurrent = function(ModalNumber){
+      $('.modal-trigger').leanModal();
+      this.current = ModalNumber || 0;
+      this.editProfile = Restangular.copy($scope.profiles[this.current]);
+      if (this.current <= $scope.employees.length-1){
+        this.editEmployee = Restangular.copy($scope.employees[this.current]);
+      }
+      Materialize.updateTextFields();
+    };
+
+    var allEmployees = Restangular.all('employees');
+    allEmployees.getList().then(function(response){
+      $scope.employees = response;
+    });
+
+    var allProfiles = Restangular.all('profiles');
+    allProfiles.getList().then(function(response){
+      $scope.profiles = response;
+    });
+
+    this.prepareJson = function(dic){
+      var i = 0;
+      for (i in dic){
+	        if (dic[i] === ""){
+		          dic[i] = null;
+          }
+      }
+      return dic;
+    };
+
+    this.saveEmployee = function(employeePos){
+      var employee = this.editEmployee;
+      employee.profile = prepareJson(employee.profile);
+      employee.save().then(function (response){
+        $scope.employees[employeePos] = employee;
+      });
+    };
+
+    this.saveProfile = function(profilePos){
+      var profile = this.editProfile;
+      profile = prepareJson(profile);
+      profile.save().then(function (response){
+        $scope.profiles[profilePos] = profile;
+      });
+    };
+
+    this.deleteEmployee = function(employeePos){
+
+      var employee = $scope.employees[employeePos];
+      employee.remove().then(function() {
+        $scope.employees = _.without($scope.employees, employee);
+      });
+    };
+
+    this.deleteProfile = function(profilePos){
+      var profile = $scope.profiles[profilePos];
+      profile.remove().then(function() {
+        $scope.profiles = _.without($scope.profiles, profile);
+      });
+    };
+
+    this.createProfile = function(){
+      allProfiles.post(this.addPerson).then(function(postedUser) {
+        allProfiles.getList().then(function(response){
+          $scope.profiles = response;
+        });
+      });
+    };
+
+    this.createEmployee = function(){
+      this.addPerson.assist_ed = [];
+      console.log(this.addPerson);
+      allEmployees.post(this.addPerson).then(function(postedUser) {
+        allEmployees.getList().then(function(response){
+          $scope.employees = response;
+        });
+      });
+    };
+
+    $rootScope.$broadcast('dataloaded');
+
+  }]);
+
+  app.directive('modalRefresh', ['$timeout', function ($timeout) {
+    return {
+      link: function ($scope, element, attrs) {
+        $scope.$on('dataloaded', function () {
+          $timeout(function () {
+            console.log("PATO");
+            $('.modal-trigger').leanModal();
+          }, 0, false);
+        });
+      }
+    };
+  }]);
 
   var employees = [
     {
