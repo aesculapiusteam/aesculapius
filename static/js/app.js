@@ -55,8 +55,19 @@
       $scope.profiles = response;
     });
 
+    var prepareJson = function(dic){
+      var i = 0;
+      for (i in dic){
+	        if (dic[i] === ""){
+		          dic[i] = null;
+          }
+      }
+      return dic;
+    };
+
     this.saveEmployee = function(employeePos){
       var employee = this.editEmployee;
+      employee.profile = prepareJson(employee.profile);
       employee.save().then(function (response){
         $scope.employees[employeePos] = employee;
       });
@@ -64,6 +75,7 @@
 
     this.saveProfile = function(profilePos){
       var profile = this.editProfile;
+      profile = prepareJson(profile);
       profile.save().then(function (response){
         $scope.profiles[profilePos] = profile;
       });
