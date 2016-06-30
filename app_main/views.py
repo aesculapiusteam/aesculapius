@@ -4,4 +4,6 @@ from django.http import HttpResponse
 
 def home(request):
     context = RequestContext(request)
-    return render_to_response('home.html', context)
+    if request.user.is_authenticated():
+        return render_to_response('home.html', context)
+    return render_to_response('base.html', context)

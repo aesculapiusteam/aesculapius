@@ -1,25 +1,25 @@
 (function() {
-    var app = angular.module('peopleModule', []);
+  var app = angular.module('peopleModule', []);
 
-    app.controller('PeopleController', ['$scope',function($scope){
-        $scope.employees = employees;
-        $scope.profiles = profiles;
-        $scope.visits = visits;
-        this.current = 0;
+  app.controller('PeopleController', ['$scope',function($scope){
+    $scope.employees = employees;
+    $scope.profiles = profiles;
+    $scope.visits = visits;
+    this.current = 0;
 
-        this.setCurrent = function(ModalNumber){
-            this.current = ModalNumber || 0;
-        };
-    }]);
+    this.setCurrent = function(ModalNumber){
+      this.current = ModalNumber || 0;
+    };
+  }]);
 
 
-    app.filter('getEmployeePosById', function(){
+  app.filter('getEmployeePosById', function(){
     return function(employeeId, $scope){
-        return $scope.employees.find(x=> x.id === employeeId);
-  }
-})
+      return $scope.employees.find(function(x){return x.id === employeeId;});
+    };
+  });
 
-var employees = [
+  var employees = [
     {
       "id": 1,
       "username": "doctor",
@@ -76,7 +76,7 @@ var employees = [
     }
   ];
 
-var profiles = [
+  var profiles = [
     {
       "id": 1,
       "employee": null,
@@ -144,42 +144,42 @@ var profiles = [
     }
   ];
 
-var visits = [
-        {
-            "id": 1,
-            "pacient": 1,
-            "doctor": 1,
-            "datetime": "2016-06-26T16:31:08.018697Z",
-            "detail": "El brayan trajo una navaja metida en el pesguezo, se la saque y le di una bayaspirina,"
-        },
-        {
-            "id": 2,
-            "pacient": 1,
-            "doctor": 1,
-            "datetime": "2016-06-26T16:31:33.462942Z",
-            "detail": "Otra vez vino el brayan con una navaja clavada en la pierna"
-        },
-        {
-            "id": 3,
-            "pacient": 1,
-            "doctor": 2,
-            "datetime": "2016-06-26T16:32:19.131782Z",
-            "detail": "OTRA VEZ BRAYAN BASTA!!! le di una psicoinmunoneuroendomorfinacalmante"
-        },
-        {
-            "id": 4,
-            "pacient": 2,
-            "doctor": 2,
-            "datetime": "2016-06-26T16:40:35.797589Z",
-            "detail": "Otra vez vino el mocaco"
-        },
-        {
-            "id": 5,
-            "pacient": 2,
-            "doctor": 2,
-            "datetime": "2016-06-26T16:41:17.305309Z",
-            "detail": "el mocaco se hizo atender por cancer"
-        }
-    ];
+  var visits = [
+    {
+      "id": 1,
+      "pacient": 1,
+      "doctor": 1,
+      "datetime": "2016-06-26T16:31:08.018697Z",
+      "detail": "El brayan trajo una navaja metida en el pesguezo, se la saque y le di una bayaspirina,"
+    },
+    {
+      "id": 2,
+      "pacient": 1,
+      "doctor": 1,
+      "datetime": "2016-06-26T16:31:33.462942Z",
+      "detail": "Otra vez vino el brayan con una navaja clavada en la pierna"
+    },
+    {
+      "id": 3,
+      "pacient": 1,
+      "doctor": 2,
+      "datetime": "2016-06-26T16:32:19.131782Z",
+      "detail": "OTRA VEZ BRAYAN BASTA!!! le di una psicoinmunoneuroendomorfinacalmante"
+    },
+    {
+      "id": 4,
+      "pacient": 2,
+      "doctor": 2,
+      "datetime": "2016-06-26T16:40:35.797589Z",
+      "detail": "Otra vez vino el mocaco"
+    },
+    {
+      "id": 5,
+      "pacient": 2,
+      "doctor": 2,
+      "datetime": "2016-06-26T16:41:17.305309Z",
+      "detail": "el mocaco se hizo atender por cancer"
+    }
+  ];
 
 })();
