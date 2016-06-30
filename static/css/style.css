@@ -96,7 +96,7 @@ i.left, i.right {
 }
 
 .tabs .tab a {
-    color: black;
+    color: #64b5f6 ;
     display: block;
     width: 100%;
     height: 100%;
@@ -106,14 +106,14 @@ i.left, i.right {
 }
 
 .tabs .tab a:hover {
-    color: black;
+    color: #1976d2;
 }
 
 .tabs .indicator {
     position: absolute;
     bottom: 0;
     height: 2px;
-    background-color: #e0f7fa;
+    background-color: #64b5f6;
     will-change: left, right;
 }
 
@@ -188,20 +188,5 @@ h5 {
 .slider .slides li .caption {
     color: #000;
     background-color: rgba(0,0,0,0.3);
-}
-
-.input-field input[type=search]#searchEmployee:focus {
-    background-color: #0288d1;
-    border: 0;
-    box-shadow: none;
-    color: white; }
-
-#searchEmployee {
-    color:  #fff;
-    /* 1 */
-    font: inherit;
-    /* 2 */
-    margin: 0;
-    /* 3 */
 }
 
