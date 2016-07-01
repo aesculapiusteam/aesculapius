@@ -261,15 +261,15 @@
 				<div class="modal-content">
 					<div class="row">
 						<div class="input-field col s4">
-							<input id="user_name" type="text" ng-model="plpCtrl.addPerson.username">
+							<input id="user_name" type="text" ng-model="plpCtrl.addEmployee.username">
 							<label for="user_name">Nombre de Usuario</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="user_pass" type="password" ng-model="plpCtrl.addPerson.password">
+							<input id="user_pass" type="password" ng-model="plpCtrl.addEmployee.password">
 							<label for="user_pass">Password</label>
 						</div>
 						<div class="input-field col s4">
-							<select class="browser-default" ng-model="plpCtrl.addPerson.charge">
+							<select class="browser-default" ng-model="plpCtrl.addEmployee.charge">
 								<option value="" disabled selected>Seleccionar cargo</option>
 								<option value="doctor">Doctor</option>
 								<option value="secretary">Secretaria</option>
@@ -282,38 +282,38 @@
 							</div>
 						</div>
 						<div class="input-field col s4">
-							<input id="first_name" type="text" ng-model="plpCtrl.addPerson.profile.first_name">
+							<input id="first_name" type="text" ng-model="plpCtrl.addEmployee.profile.first_name">
 							<label for="first_name">Nombre</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="last_name" type="text" ng-model="plpCtrl.addPerson.profile.last_name">
+							<input id="last_name" type="text" ng-model="plpCtrl.addEmployee.profile.last_name">
 							<label for="last_name">Apellido</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="dni" type="text" ng-model="plpCtrl.addPerson.profile.dni">
+							<input id="dni" type="text" ng-model="plpCtrl.addEmployee.profile.dni">
 							<label for="dni">DNI</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="address" type="text" ng-model="plpCtrl.addPerson.profile.address">
+							<input id="address" type="text" ng-model="plpCtrl.addEmployee.profile.address">
 							<label for="address">Direccion</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="phone" type="text" ng-model="plpCtrl.addPerson.profile.phone">
+							<input id="phone" type="text" ng-model="plpCtrl.addEmployee.profile.phone">
 							<label for="phone">Telefono</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="cellphone" type="text" ng-model="plpCtrl.addPerson.profile.cellphone">
+							<input id="cellphone" type="text" ng-model="plpCtrl.addEmployee.profile.cellphone">
 							<label for="cellphone">Celular</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="email" type="text" ng-model="plpCtrl.addPerson.profile.email">
+							<input id="email" type="text" ng-model="plpCtrl.addEmployee.profile.email">
 							<label for="email">Email</label>
 						</div>
 					</div>
 				</div>
 			</form>
 			<div class="modal-footer">
-				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createEmployee(plpCtrl.addPerson)">Guardar</a>
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createEmployee()">Guardar</a>
 				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
 			</div>
 		</div>
@@ -322,38 +322,38 @@
 				<div class="modal-content">
 					<div class="row">
 						<div class="input-field col s4">
-							<input id="first_name" type="text" ng-model="plpCtrl.addPerson.first_name">
+							<input id="first_name" type="text" ng-model="plpCtrl.addProfile.first_name">
 							<label for="first_name" >Nombre</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="last_name" type="text" ng-model="plpCtrl.addPerson.last_name">
+							<input id="last_name" type="text" ng-model="plpCtrl.addProfile.last_name">
 							<label for="last_name" >Apellido</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="dni" type="text" ng-model="plpCtrl.addPerson.dni">
+							<input id="dni" type="text" ng-model="plpCtrl.addProfile.dni">
 							<label for="dni" >DNI</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="address" type="text" ng-model="plpCtrl.addPerson.address">
+							<input id="address" type="text" ng-model="plpCtrl.addProfile.address">
 							<label for="address">Direccion</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="phone" type="text" ng-model="plpCtrl.addPerson.phone">
+							<input id="phone" type="text" ng-model="plpCtrl.addProfile.phone">
 							<label for="phone" >Telefono</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="cellphone" type="text" ng-model="plpCtrl.addPerson.cellphone">
+							<input id="cellphone" type="text" ng-model="plpCtrl.addProfile.cellphone">
 							<label for="cellphone" >Celular</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="email" type="text" ng-model="plpCtrl.addPerson.email">
+							<input id="email" type="text" ng-model="plpCtrl.addProfile.email">
 							<label for="email" >Email</label>
 						</div>
 					</div>
 				</div>
 			</form>
 			<div class="modal-footer">
-				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createProfile(plpCtrl.addPerson)">Guardar</a>
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createProfile()">Guardar</a>
 				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
 			</div>
 		</div>
@@ -362,12 +362,12 @@
 				<div class="modal-content">
 					<h4>Nueva consulta para {{profiles[plpCtrl.current].first_name}} {{profiles[plpCtrl.current].last_name}}</h4>
 					<div class="input-field col s12">
-						<textarea id="textarea1" class="materialize-textarea" placeholder="Agregar consulta"></textarea>
+						<textarea id="textarea1" class="materialize-textarea" placeholder="Agregar consulta" ng-model="plpCtrl.addVisit.detail"></textarea>
 					</div>
 				</div>
 			</form>
 			<div class="modal-footer">
-				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Guardar</a>
+				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat" ng-click="plpCtrl.createVisit()">Guardar</a>
 				<a href="#!" class=" modal-action black-text modal-close waves-effect waves-green btn-flat">Cancelar</a>
 			</div>
 		</div>

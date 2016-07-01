@@ -35,10 +35,7 @@
 
   app.controller("PeopleController", ['$scope', '$rootScope', 'Restangular', function($scope, $rootScope, Restangular){
     this.current = 0;
-    $scope.visits = visits;
     $scope.employees = [];
-
-    this.addPerson = {};
 
     this.setCurrent = function(ModalNumber){
       $('.modal-trigger').leanModal();
@@ -60,12 +57,17 @@
       $scope.profiles = response;
     });
 
+    var allVisits = Restangular.all('visits');
+    allVisits.getList().then(function(response){
+      $scope.visits = response;
+    });
+
     this.prepareJson = function(dic){
       var i = 0;
       for (i in dic){
-	        if (dic[i] === ""){
-		          dic[i] = null;
-          }
+        if (dic[i] === ""){
+          dic[i] = null;
+        }
       }
       return dic;
     };
@@ -101,19 +103,28 @@
       });
     };
 
+    this.createEmployee = function(){
+      this.addEmployee.assist_ed = [];
+      allEmployees.post(this.addEmployee).then(function(postedUser) {
+        allEmployees.getList().then(function(response){
+          $scope.employees = response;
+        });
+      });
+    };
+
     this.createProfile = function(){
-      allProfiles.post(this.addPerson).then(function(postedUser) {
+      allProfiles.post(this.addProfile).then(function(postedUser) {
         allProfiles.getList().then(function(response){
           $scope.profiles = response;
         });
       });
     };
 
-    this.createEmployee = function(){
-      this.addPerson.assist_ed = [];
-        allEmployees.post(this.addPerson).then(function(postedUser) {
-        allEmployees.getList().then(function(response){
-          $scope.employees = response;
+    this.createVisit = function(){
+      this.addVisit.pacient = $scope.profiles[this.current].id;
+      allVisits.post(this.addVisit).then(function(postedVisit) {
+        allVisits.getList().then(function(response){
+          $scope.visits = response;
         });
       });
     };
