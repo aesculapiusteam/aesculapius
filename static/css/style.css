@@ -53,7 +53,7 @@ nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul 
 }
 
 
-.input-field input[type=search] + label, .input-field input[type=password] + label {
+.input-field input[type=search] + label, .input-field input#loginPassword[type=password] + label {
     left: 1rem;
     top: 0.9rem;
 }
@@ -62,7 +62,7 @@ nav ul a.btn, nav ul a.btn-large, nav ul a.btn-large, nav ul a.btn-flat, nav ul 
     color: black;
 }
 
-.input-field input[type=search]:focus, .input-field input[type=password]:focus {
+.input-field input[type=search]:focus, .input-field input#loginPassword[type=password]:focus {
     background-color: #bdbdbd;
     border: 0;
     box-shadow: none;
@@ -122,7 +122,7 @@ i.left, i.right {
     cursor: default;
 }
 
-.input-field input[type=search], .input-field input[type=password] {
+.input-field input[type=search], .input-field input#loginPassword[type=password] {
     display: inline-block;
     line-height: inherit;
     padding-left: 4rem;
@@ -190,3 +190,6 @@ h5 {
     background-color: rgba(0,0,0,0.3);
 }
 
+::-webkit-input-placeholder {
+    color: #757575;
+}

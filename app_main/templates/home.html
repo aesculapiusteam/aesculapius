@@ -265,8 +265,8 @@
 							<label for="user_name">Nombre de Usuario</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="user_pass" type="text" ng-model="plpCtrl.addPerson.password">
-							<label for="user_pass">Contraseña</label>
+							<input id="user_pass" type="password" ng-model="plpCtrl.addPerson.password">
+							<label for="user_pass">Password</label>
 						</div>
 						<div class="input-field col s4">
 							<select class="browser-default" ng-model="plpCtrl.addPerson.charge">
@@ -360,10 +360,9 @@
 		<div id="modalAddVisit" class="modal modal-fixed-footer">
 			<form class="col s12">
 				<div class="modal-content">
-					<h4>Nueva consulta</h4>
+					<h4>Nueva consulta para {{profiles[plpCtrl.current].first_name}} {{profiles[plpCtrl.current].last_name}}</h4>
 					<div class="input-field col s12">
-						<textarea id="textarea1" class="materialize-textarea"></textarea>
-						<label for="textarea1">Agregar consulta</label>
+						<textarea id="textarea1" class="materialize-textarea" placeholder="Agregar consulta"></textarea>
 					</div>
 				</div>
 			</form>
