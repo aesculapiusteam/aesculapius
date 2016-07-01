@@ -36,6 +36,7 @@
     <div class="nav-wrapper"><a id="logo-container" href="{% url 'main:home' %}" class="brand-logo"><img src="{% static 'img/logo.png' %}" width="250px" height="55px" VSPACE=4 ></a>
       {% if user.is_authenticated %}
       <ul id="nav" class="right">
+          <span class="black-text">{{ user.employee.profile.first_name }} {% if user.employee.profile.last_name != None %}{{ user.employee.profile.last_name }}{% endif %}</span>
           <a id="login" href="/api-auth/logout/?next=/" class="tooltipped waves-effect waves-light btn-flat" onclick="$(this).closest('form').submit()" data-position="left" data-delay="50" data-tooltip="Salir"><i class="material-icons left">close</i></a>
       </ul>
       {% else %}
