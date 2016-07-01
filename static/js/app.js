@@ -103,6 +103,13 @@
       });
     };
 
+    this.deleteVisit = function(visitPos){
+      var visit = $scope.visits[visitPos];
+      visit.remove().then(function() {
+        $scope.visits = _.without($scope.visits, visit);
+      });
+    };
+
     this.createEmployee = function(){
       this.addEmployee.assist_ed = [];
       allEmployees.post(this.addEmployee).then(function(postedUser) {

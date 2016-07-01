@@ -218,7 +218,7 @@
 										<p class="right"> {{visit.datetime | date}} </p>
 										<p>{{(visit.doctor|getEmployeePosById:this).profile.first_name}}</p>
 										<p> {{visit.detail}} </p>
-										<a class="btn-floating right red"><i class="material-icons">delete</i></a>
+										<a class="btn-floating right red waves-effect waves-light" ng-click="plpCtrl.deleteVisit($index)"><i class="material-icons">delete</i></a>
 										<br>
 										<br>
 									</li>
