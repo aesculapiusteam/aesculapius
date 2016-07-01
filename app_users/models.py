@@ -52,11 +52,11 @@ class Employee(models.Model):
 
     # TODO Use __init__ instead of create. not using init because it makes
     #"profile.employee" or "user.employee" commands to not work
-    def create(self, username, password, charge, email, first_name, last_name, **kwargs):
+    def create(self, username, password, charge, **kwargs):
         user = User(username = username)
         user.set_password(password)
         self.user = user
-        profile = Profile(first_name=first_name, last_name=last_name, email = email, **kwargs)
+        profile = Profile(**kwargs)
         self.profile = profile
         self.charge = charge
         return self

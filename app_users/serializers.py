@@ -32,14 +32,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
             username = user['username'],
             password = user['password'],
             charge = validated_data['charge'],
-            first_name = profile['first_name'],
-            last_name = profile['last_name'],
-            email = profile['email'],
-            dni = profile['dni'],
-            birth_date = profile['birth_date'],
-            address = profile['address'],
-            phone = profile['phone'],
-            cellphone = profile['cellphone'],
+            **profile
         )
         employee.save()
         for i in assist_ed:
