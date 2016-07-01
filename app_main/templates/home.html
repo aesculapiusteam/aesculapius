@@ -269,12 +269,11 @@
 							<label for="user_pass">Contraseña</label>
 						</div>
 						<div class="input-field col s4">
-							<select ng-model="plpCtrl.addPerson.charge">
+							<select class="browser-default" ng-model="plpCtrl.addPerson.charge">
 								<option value="" disabled selected>Elegí tu cargo</option>
-								<option value="Doctor">Doctor</option>
-								<option value="Secretaria">Secretaria</option>
+								<option value="doctor">Doctor</option>
+								<option value="secretary">Secretaria</option>
 							</select>
-							<label>Cargo</label>
 						</div>
 						<div class="col s12">
 							<div class="input-field col s3 row" ng-repeat="employee in employees">

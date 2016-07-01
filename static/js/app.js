@@ -111,8 +111,7 @@
 
     this.createEmployee = function(){
       this.addPerson.assist_ed = [];
-      console.log(this.addPerson);
-      allEmployees.post(this.addPerson).then(function(postedUser) {
+        allEmployees.post(this.addPerson).then(function(postedUser) {
         allEmployees.getList().then(function(response){
           $scope.employees = response;
         });
