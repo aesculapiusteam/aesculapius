@@ -98,4 +98,4 @@ class Visit(models.Model):
     detail = models.TextField()
 
     def __unicode__(self):
-        return self.pacient.__unicode__() + " assists " + self.doctor.__unicode__()
+        return self.pacient.__unicode__() + " visited " + self.doctor.__unicode__() + " on " + self.datetime.ctime()

@@ -1,12 +1,21 @@
 from rest_framework import serializers
 from app_users.models import Profile, Employee, Visit
+import time
 
+class TimestampField(serializers.DateTimeField):
+    """
+    Returns a epoch timestamp from a datetime object
+    """
+    def to_representation(self, value):
+        print(value)
+        return int(time.mktime(value.timetuple())) * 1000
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     # employee = serializers.ReadOnlyField(required=False, allow_null=True)
     # employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
     employee = serializers.ReadOnlyField(source="employee.id", required=False, read_only=True)
-
+    birth_date = TimestampField()
+    creation_date = TimestampField()
     class Meta:
         model = Profile
         fields = ('id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
@@ -64,7 +73,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 class VisitSerializer(serializers.ModelSerializer):
     doctor = serializers.ReadOnlyField(source="doctor.id")
-    datetime = serializers.DateTimeField(read_only=False, required=False)
+    datetime = TimestampField()
+
     class Meta:
         model = Visit
         fields = ('id', 'pacient', 'doctor', 'datetime', 'detail')

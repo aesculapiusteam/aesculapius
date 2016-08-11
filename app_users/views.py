@@ -29,11 +29,11 @@ class ProfileViewSet(viewsets.ModelViewSet):
     - last_name (CharField)
     - email (CharField)
     - dni (IntegerField)
-    - birth_date (DateField)
+    - birth_date (TimestampField)
     - address (CharField)
     - phone (CharField)
     - cellphone (CharField)
-    - creation_date (DateField)
+    - creation_date (TimestampField)
     - **employee** (IntegerField) If this profile is from an employee, this is
         the employee id
     """
@@ -90,7 +90,7 @@ class VisitViewSet(viewsets.ModelViewSet):
     # Visit Serializer
     - **doctor** (IntegerField) Id that represents the doctor of the visit
     - **pacient** (IntegerField) Id that represents the pacient of the visit
-    - datetime (DateTimeField)
+    - datetime (TimestampField)
     - detail (TextField)
     """
     permission_classes = (IsAuthenticated, IsDoctor)
