@@ -47,17 +47,17 @@
       Materialize.updateTextFields();
     };
 
-    var allEmployees = Restangular.all('employees');
+    var allEmployees = Restangular.all('employee');
     allEmployees.getList().then(function(response){
       $scope.employees = response;
     });
 
-    var allProfiles = Restangular.all('profiles');
+    var allProfiles = Restangular.all('profile');
     allProfiles.getList().then(function(response){
       $scope.profiles = response;
     });
 
-    var allVisits = Restangular.all('visits');
+    var allVisits = Restangular.all('visit');
     allVisits.getList().then(function(response){
       $scope.visits = response;
     });
