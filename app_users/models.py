@@ -21,12 +21,16 @@ class Profile(models.Model):
         return self.first_name + last
 
     def delete(self):
+        """
+        Delete the corresponding user and employee of the profile
+        """
         if hasattr(self, 'employee'): # Is a employee profile
             User.objects.get(pk=self.employee.user.pk).delete()
         super(Profile, self).delete()
 
 class Employee(models.Model):
     CHARGES = (
+        #("option", "what will appear on the api page")
         ("doctor", "Doctor"),
         ("secretary", "Secretary"),
     )
@@ -43,7 +47,10 @@ class Employee(models.Model):
         return self.profile.first_name + last
 
     def set_assist_ed(self, who):
-        """if it is a secretary use this function to set a doctor to assist"""
+        """
+        if employee is a secretary use this function to set a doctor to assist
+        or viceversa
+        """
         if (self.charge == "doctor" and who.charge == "secretary") or (self.charge == "secretary" and who.charge == "doctor"):
             self.assist_ed.add(who)
             return self.assist_ed
@@ -53,6 +60,9 @@ class Employee(models.Model):
     # TODO Use __init__ instead of create. not using init because it makes
     #"profile.employee" or "user.employee" commands to not work
     def create(self, username, password, charge, **kwargs):
+        """
+        Creates a Employee and its corresponding User and Profile objects
+        """
         user = User(username = username)
         user.set_password(password)
         self.user = user
@@ -62,6 +72,10 @@ class Employee(models.Model):
         return self
 
     def save(self, **kwargs):
+        """
+        Makes sure that the User and Profile of the employee are saved too
+        after using the self.create() method.
+        """
         self.profile.save()
         self.user.save()
         self.profile_id = self.profile.id
@@ -69,6 +83,9 @@ class Employee(models.Model):
         super(Employee, self).save(**kwargs)
 
     def delete(self):
+        """
+        Makes sure the User and the Profile of the employee are deleted too
+        """
         User.objects.get(pk=self.user.pk).delete()
         Profile.objects.get(pk=self.profile.pk).delete()
         super(Employee, self).delete()
