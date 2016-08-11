@@ -3,7 +3,12 @@ from app_users.models import Profile, Visit
 
 class IsAdminOrOwnerOrReadOnly(permissions.BasePermission):
     """
-    Custom permission to only allow owners of an object to edit it.
+    - All read permissions are allowed to any user for any object
+    - All write permissions are allowed to Admin users for any object
+    - All write permissions are allowed to any user for objects that are not
+        related to system users
+    - Object write permissions are allowed only to the user that owns that
+        profile or employee object for objects **related to/that are** employees
     """
 
     def has_object_permission(self, request, view, obj):
@@ -28,7 +33,12 @@ class IsAdminOrOwnerOrReadOnly(permissions.BasePermission):
 
 class IsDoctor(permissions.BasePermission):
     """
-    Custom permission to only allow owners of an object to edit it.
+    - All read permissions are allowed to any user for any object
+    - All write permissions are allowed to admin users for any object
+    - All write permissions are allowed to doctor users for any non Visit object
+    - All write permissions are allowed to doctor users only for Visits that the
+        same doctor generated.
+
     """
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
