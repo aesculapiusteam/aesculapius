@@ -7,7 +7,6 @@ class TimestampField(serializers.DateTimeField):
     Returns a epoch timestamp from a datetime object
     """
     def to_representation(self, value):
-        print(value)
         return int(time.mktime(value.timetuple())) * 1000
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
