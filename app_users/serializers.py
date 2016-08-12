@@ -72,7 +72,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 class VisitSerializer(serializers.ModelSerializer):
     doctor = serializers.ReadOnlyField(source="doctor.id")
-    datetime = TimestampField()
+    datetime = TimestampField(read_only=True)
 
     class Meta:
         model = Visit
