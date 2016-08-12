@@ -22,7 +22,8 @@ class Profile(models.Model):
 
     def delete(self):
         """
-        Delete the corresponding user and employee of the profile
+        Delete the corresponding user of the profile (if it's a employee
+        profile) the Employee object is being automatically deleted
         """
         if hasattr(self, 'employee'): # Is a employee profile
             User.objects.get(pk=self.employee.user.pk).delete()
