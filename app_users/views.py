@@ -9,7 +9,10 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 class ProfileViewSet(viewsets.ModelViewSet):
     """
-    # Permissions
+    # Permissions for Profile
+    *All permissions listed below have to be true in order to give access to the
+    client*
+
     ### IsAuthenticated
     - All permissions are allowed if the user is not anonymous (is authenticated)
 
@@ -44,7 +47,10 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     """
-    # Permissions
+    # Permissions for Employee
+    *All permissions listed below have to be true in order to give access to the
+    client*
+
     ### IsAuthenticated
     - All permissions are allowed if the user is not anonymous (is authenticated)
 
@@ -76,7 +82,10 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
 class VisitViewSet(viewsets.ModelViewSet):
     """
-    # Permissions
+    # Permissions for Visit
+    *All permissions listed below have to be true in order to give access to the
+    client*
+
     ### IsAuthenticated
     - All permissions are allowed if the user is not anonymous (is authenticated)
 
