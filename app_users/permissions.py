@@ -38,7 +38,6 @@ class IsDoctor(permissions.BasePermission):
     - All write permissions are allowed to doctor users for any non Visit object
     - All write permissions are allowed to doctor users only for Visits that the
         same doctor generated.
-
     """
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:

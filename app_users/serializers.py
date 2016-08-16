@@ -6,6 +6,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     # employee = serializers.ReadOnlyField(required=False, allow_null=True)
     # employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
     employee = serializers.ReadOnlyField(source="employee.id", required=False, read_only=True)
+
     class Meta:
         model = Profile
         fields = ('id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
@@ -62,6 +63,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         for i in assist_ed:
             employee.set_assist_ed(i)
         return employee
+
 
 class VisitSerializer(serializers.ModelSerializer):
     doctor = serializers.ReadOnlyField(source="doctor.id")
