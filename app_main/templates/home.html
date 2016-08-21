@@ -47,7 +47,7 @@
 								<th> Detalles </th>
 							</tr>
 						</thead>
-						<tbody ng-repeat="employee in employees| filter:searchEmp">
+						<tbody ng-repeat="employee in employees| filter:searchEmp" repeat-done="initModals()">
 							<tr ng-show="employee.charge == 'secretary'">
 								<td> {{employee.profile.first_name}} {{employee.profile.last_name}} </td>
 								<td> {{employee.profile.dni}} </td>
@@ -70,7 +70,7 @@
 								<th>Detalles</th>
 							</tr>
 						</thead>
-						<tbody ng-repeat="employee in employees| filter:searchEmp">
+						<tbody ng-repeat="employee in employees| filter:searchEmp" repeat-done="initModals()">
 							<tr ng-show="employee.charge == 'doctor'">
 								<td>{{employee.profile.first_name}} {{employee.profile.last_name}}</td>
 								<td>{{employee.profile.dni}}</td>
@@ -105,7 +105,7 @@
 							<th>Consultas</th>
 						</tr>
 					</thead>
-					<tbody ng-repeat="profile in profiles| filter:searchPaci">
+					<tbody ng-repeat="profile in profiles| filter:searchPaci" repeat-done="initModals()">
 						<tr ng-hide="profile.employee">
 							<td>{{profile.first_name}} {{profile.last_name}}</td>
 							<td>{{profile.dni}}</td>
