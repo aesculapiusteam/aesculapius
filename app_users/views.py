@@ -41,12 +41,19 @@ class ProfileViewSet(viewsets.ModelViewSet):
     - creation_date (TimestampField)
     - **employee** (IntegerField) If this profile is from an employee, this is
         the employee id
+    # Profile SearchFilter and OrderingFilter
+    - **filter_backends** Filters that the API  will be using
+    - search_fields
+    - ordering_fields
+    - **ordering** Default ordering that the API will use for the view
     """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly, )
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter,filters.OrderingFilter,)
     search_fields = ('first_name', 'last_name', 'email')
+    ordering_fields = ('first_name', 'last_name')
+    ordering = ('first_name',)
 
 
 class EmployeeViewSet(viewsets.ModelViewSet):
@@ -78,12 +85,19 @@ class EmployeeViewSet(viewsets.ModelViewSet):
             but shouldn't.
     - **profile** (OneToOneField) Is a copy of the profile that corresponds to
         this employee, it can be accessed from /profile/<employee.profile.id>
+    # Employee SearchFilter and OrderingFilter
+    - **filter_backends** Filters that the API  will be using
+    - search_fields
+    - ordering_fields
+    - **ordering** Default ordering that the API will use for the view
     """
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly,)
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter,filters.OrderingFilter,)
     search_fields = ('profile__first_name', 'profile__last_name', 'profile__email')
+    ordering_fields = ('profile__first_name', 'profile__last_name', 'charge')
+    ordering = ('profile__first_name',)
 
 
 class VisitViewSet(viewsets.ModelViewSet):
