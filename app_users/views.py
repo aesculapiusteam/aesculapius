@@ -5,6 +5,8 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from app_users.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework import filters
+
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
@@ -43,6 +45,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly, )
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('first_name', 'last_name', 'email')
 
 
 class EmployeeViewSet(viewsets.ModelViewSet):
@@ -78,6 +82,8 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly,)
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('profile__first_name', 'profile__last_name', 'profile__email')
 
 
 class VisitViewSet(viewsets.ModelViewSet):
