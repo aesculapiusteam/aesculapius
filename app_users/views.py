@@ -6,6 +6,7 @@ from rest_framework import permissions
 from app_users.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import filters
+import django_filters
 
 
 
@@ -46,14 +47,17 @@ class ProfileViewSet(viewsets.ModelViewSet):
     - search_fields
     - ordering_fields
     - **ordering** Default ordering that the API will use for the view
+    # Pagination
+    - **limit** Sets a limit of items in a page, (USAGE: /api/somelist?limit=5 (sets 5 item lists))
+    - **offset** Goes to the number given of the item (USAGE: /api/somelist?limit=5&offset=10 (sets 5 item lists and goes to the 10th item))
     """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly, )
     filter_backends = (filters.SearchFilter,filters.OrderingFilter,)
     search_fields = ('first_name', 'last_name', 'email')
-    ordering_fields = ('first_name', 'last_name')
-    ordering = ('first_name',)
+    ordering_fields = ('first_name', 'last_name', 'creation_date')
+    ordering = ('first_name', 'last_name')
 
 
 class EmployeeViewSet(viewsets.ModelViewSet):
@@ -90,14 +94,17 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     - search_fields
     - ordering_fields
     - **ordering** Default ordering that the API will use for the view
+    # Pagination
+    - **limit** Sets a limit of items in a page, (USAGE: /api/somelist?limit=5 (sets 5 item lists))
+    - **offset** Goes to the number given of the item (USAGE: /api/somelist?limit=5&offset=10 (sets 5 item lists and goes to the 10th item))
     """
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly,)
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     filter_backends = (filters.SearchFilter,filters.OrderingFilter,)
     search_fields = ('profile__first_name', 'profile__last_name', 'profile__email')
-    ordering_fields = ('profile__first_name', 'profile__last_name', 'charge')
-    ordering = ('profile__first_name',)
+    ordering_fields = ('profile__first_name', 'profile__last_name', 'charge', 'profile__creation_date')
+    ordering = ('profile__first_name', 'profile__last_name')
 
 
 class VisitViewSet(viewsets.ModelViewSet):

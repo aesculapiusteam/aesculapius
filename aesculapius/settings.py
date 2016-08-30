@@ -27,7 +27,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 1000,
+    # 'PAGE_SIZE': 5,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     )
@@ -43,7 +44,7 @@ EXTERNAL_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
-    'rest_framework'
+    'rest_framework',
 ]
 
 INTERNAL_APPS =[
