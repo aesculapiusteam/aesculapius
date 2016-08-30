@@ -18,7 +18,7 @@
     RestangularProvider.setBaseUrl(newBaseUrl);
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       var extractedData;
-      if (operation === "getList") {
+      if (operation === "getList" && data.results) {
         extractedData = data.results;
       } else {
         extractedData = data;
@@ -33,19 +33,19 @@
     };
   });
   app.directive('repeatDone', function() {
-     return function(scope, element, attrs) {
-         if (scope.$last) {
-             scope.$eval(attrs.repeatDone);
-         }
-     };
- });
+    return function(scope, element, attrs) {
+      if (scope.$last) {
+        scope.$eval(attrs.repeatDone);
+      }
+    };
+  });
 
   app.controller("PeopleController", ['$scope', '$rootScope', 'Restangular', function($scope, $rootScope, Restangular){
     this.current = 0;
     $scope.employees = [];
     $scope.initModals = function() {
-        $('.modal-trigger').leanModal(); // Initialize the modals
-        Materialize.updateTextFields();
+      $('.modal-trigger').leanModal(); // Initialize the modals
+      Materialize.updateTextFields();
     };
     this.setCurrent = function(ModalNumber){
       this.current = ModalNumber || 0;
@@ -58,6 +58,7 @@
     var allEmployees = Restangular.all('employee');
     allEmployees.getList().then(function(response){
       $scope.employees = response;
+      console.log(response);
     });
 
     var allProfiles = Restangular.all('profile');
