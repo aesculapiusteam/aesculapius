@@ -48,8 +48,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
     - ordering_fields
     - **ordering** Default ordering that the API will use for the view
     # Pagination
-    - **limit** Sets a limit of items in a page, (USAGE: /api/somelist?limit=5 (sets 5 item lists))
-    - **offset** Goes to the number given of the item (USAGE: /api/somelist?limit=5&offset=10 (sets 5 item lists and goes to the 10th item))
+    - **limit** Sets a limit of items in a page, (USAGE: /api/somelist?limit=5 (sets 5 item pages))
+    - **offset** Goes to the number given of the item (USAGE: /api/somelist?limit=5&offset=10 (sets 5 item pages and goes to the 10th item))
     """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
