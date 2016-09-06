@@ -38,7 +38,8 @@ coverage.xml
 *.sqlite3
 
 #DB Migrations
-migrations/
+/*/migrations/**
+!/*/migrations/__init__.py
 
 #Pip
 pip-selfcheck.json
