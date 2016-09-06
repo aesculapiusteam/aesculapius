@@ -42,18 +42,14 @@ class IsDoctor(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
             return True
-        if request.user.is_superuser:
-            return True
-        if request.user.employee.charge == "doctor":
+        if hasattr(request.user, 'employee') and request.user.employee.charge == "doctor":
             return True
         return False
 
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
             return True
-        if request.user.is_superuser:
-            return True
-        if request.user.employee.charge == "doctor":
+        if hasattr(request.user, 'employee') and request.user.employee.charge == "doctor":
             if isinstance(obj, Visit):
                 if request.user == obj.doctor.user:
                     return True

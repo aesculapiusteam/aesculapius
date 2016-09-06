@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from app_users.models import Profile, Employee, Visit
-import time
+from django.utils import timezone
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     # employee = serializers.ReadOnlyField(required=False, allow_null=True)
@@ -67,6 +67,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 class VisitSerializer(serializers.ModelSerializer):
     doctor = serializers.ReadOnlyField(source="doctor.id")
+    datetime = serializers.ReadOnlyField()
 
     class Meta:
         model = Visit
@@ -75,4 +76,10 @@ class VisitSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['doctor'] = self.context['request'].user.employee
         res = super(VisitSerializer, self).create(validated_data)
+        return res
+
+    def update(self, instance, validated_data):
+        validated_data['datetime'] = timezone.now()
+        validated_data.pop('pacient', None)
+        res = super(VisitSerializer, self).update(instance, validated_data)
         return res
