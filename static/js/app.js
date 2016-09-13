@@ -55,18 +55,18 @@
       }
     };
 
-    var allEmployees = Restangular.all('employee');
+    var allEmployees = Restangular.all('employees');
     allEmployees.getList().then(function(response){
       $scope.employees = response;
       console.log(response);
     });
 
-    var allProfiles = Restangular.all('profile');
+    var allProfiles = Restangular.all('profiles');
     allProfiles.getList().then(function(response){
       $scope.profiles = response;
     });
 
-    var allVisits = Restangular.all('visit');
+    var allVisits = Restangular.all('visits');
     allVisits.getList().then(function(response){
       $scope.visits = response;
     });
