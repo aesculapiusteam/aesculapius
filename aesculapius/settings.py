@@ -31,6 +31,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     )
 }
 
@@ -46,6 +50,7 @@ EXTERNAL_APPS = [
     'django_extensions',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 INTERNAL_APPS =[
