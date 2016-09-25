@@ -15,11 +15,11 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EmployeeBriefSerializer(serializers.ModelSerializer):
-    first_name = serializers.CharField(source="profile.first_name")
-    last_name = serializers.CharField(source="profile.last_name")
+    full_name = serializers.CharField(source="__unicode__")
+
     class Meta:
         model = Employee
-        fields = ('id', 'first_name', 'last_name')
+        fields = ('id', 'full_name')
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source="user.username", required=True)
     password = serializers.CharField(source="user.password", write_only=True,
         required=False, style={'input_type': 'password'}
-        )
+    )
 
     class Meta:
         model = Employee
