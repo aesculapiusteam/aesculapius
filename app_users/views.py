@@ -1,11 +1,13 @@
 from app_users.models import Profile, Employee, Visit
-from app_users.serializers import ProfileSerializer, EmployeeSerializer, VisitSerializer
+from app_users.serializers import (
+    ProfileSerializer, EmployeeSerializer, VisitSerializer, EmployeeBriefSerializer
+)
+from rest_framework import viewsets, permissions, filters
 from rest_framework.response import Response
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework.decorators import detail_route
+
 from app_users.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework import filters
 import django_filters
 
 
@@ -108,6 +110,11 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     )
     ordering = ('profile__first_name', 'profile__last_name')
 
+    @detail_route()
+    def brief(self, request, pk):
+        employee = self.get_object()
+        serializer = EmployeeBriefSerializer(employee)
+        return Response(serializer.data)
 
 class VisitViewSet(viewsets.ModelViewSet):
     """

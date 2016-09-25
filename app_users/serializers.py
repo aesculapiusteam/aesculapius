@@ -14,6 +14,14 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
 
+class EmployeeBriefSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source="profile.first_name")
+    last_name = serializers.CharField(source="profile.last_name")
+    class Meta:
+        model = Employee
+        fields = ('id', 'first_name', 'last_name')
+
+
 class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     username = serializers.CharField(source="user.username", required=True)
