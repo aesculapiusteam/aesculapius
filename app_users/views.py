@@ -55,7 +55,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly, )
     filter_backends = (filters.SearchFilter,filters.OrderingFilter,)
-    search_fields = ('first_name', 'last_name', 'email')
+    search_fields = ('first_name', 'last_name', 'email', 'dni')
     ordering_fields = ('first_name', 'last_name', 'creation_date')
     ordering = ('first_name', 'last_name')
 
@@ -103,7 +103,9 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     serializer_class = EmployeeSerializer
     filter_backends = (filters.SearchFilter,filters.OrderingFilter,)
     search_fields = ('profile__first_name', 'profile__last_name', 'profile__email')
-    ordering_fields = ('profile__first_name', 'profile__last_name', 'charge', 'profile__creation_date')
+    ordering_fields = ('profile__first_name', 'profile__last_name', 'charge',
+        'profile__creation_date', 'profile__dni'
+    )
     ordering = ('profile__first_name', 'profile__last_name')
 
 
@@ -132,3 +134,5 @@ class VisitViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Visit.objects.all()
     serializer_class = VisitSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ("doctor", "pacient")
