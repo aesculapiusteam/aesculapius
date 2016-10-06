@@ -2,6 +2,12 @@ from rest_framework import serializers
 from app_users.models import Profile, Employee, Visit
 from django.utils import timezone
 
+class ProfileBriefSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = ('id', 'first_name', 'last_name', 'dni', 'email')
+
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     # employee = serializers.ReadOnlyField(required=False, allow_null=True)
     # employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
@@ -13,14 +19,16 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         'address', 'phone', 'cellphone', 'creation_date')
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
-
 class EmployeeBriefSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField(source="__unicode__")
+    email = serializers.SerializerMethodField()
+
+    def get_email(self, employee):
+        return Profile.objects.get(id=employee.id).email
 
     class Meta:
         model = Employee
-        fields = ('id', 'full_name')
-
+        fields = ('id', 'full_name', 'charge', 'email')
 
 class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
@@ -72,6 +80,19 @@ class EmployeeSerializer(serializers.ModelSerializer):
             employee.set_assist_ed(i)
         return employee
 
+class VisitBriefSerializer(serializers.ModelSerializer):
+    doctor_name = serializers.SerializerMethodField()
+    detail_summary = serializers.SerializerMethodField()
+
+    def get_doctor_name(self, visit):
+        return Employee.objects.get(id=visit.doctor.id).__unicode__()
+
+    def get_detail_summary(self, visit):
+        return (visit.detail[:45] + '..') if len(visit.detail) > 45 else visit.detail
+
+    class Meta:
+        model = Visit
+        fields = ('id', 'datetime', 'doctor_name', 'detail_summary')
 
 class VisitSerializer(serializers.ModelSerializer):
     doctor = serializers.ReadOnlyField(source="doctor.id")

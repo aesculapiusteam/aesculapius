@@ -1,6 +1,7 @@
 from app_users.models import Profile, Employee, Visit
 from app_users.serializers import (
-    ProfileSerializer, EmployeeSerializer, VisitSerializer, EmployeeBriefSerializer
+    ProfileSerializer, EmployeeSerializer, VisitSerializer, EmployeeBriefSerializer,
+    VisitBriefSerializer, ProfileBriefSerializer
 )
 from rest_framework import viewsets, permissions, filters
 from rest_framework.response import Response
@@ -60,6 +61,12 @@ class ProfileViewSet(viewsets.ModelViewSet):
     search_fields = ('first_name', 'last_name', 'email', 'dni')
     ordering_fields = ('first_name', 'last_name', 'creation_date')
     ordering = ('first_name', 'last_name')
+
+    @detail_route()
+    def brief(self, request, pk):
+        profile = self.get_object()
+        serializer = ProfileBriefSerializer(profile)
+        return Response(serializer.data)
 
 
 class EmployeeViewSet(viewsets.ModelViewSet):
@@ -143,3 +150,9 @@ class VisitViewSet(viewsets.ModelViewSet):
     serializer_class = VisitSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ("doctor", "pacient")
+
+    @detail_route()
+    def brief(self, request, pk):
+        visit = self.get_object()
+        serializer = VisitBriefSerializer(visit)
+        return Response(serializer.data)
