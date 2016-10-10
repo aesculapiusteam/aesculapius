@@ -19,16 +19,19 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         'address', 'phone', 'cellphone', 'creation_date')
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
-class EmployeeBriefSerializer(serializers.ModelSerializer):
-    full_name = serializers.CharField(source="__unicode__")
-    email = serializers.SerializerMethodField()
+class EmployeeMoreSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
+    mail = serializers.SerializerMethodField()
 
-    def get_email(self, employee):
-        return Profile.objects.get(id=employee.id).email
+    def get_mail(self, employee):
+        return employee.profile.email
+
+    def get_full_name(self, employee):
+        return employee.__unicode__()
 
     class Meta:
         model = Employee
-        fields = ('id', 'full_name', 'charge', 'email')
+        fields = ('id', 'charge', 'full_name', 'mail')
 
 class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
