@@ -1,6 +1,6 @@
 from app_users.models import Profile, Employee, Visit
 from app_users.serializers import (
-    ProfileSerializer, EmployeeSerializer, VisitSerializer, EmployeeMoreSerializer,
+    ProfileSerializer, EmployeeSerializer, VisitSerializer, EmployeeBriefSerializer,
     VisitBriefSerializer, ProfileBriefSerializer
 )
 from rest_framework import viewsets, permissions, filters
@@ -125,9 +125,9 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     #     return Response(serializer.data)
 
     @list_route()
-    def more(self, request):
+    def brief(self, request):
         employees = Employee.objects.all()
-        serializer = EmployeeMoreSerializer(employees, many=True)
+        serializer = EmployeeBriefSerializer(employees, many=True)
         return Response(serializer.data)
 
 class VisitViewSet(viewsets.ModelViewSet):
