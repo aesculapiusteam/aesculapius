@@ -100,3 +100,11 @@ class Visit(models.Model):
 
     def __unicode__(self):
         return self.pacient.__unicode__() + " visited " + self.doctor.__unicode__() + " on " + self.datetime.ctime()
+
+class Drug(models.Model):
+    name = models.CharField(max_length=256)
+    description = models.TextField(null=True)
+    quantity = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.name + ': ' + str(self.quantity)

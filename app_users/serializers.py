@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app_users.models import Profile, Employee, Visit
+from app_users.models import Profile, Employee, Visit, Drug
 from django.utils import timezone
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
@@ -12,6 +12,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
         'address', 'phone', 'cellphone', 'creation_date')
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
+
 
 class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
@@ -63,6 +64,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
             employee.set_assist_ed(i)
         return employee
 
+
 class VisitSerializer(serializers.ModelSerializer):
     doctor = serializers.ReadOnlyField(source="doctor.id")
     doctor_name = serializers.ReadOnlyField(source="doctor.__unicode__")
@@ -83,3 +85,9 @@ class VisitSerializer(serializers.ModelSerializer):
         validated_data.pop('pacient', None)
         res = super(VisitSerializer, self).update(instance, validated_data)
         return res
+
+
+class DrugSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Drug
+        fields = ('id', 'name', 'description', 'quantity')

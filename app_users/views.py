@@ -1,6 +1,7 @@
-from app_users.models import Profile, Employee, Visit
+from app_users.models import Profile, Employee, Visit, Drug
 from app_users.serializers import (
-    ProfileSerializer, EmployeeSerializer, VisitSerializer)
+    ProfileSerializer, EmployeeSerializer, VisitSerializer, DrugSerializer
+)
 from rest_framework import viewsets, permissions, filters
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
@@ -136,3 +137,24 @@ class VisitViewSet(viewsets.ModelViewSet):
     serializer_class = VisitSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ("doctor", "pacient")
+
+
+class DrugViewSet(viewsets.ModelViewSet):
+    """
+    # Permissions for Drug
+    *All permissions listed below have to be true in order to give access to the
+    client*
+
+    ### IsAuthenticated
+    - All permissions are allowed if the user is not anonymous (is authenticated)
+
+    # Drug Serializer
+    - name (CharField)
+    - description (TextField)
+    - quantity (IntegerField)
+    """
+    permission_classes = (IsAuthenticated,)
+    queryset = Drug.objects.all()
+    serializer_class = DrugSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ("name", "description", "quantity")
