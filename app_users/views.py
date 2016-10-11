@@ -1,8 +1,6 @@
 from app_users.models import Profile, Employee, Visit
 from app_users.serializers import (
-    ProfileSerializer, EmployeeSerializer, VisitSerializer, EmployeeBriefSerializer,
-    VisitBriefSerializer, ProfileBriefSerializer
-)
+    ProfileSerializer, EmployeeSerializer, VisitSerializer)
 from rest_framework import viewsets, permissions, filters
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route
@@ -56,19 +54,12 @@ class ProfileViewSet(viewsets.ModelViewSet):
     - **offset** Goes to the number given of the item (USAGE: /api/somelist?limit=5&offset=10 (sets 5 item pages and goes to the 10th item))
     """
     queryset = Profile.objects.all()
-    serializer_class = ProfileBriefSerializer
+    serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly, )
     filter_backends = (filters.SearchFilter,filters.OrderingFilter,)
     search_fields = ('first_name', 'last_name', 'email', 'dni')
     ordering_fields = ('first_name', 'last_name', 'creation_date')
     ordering = ('first_name', 'last_name')
-
-    @detail_route()
-    def more(self, request, pk):
-        profile = self.get_object()
-        serializer = ProfileSerializer(profile)
-        return Response(serializer.data)
-
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     """
@@ -118,18 +109,6 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     )
     ordering = ('profile__first_name', 'profile__last_name')
 
-    # @detail_route()
-    # def brief(self, request, pk):
-    #     employee = self.get_object()
-    #     serializer = EmployeeBriefSerializer(employee)
-    #     return Response(serializer.data)
-
-    @list_route()
-    def brief(self, request):
-        employees = Employee.objects.all()
-        serializer = EmployeeBriefSerializer(employees, many=True)
-        return Response(serializer.data)
-
 class VisitViewSet(viewsets.ModelViewSet):
     """
     # Permissions for Visit
@@ -154,12 +133,6 @@ class VisitViewSet(viewsets.ModelViewSet):
     """
     permission_classes = (IsAuthenticated, IsDoctor)
     queryset = Visit.objects.all()
-    serializer_class = VisitBriefSerializer
+    serializer_class = VisitSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ("doctor", "pacient")
-
-    @detail_route()
-    def more(self, request, pk):
-        visit = self.get_object()
-        serializer = VisitSerializer(visit)
-        return Response(serializer.data)
