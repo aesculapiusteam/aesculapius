@@ -64,15 +64,14 @@ class EmployeeSerializer(serializers.ModelSerializer):
         return employee
 
 class VisitSerializer(serializers.ModelSerializer):
-    doctor_id = serializers.ReadOnlyField(source="doctor.id")
+    doctor = serializers.ReadOnlyField(source="doctor.id")
     doctor_name = serializers.ReadOnlyField(source="doctor.__unicode__")
     patient_name = serializers.ReadOnlyField(source="pacient.__unicode__")
-    pacient_id = serializers.ReadOnlyField(source="pacient.id")
     datetime = serializers.ReadOnlyField()
 
     class Meta:
         model = Visit
-        fields = ('id', 'pacient_id', 'patient_name', 'doctor_id', 'doctor_name', 'datetime', 'detail')
+        fields = ('id', 'pacient', 'patient_name', 'doctor', 'doctor_name', 'datetime', 'detail')
 
     def create(self, validated_data):
         validated_data['doctor'] = self.context['request'].user.employee
