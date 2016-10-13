@@ -110,6 +110,13 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     )
     ordering = ('profile__first_name', 'profile__last_name')
 
+    def get_object(self):
+        if self.kwargs['pk'] == 'me':
+            return self.request.user.employee
+        else:
+            return super(Employee, self).get_object()
+
+
 class VisitViewSet(viewsets.ModelViewSet):
     """
     # Permissions for Visit
