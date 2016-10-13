@@ -156,5 +156,6 @@ class DrugViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Drug.objects.all()
     serializer_class = DrugSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter)
+    search_fields = ("name", "description", "quantity")
     filter_fields = ("name", "description", "quantity")
