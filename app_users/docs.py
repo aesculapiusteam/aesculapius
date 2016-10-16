@@ -116,22 +116,28 @@ client*
 movements = """
 Movements Documentation - TODO
 
+This fields are not obligatory, their default values are:
+
+- employee: current employee, you dont have to send it
+- detail: ""
+- is_donation: false
+- movement_type: 0 (0 is for a drug movement, 1 for cash movement)
+
 Example petition
 
+    {
+      "profile": 6,
+      "items": [
         {
-          "employee": 1,
-          "profile": 6,
-          "items": [
-            {
-              "detail": "puede o no estar",
-              "is_donation": true,
-              "drug": 5,
-              "drug_quantity": 9
-            },
-            {
-              "movement_type": 1,
-              "cash": 23.54
-            }
-          ]
+          "detail": "puede o no estar",
+          "is_donation": true,
+          "drug": 5,
+          "drug_quantity": 9
+        },
+        {
+          "movement_type": 1,
+          "cash": 23.54
         }
+      ]
+    }
 """
