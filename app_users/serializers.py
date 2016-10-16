@@ -1,29 +1,37 @@
 from rest_framework import serializers
-from app_users.models import Profile, Employee, Visit, Drug, Movement
+from app_users.models import Profile, Employee, Visit, Drug, Movement, MovementItem
 from django.utils import timezone
+
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     # employee = serializers.ReadOnlyField(required=False, allow_null=True)
     # employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
-    employee = serializers.ReadOnlyField(source="employee.id", required=False, read_only=True)
+    employee = serializers.ReadOnlyField(
+        source="employee.id", required=False, read_only=True
+    )
 
     class Meta:
         model = Profile
-        fields = ('id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
-        'address', 'phone', 'cellphone', 'creation_date')
+        fields = (
+            'id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
+            'address', 'phone', 'cellphone', 'creation_date'
+        )
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     username = serializers.CharField(source="user.username", required=True)
-    password = serializers.CharField(source="user.password", write_only=True,
+    password = serializers.CharField(
+        source="user.password", write_only=True,
         required=False, style={'input_type': 'password'}
     )
 
     class Meta:
         model = Employee
-        fields = ('id', 'username', 'password', 'charge', 'assist_ed', 'profile')
+        fields = (
+            'id', 'username', 'password', 'charge', 'assist_ed', 'profile'
+        )
         extra_kwargs = {'url': {'view_name': 'api:employee-detail'}}
 
     def create(self, validated_data):
@@ -31,9 +39,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
         user = validated_data["user"]
         assist_ed = validated_data['assist_ed']
         employee = Employee().create(
-            username = user['username'],
-            password = user['password'],
-            charge = validated_data['charge'],
+            username=user['username'],
+            password=user['password'],
+            charge=validated_data['charge'],
             **profile
         )
         employee.save()
@@ -73,7 +81,9 @@ class VisitSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Visit
-        fields = ('id', 'pacient', 'patient_name', 'doctor', 'doctor_name', 'datetime', 'detail')
+        fields = (
+            'id', 'pacient', 'patient_name', 'doctor', 'doctor_name', 'datetime', 'detail'
+        )
 
     def create(self, validated_data):
         validated_data['doctor'] = self.context['request'].user.employee
@@ -88,11 +98,26 @@ class VisitSerializer(serializers.ModelSerializer):
 
 
 class DrugSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Drug
         fields = ('id', 'name', 'description', 'quantity')
 
+
+class MovementItemSerializer(serializers.ModelSerializer):
+    drug_name = serializers.CharField(source='drug.name')
+
+    class Meta:
+        model = MovementItem
+        fields = (
+            'id', 'detail', 'is_donation', 'movement_type',
+            'drug', 'drug_name', 'drug_quantity', 'cash'
+        )
+
+
 class MovementSerializer(serializers.ModelSerializer):
+    items = MovementItemSerializer(many=True)
+
     class Meta:
         model = Movement
-        fields = ('id',)
+        fields = ('id', 'employee', 'profile', 'datetime', 'items')

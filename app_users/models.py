@@ -127,6 +127,6 @@ class MovementItem(models.Model):
     movement_type = models.IntegerField(
         choices=[(0, 'Medicamento'), (1, 'Dinero')], default=0
     )
-    drug = models.ForeignKey(Drug, related_name='movement_items')
-    drug_quantity = models.IntegerField(default=0)
-    cash = models.FloatField(default=0.0)
+    drug = models.ForeignKey(Drug, related_name='movement_items', null=True)
+    drug_quantity = models.IntegerField(null=True)
+    cash = models.FloatField(null=True)
