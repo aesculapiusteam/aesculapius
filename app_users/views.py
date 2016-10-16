@@ -72,3 +72,6 @@ class MovementViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Movement.objects.all()
     serializer_class = MovementSerializer
+    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter)
+    search_fields = ("employee__profile__name", "profile__name")
+    filter_fields = ("employee", "profile")

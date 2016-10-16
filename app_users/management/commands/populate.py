@@ -7,9 +7,17 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Admin
-        admin = User(username="admin", is_superuser=True, is_staff=True)
-        admin.set_password("admin")
-        admin.save()
+        a = Employee().create(
+            username="admin",
+            password="admin",
+            charge="secretary",
+            first_name="administrador",
+            last_name="de aesculapius"
+        )
+        a.user.is_superuser = True
+        a.user.is_staff = True
+        a.save()
+        a.user.save()
 
         # Employees
         s = Employee().create(

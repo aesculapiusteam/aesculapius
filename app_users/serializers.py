@@ -105,7 +105,7 @@ class DrugSerializer(serializers.ModelSerializer):
 
 
 class MovementItemSerializer(serializers.ModelSerializer):
-    drug_name = serializers.CharField(source='drug.name')
+    drug_name = serializers.CharField(source='drug.name', read_only=True)
 
     class Meta:
         model = MovementItem
@@ -117,7 +117,69 @@ class MovementItemSerializer(serializers.ModelSerializer):
 
 class MovementSerializer(serializers.ModelSerializer):
     items = MovementItemSerializer(many=True)
+    datetime = serializers.ReadOnlyField()
+    employee = serializers.ReadOnlyField(source="employee.id")
+    employee_name = serializers.ReadOnlyField(source="employee.__unicode__")
+    profile_name = serializers.ReadOnlyField(source="profile.__unicode__")
 
     class Meta:
         model = Movement
-        fields = ('id', 'employee', 'profile', 'datetime', 'items')
+        fields = (
+            'id', 'employee', 'employee_name', 'profile',
+            'profile_name', 'datetime', 'items'
+        )
+    """
+    {
+        u'employee': <Employee: Medico Ricardao Moraleas>,
+        u'profile': <Profile: Diego Velinsky>,
+        u'items': [
+            OrderedDict([
+                (u'detail', u'puede o no estar'),
+                (u'is_donation', True),
+                (u'drug', <Drug: Bayaspirina: 1003>),
+                (u'drug_quantity', 9)
+            ]),
+            OrderedDict([
+                (u'movement_type', 1),
+                (u'cash', 23.54)
+            ])
+        ]
+    }
+
+    """
+
+    def create(self, validated_data):
+        movement = Movement(
+            employee=self.context['request'].user.employee,
+            profile=validated_data['profile']
+        )
+        items_toadd = []
+
+        for i in validated_data['items']:
+            item = MovementItem()
+            item.detail = i.get('detail', '')
+            item.is_donation = i.get('is_donation', False)
+            item.movement_type = i.get('movement_type', 0)
+            if not item.movement_type:
+                if not ('drug' in i and 'drug_quantity' in i):
+                    print("\n\n\tYou should pass drug and drug_quantity properties\n\n")
+                    return
+                item.drug = i['drug']
+                item.drug_quantity = i['drug_quantity']
+            else:
+                if not ('cash' in i):
+                    print("\n\n\tYou should pass cash property\n\n")
+                    return
+                item.cash = i['cash']
+            items_toadd.append(item)
+
+        movement.save()
+        for item in items_toadd:
+            item.movement = movement
+            item.save()
+
+        return movement
+
+    def update(self, movement, validated_data):
+        # Don't allow updates on movements
+        return movement
