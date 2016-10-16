@@ -115,4 +115,23 @@ client*
 
 movements = """
 Movements Documentation - TODO
+
+Example petition
+
+        {
+          "employee": 1,
+          "profile": 6,
+          "items": [
+            {
+              "detail": "puede o no estar",
+              "is_donation": true,
+              "drug": 5,
+              "drug_quantity": 9
+            },
+            {
+              "movement_type": 1,
+              "cash": 23.54
+            }
+          ]
+        }
 """
