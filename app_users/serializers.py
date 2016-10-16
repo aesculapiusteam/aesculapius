@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app_users.models import Profile, Employee, Visit, Drug
+from app_users.models import Profile, Employee, Visit, Drug, Movement
 from django.utils import timezone
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
@@ -91,3 +91,8 @@ class DrugSerializer(serializers.ModelSerializer):
     class Meta:
         model = Drug
         fields = ('id', 'name', 'description', 'quantity')
+
+class MovementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movement
+        fields = ('id',)
