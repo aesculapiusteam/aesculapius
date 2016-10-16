@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User, UserManager
 from django.utils import timezone
 
+
 class Profile(models.Model):
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128, null=True)
@@ -12,7 +13,7 @@ class Profile(models.Model):
     address = models.CharField(max_length=256, null=True)
     phone = models.CharField(max_length=50, null=True)
     cellphone = models.CharField(max_length=50, null=True)
-    creation_date = models.DateField(auto_now_add = True)
+    creation_date = models.DateField(auto_now_add=True)
 
     def __unicode__(self):
         last = ""
@@ -25,9 +26,10 @@ class Profile(models.Model):
         Delete the corresponding user of the profile (if it's a employee
         profile) the Employee object is being automatically deleted
         """
-        if hasattr(self, 'employee'): # Is a employee profile
+        if hasattr(self, 'employee'):  # Is a employee profile
             User.objects.get(pk=self.employee.user.pk).delete()
         super(Profile, self).delete()
+
 
 class Employee(models.Model):
     CHARGES = (
@@ -38,7 +40,8 @@ class Employee(models.Model):
 
     user = models.OneToOneField(User)
     profile = models.OneToOneField(Profile)
-    charge = models.CharField(choices=CHARGES, default='doctor', max_length=100)
+    charge = models.CharField(
+        choices=CHARGES, default='doctor', max_length=100)
     assist_ed = models.ManyToManyField('self', blank=True)
 
     def __unicode__(self):
@@ -64,7 +67,7 @@ class Employee(models.Model):
         """
         Creates a Employee and its corresponding User and Profile objects
         """
-        user = User(username = username)
+        user = User(username=username)
         user.set_password(password)
         self.user = user
         profile = Profile(**kwargs)
@@ -96,10 +99,11 @@ class Visit(models.Model):
     doctor = models.ForeignKey(Employee, unique=False, related_name='visits')
     pacient = models.ForeignKey(Profile, unique=False, related_name='visits')
     datetime = models.DateTimeField(default=timezone.now)
-    detail = models.TextField()
+    detail = models.TextField(default="")
 
     def __unicode__(self):
         return self.pacient.__unicode__() + " visited " + self.doctor.__unicode__() + " on " + self.datetime.ctime()
+
 
 class Drug(models.Model):
     name = models.CharField(max_length=256)
@@ -108,3 +112,21 @@ class Drug(models.Model):
 
     def __unicode__(self):
         return self.name + ': ' + str(self.quantity)
+
+
+class Movement(models.Model):
+    employee = models.ForeignKey(Employee, related_name='movements')
+    profile = models.ForeignKey(Profile, related_name='movements')
+    datetime = models.DateTimeField(default=timezone.now)
+
+
+class MovementItem(models.Model):
+    movement = models.ForeignKey(Movement, related_name='items')
+    detail = models.TextField(default="")
+    is_donation = models.BooleanField(default=False)
+    movement_type = models.IntegerField(
+        choices=[(0, 'Medicamento'), (1, 'Dinero')], default=0
+    )
+    drug = models.ForeignKey(Drug, related_name='movement_items', null=True)
+    drug_quantity = models.IntegerField(null=True)
+    cash = models.FloatField(null=True)

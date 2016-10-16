@@ -1,29 +1,37 @@
 from rest_framework import serializers
-from app_users.models import Profile, Employee, Visit, Drug
+from app_users.models import Profile, Employee, Visit, Drug, Movement, MovementItem
 from django.utils import timezone
+
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     # employee = serializers.ReadOnlyField(required=False, allow_null=True)
     # employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
-    employee = serializers.ReadOnlyField(source="employee.id", required=False, read_only=True)
+    employee = serializers.ReadOnlyField(
+        source="employee.id", required=False, read_only=True
+    )
 
     class Meta:
         model = Profile
-        fields = ('id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
-        'address', 'phone', 'cellphone', 'creation_date')
+        fields = (
+            'id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
+            'address', 'phone', 'cellphone', 'creation_date'
+        )
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
     username = serializers.CharField(source="user.username", required=True)
-    password = serializers.CharField(source="user.password", write_only=True,
+    password = serializers.CharField(
+        source="user.password", write_only=True,
         required=False, style={'input_type': 'password'}
     )
 
     class Meta:
         model = Employee
-        fields = ('id', 'username', 'password', 'charge', 'assist_ed', 'profile')
+        fields = (
+            'id', 'username', 'password', 'charge', 'assist_ed', 'profile'
+        )
         extra_kwargs = {'url': {'view_name': 'api:employee-detail'}}
 
     def create(self, validated_data):
@@ -31,9 +39,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
         user = validated_data["user"]
         assist_ed = validated_data['assist_ed']
         employee = Employee().create(
-            username = user['username'],
-            password = user['password'],
-            charge = validated_data['charge'],
+            username=user['username'],
+            password=user['password'],
+            charge=validated_data['charge'],
             **profile
         )
         employee.save()
@@ -73,7 +81,9 @@ class VisitSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Visit
-        fields = ('id', 'pacient', 'patient_name', 'doctor', 'doctor_name', 'datetime', 'detail')
+        fields = (
+            'id', 'pacient', 'patient_name', 'doctor', 'doctor_name', 'datetime', 'detail'
+        )
 
     def create(self, validated_data):
         validated_data['doctor'] = self.context['request'].user.employee
@@ -88,6 +98,88 @@ class VisitSerializer(serializers.ModelSerializer):
 
 
 class DrugSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Drug
         fields = ('id', 'name', 'description', 'quantity')
+
+
+class MovementItemSerializer(serializers.ModelSerializer):
+    drug_name = serializers.CharField(source='drug.name', read_only=True)
+
+    class Meta:
+        model = MovementItem
+        fields = (
+            'id', 'detail', 'is_donation', 'movement_type',
+            'drug', 'drug_name', 'drug_quantity', 'cash'
+        )
+
+
+class MovementSerializer(serializers.ModelSerializer):
+    items = MovementItemSerializer(many=True)
+    datetime = serializers.ReadOnlyField()
+    employee = serializers.ReadOnlyField(source="employee.id")
+    employee_name = serializers.ReadOnlyField(source="employee.__unicode__")
+    profile_name = serializers.ReadOnlyField(source="profile.__unicode__")
+
+    class Meta:
+        model = Movement
+        fields = (
+            'id', 'employee', 'employee_name', 'profile',
+            'profile_name', 'datetime', 'items'
+        )
+    """
+    {
+        u'employee': <Employee: Medico Ricardao Moraleas>,
+        u'profile': <Profile: Diego Velinsky>,
+        u'items': [
+            OrderedDict([
+                (u'detail', u'puede o no estar'),
+                (u'is_donation', True),
+                (u'drug', <Drug: Bayaspirina: 1003>),
+                (u'drug_quantity', 9)
+            ]),
+            OrderedDict([
+                (u'movement_type', 1),
+                (u'cash', 23.54)
+            ])
+        ]
+    }
+
+    """
+
+    def create(self, validated_data):
+        movement = Movement(
+            employee=self.context['request'].user.employee,
+            profile=validated_data['profile']
+        )
+        items_toadd = []
+
+        for i in validated_data['items']:
+            item = MovementItem()
+            item.detail = i.get('detail', '')
+            item.is_donation = i.get('is_donation', False)
+            item.movement_type = i.get('movement_type', 0)
+            if not item.movement_type:
+                if not ('drug' in i and 'drug_quantity' in i):
+                    print("\n\n\tYou should pass drug and drug_quantity properties\n\n")
+                    return
+                item.drug = i['drug']
+                item.drug_quantity = i['drug_quantity']
+            else:
+                if not ('cash' in i):
+                    print("\n\n\tYou should pass cash property\n\n")
+                    return
+                item.cash = i['cash']
+            items_toadd.append(item)
+
+        movement.save()
+        for item in items_toadd:
+            item.movement = movement
+            item.save()
+
+        return movement
+
+    def update(self, movement, validated_data):
+        # Don't allow updates on movements
+        return movement
