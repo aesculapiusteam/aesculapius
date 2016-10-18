@@ -1,6 +1,6 @@
 Django==1.9.7
 django-extensions==1.6.7
-djangorestframework==3.3.3
+djangorestframework==3.4.7
 six==1.10.0
 sqlparse==0.1.19
 Markdown==2.6.6

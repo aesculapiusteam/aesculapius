@@ -128,25 +128,6 @@ class MovementSerializer(serializers.ModelSerializer):
             'id', 'employee', 'employee_name', 'profile',
             'profile_name', 'datetime', 'items'
         )
-    """
-    {
-        u'employee': <Employee: Medico Ricardao Moraleas>,
-        u'profile': <Profile: Diego Velinsky>,
-        u'items': [
-            OrderedDict([
-                (u'detail', u'puede o no estar'),
-                (u'is_donation', True),
-                (u'drug', <Drug: Bayaspirina: 1003>),
-                (u'drug_quantity', 9)
-            ]),
-            OrderedDict([
-                (u'movement_type', 1),
-                (u'cash', 23.54)
-            ])
-        ]
-    }
-
-    """
 
     def create(self, validated_data):
         movement = Movement(
@@ -154,6 +135,10 @@ class MovementSerializer(serializers.ModelSerializer):
             profile=validated_data['profile']
         )
         items_toadd = []
+
+        if not (validated_data['items'] and len(validated_data['items']) > 0):
+            print("\n\n\tYou should pass at least one item\n\n")
+            return
 
         for i in validated_data['items']:
             item = MovementItem()
