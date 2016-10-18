@@ -122,7 +122,7 @@ class Movement(models.Model):
 
 class MovementItem(models.Model):
     movement = models.ForeignKey(Movement, related_name='items')
-    detail = models.TextField(default="")
+    detail = models.TextField(default="", blank=True)
     is_donation = models.BooleanField(default=False)
     movement_type = models.IntegerField(
         choices=[(0, 'Medicamento'), (1, 'Dinero')], default=0
