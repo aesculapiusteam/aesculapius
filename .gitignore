@@ -47,3 +47,7 @@ pip-selfcheck.json
 #Archivos de mauro
 include/
 local/
+
+#Static files
+assets/
+static/
