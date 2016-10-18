@@ -11,8 +11,8 @@ class Command(BaseCommand):
             username="admin",
             password="admin",
             charge="secretary",
-            first_name="administrador",
-            last_name="de aesculapius"
+            first_name="Administrador",
+            last_name="de Aesculapius"
         )
         a.user.is_superuser = True
         a.user.is_staff = True
