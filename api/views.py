@@ -1,5 +1,5 @@
-from app_users.models import Profile, Employee, Visit, Drug, Movement
-from app_users.serializers import (
+from api.models import Profile, Employee, Visit, Drug, Movement
+from api.serializers import (
     ProfileSerializer, EmployeeSerializer, VisitSerializer,
     DrugSerializer, MovementSerializer
 )
@@ -8,11 +8,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from rest_framework.decorators import list_route
 
-from app_users.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor
+from api.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 import django_filters
 
-import app_users.docs as docs
+import api.docs as docs
 
 
 class ProfileViewSet(viewsets.ModelViewSet):

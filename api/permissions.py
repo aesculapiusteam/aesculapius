@@ -1,5 +1,5 @@
 from rest_framework import permissions
-from app_users.models import Profile, Visit
+from api.models import Profile, Visit
 
 class IsAdminOrOwnerOrReadOnly(permissions.BasePermission):
     """

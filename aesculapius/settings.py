@@ -46,7 +46,6 @@ EXTERNAL_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
     'django_extensions',
     'corsheaders',
     'rest_framework',
@@ -54,8 +53,7 @@ EXTERNAL_APPS = [
 ]
 
 INTERNAL_APPS =[
-    'app_main',
-    'app_users',
+    'api',
 ]
 
 INSTALLED_APPS = EXTERNAL_APPS + INTERNAL_APPS
@@ -145,6 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR + '/assets/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR + '/media/'
 

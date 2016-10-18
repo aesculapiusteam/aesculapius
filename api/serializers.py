@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app_users.models import Profile, Employee, Visit, Drug, Movement, MovementItem
+from api.models import Profile, Employee, Visit, Drug, Movement, MovementItem
 from django.utils import timezone
 
 
