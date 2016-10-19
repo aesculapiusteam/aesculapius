@@ -45,7 +45,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         if self.kwargs['pk'] == 'me':
             return self.request.user.employee
         else:
-            return super(Employee, self).get_object()
+            return super(EmployeeViewSet, self).get_object()
 
 
 class VisitViewSet(viewsets.ModelViewSet):
