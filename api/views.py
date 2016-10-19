@@ -54,7 +54,7 @@ class VisitViewSet(viewsets.ModelViewSet):
     queryset = Visit.objects.all()
     serializer_class = VisitSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ("doctor", "pacient")
+    filter_fields = ('doctor', 'pacient')
 
 
 class DrugViewSet(viewsets.ModelViewSet):
@@ -62,9 +62,13 @@ class DrugViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Drug.objects.all()
     serializer_class = DrugSerializer
-    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter)
-    search_fields = ("name", "description", "quantity")
-    filter_fields = ("name", "description", "quantity")
+    filter_backends = (
+        filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter
+    )
+    search_fields = ('name', 'description', 'quantity')
+    filter_fields = ('name', 'description', 'quantity')
+    ordering_fields = ('name', 'description', 'quantity')
+    ordering = ('name', 'description', 'quantity')
 
 
 class MovementViewSet(viewsets.ModelViewSet):
@@ -72,6 +76,8 @@ class MovementViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Movement.objects.all()
     serializer_class = MovementSerializer
-    filter_backends = (filters.DjangoFilterBackend, filters.SearchFilter)
-    search_fields = ("employee__profile__name", "profile__name")
-    filter_fields = ("employee", "profile")
+    filter_backends = (
+        filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter
+    )
+    search_fields = ('employee__profile__name', 'profile__name')
+    filter_fields = ('employee', 'profile')
