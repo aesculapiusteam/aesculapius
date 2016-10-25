@@ -79,5 +79,6 @@ class MovementViewSet(viewsets.ModelViewSet):
     filter_backends = (
         filters.DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter
     )
-    search_fields = ('employee__profile__name', 'profile__name')
+    search_fields = ('employee__profile__first_name', 'profile__first_name',
+    'employee__profile__last_name', 'profile__last_name', 'datetime')
     filter_fields = ('employee', 'profile')
