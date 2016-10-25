@@ -107,7 +107,7 @@ class Visit(models.Model):
 
 class Drug(models.Model):
     name = models.CharField(max_length=256)
-    description = models.TextField(null=True)
+    description = models.TextField(null=True, blank=True)
     quantity = models.IntegerField(default=0)
 
     def __unicode__(self):
