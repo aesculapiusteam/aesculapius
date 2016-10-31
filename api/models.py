@@ -97,12 +97,12 @@ class Employee(models.Model):
 
 class Visit(models.Model):
     doctor = models.ForeignKey(Employee, unique=False, related_name='visits')
-    pacient = models.ForeignKey(Profile, unique=False, related_name='visits')
+    patient = models.ForeignKey(Profile, unique=False, related_name='visits')
     datetime = models.DateTimeField(default=timezone.now)
     detail = models.TextField(default="")
 
     def __unicode__(self):
-        return self.pacient.__unicode__() + " visited " + self.doctor.__unicode__() + " on " + self.datetime.ctime()
+        return self.patient.__unicode__() + " visited " + self.doctor.__unicode__() + " on " + self.datetime.ctime()
 
 
 class Drug(models.Model):

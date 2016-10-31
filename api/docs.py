@@ -94,7 +94,7 @@ client*
 
 # Visit Serializer
 - **doctor** (IntegerField) Id that represents the doctor of the visit
-- **pacient** (IntegerField) Id that represents the pacient of the visit
+- **patient** (IntegerField) Id that represents the patient of the visit
 - datetime (TimestampField)
 - detail (TextField)
 """

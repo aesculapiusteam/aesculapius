@@ -76,13 +76,13 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class VisitSerializer(serializers.ModelSerializer):
     doctor = serializers.ReadOnlyField(source="doctor.id")
     doctor_name = serializers.ReadOnlyField(source="doctor.__unicode__")
-    patient_name = serializers.ReadOnlyField(source="pacient.__unicode__")
+    patient_name = serializers.ReadOnlyField(source="patient.__unicode__")
     datetime = serializers.ReadOnlyField()
 
     class Meta:
         model = Visit
         fields = (
-            'id', 'pacient', 'patient_name', 'doctor', 'doctor_name', 'datetime', 'detail'
+            'id', 'patient', 'patient_name', 'doctor', 'doctor_name', 'datetime', 'detail'
         )
 
     def create(self, validated_data):
@@ -92,7 +92,7 @@ class VisitSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         validated_data['datetime'] = timezone.now()
-        validated_data.pop('pacient', None)
+        validated_data.pop('patient', None)
         res = super(VisitSerializer, self).update(instance, validated_data)
         return res
 

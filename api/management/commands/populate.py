@@ -71,7 +71,7 @@ class Command(BaseCommand):
         s.set_assist_ed(d)
         d1.set_assist_ed(s1)
 
-        # Pacients
+        # Patients
         p = Profile(first_name="Diego", last_name="Velinsky")
         p1 = Profile(first_name="Maria", last_name="de la Fuente")
         p2 = Profile(first_name="Pedro", last_name="Pitaria")
@@ -80,12 +80,12 @@ class Command(BaseCommand):
         p2.save()
 
         # Visits
-        v = Visit(doctor=d, pacient=p, detail="Tenia gripe y le di antibiotico")
-        v1 = Visit(doctor=d, pacient=p1, detail="Tenia fiebre y lo deje en cuarentena")
-        v2 = Visit(doctor=d, pacient=p2, detail="Le dolia la cabeza y le di bayaspirina")
-        v3 = Visit(doctor=d1, pacient=p, detail="Seguia con gripe y le di mas antibiotico")
-        v4 = Visit(doctor=d1, pacient=p, detail="La gripe no ceso y lo mande al hospital")
-        v5 = Visit(doctor=d1, pacient=p1, detail="Luego de la cuarentena murio")
+        v = Visit(doctor=d, patient=p, detail="Tenia gripe y le di antibiotico")
+        v1 = Visit(doctor=d, patient=p1, detail="Tenia fiebre y lo deje en cuarentena")
+        v2 = Visit(doctor=d, patient=p2, detail="Le dolia la cabeza y le di bayaspirina")
+        v3 = Visit(doctor=d1, patient=p, detail="Seguia con gripe y le di mas antibiotico")
+        v4 = Visit(doctor=d1, patient=p, detail="La gripe no ceso y lo mande al hospital")
+        v5 = Visit(doctor=d1, patient=p1, detail="Luego de la cuarentena murio")
         v.save()
         v1.save()
         v2.save()

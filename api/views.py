@@ -54,7 +54,7 @@ class VisitViewSet(viewsets.ModelViewSet):
     queryset = Visit.objects.all()
     serializer_class = VisitSerializer
     filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('doctor', 'pacient')
+    filter_fields = ('doctor', 'patient')
 
 
 class DrugViewSet(viewsets.ModelViewSet):
