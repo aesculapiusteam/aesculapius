@@ -99,7 +99,7 @@ class Visit(models.Model):
     doctor = models.ForeignKey(Employee, unique=False, related_name='visits')
     patient = models.ForeignKey(Profile, unique=False, related_name='visits')
     datetime = models.DateTimeField(default=timezone.now)
-    detail = models.TextField(default="")
+    detail = models.TextField()
 
     def __unicode__(self):
         return self.patient.__unicode__() + " visited " + self.doctor.__unicode__() + " on " + self.datetime.ctime()
