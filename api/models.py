@@ -130,3 +130,13 @@ class MovementItem(models.Model):
     drug = models.ForeignKey(Drug, related_name='movement_items', null=True)
     drug_quantity = models.IntegerField(null=True)
     cash = models.FloatField(null=True)
+
+    def save(self, **kwargs):
+        # This line is necessary, can't modify self.drug correctly.
+        drug = Drug.objects.get(pk=self.drug.pk)
+        if self.is_donation:
+            drug.quantity += self.drug_quantity
+        else:
+            drug.quantity -= self.drug_quantity
+        drug.save()
+        super(MovementItem, self).save(**kwargs)
