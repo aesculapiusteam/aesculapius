@@ -133,10 +133,11 @@ class MovementItem(models.Model):
 
     def save(self, **kwargs):
         # This line is necessary, can't modify self.drug correctly.
-        drug = Drug.objects.get(pk=self.drug.pk)
-        if self.is_donation:
-            drug.quantity += self.drug_quantity
-        else:
-            drug.quantity -= self.drug_quantity
-        drug.save()
-        super(MovementItem, self).save(**kwargs)
+        if self.movement_type == 0:
+            drug = Drug.objects.get(pk=self.drug.pk)
+            if self.is_donation:
+                drug.quantity += self.drug_quantity
+            else:
+                drug.quantity -= self.drug_quantity
+            drug.save()
+            super(MovementItem, self).save(**kwargs)
