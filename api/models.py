@@ -140,4 +140,4 @@ class MovementItem(models.Model):
             else:
                 drug.quantity -= self.drug_quantity
             drug.save()
-            super(MovementItem, self).save(**kwargs)
+        super(MovementItem, self).save(**kwargs)
