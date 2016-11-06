@@ -14,6 +14,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=50, null=True)
     cellphone = models.CharField(max_length=50, null=True)
     creation_date = models.DateField(auto_now_add=True)
+    is_deleted = models.BooleanField(default=False)
 
     def __unicode__(self):
         last = ""
@@ -100,6 +101,7 @@ class Visit(models.Model):
     patient = models.ForeignKey(Profile, unique=False, related_name='visits')
     datetime = models.DateTimeField(default=timezone.now)
     detail = models.TextField()
+    is_deleted = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.patient.__unicode__() + " visited " + self.doctor.__unicode__() + " on " + self.datetime.ctime()

@@ -20,18 +20,19 @@ class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly,)
-    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend)
+    filter_fields = ('is_deleted',)
     search_fields = ('first_name', 'last_name', 'email', 'dni')
     ordering_fields = ('first_name', 'last_name', 'creation_date')
     ordering = ('first_name', 'last_name')
-
+    
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     __doc__ = docs.employees
     permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly,)
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
-    filter_backends = (filters.SearchFilter, filters.OrderingFilter,)
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend,)
     search_fields = (
         'profile__first_name', 'profile__last_name', 'profile__email'
     )
@@ -40,6 +41,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
         'profile__creation_date', 'profile__dni'
     )
     ordering = ('profile__first_name', 'profile__last_name')
+    filter_fields = ('profile__is_deleted',)
 
     def get_object(self):
         if self.kwargs['pk'] == 'me':
@@ -82,4 +84,4 @@ class MovementViewSet(viewsets.ModelViewSet):
     search_fields = ('employee__profile__first_name', 'profile__first_name',
     'employee__profile__last_name', 'profile__last_name','items__drug__name', 'datetime')
     filter_fields = ('employee', 'profile')
-    ordering = ('-datetime')
+    ordering = ('-datetime',)
