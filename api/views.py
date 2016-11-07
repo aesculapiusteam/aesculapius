@@ -25,7 +25,10 @@ class ProfileViewSet(viewsets.ModelViewSet):
     search_fields = ('first_name', 'last_name', 'email', 'dni')
     ordering_fields = ('first_name', 'last_name', 'creation_date')
     ordering = ('first_name', 'last_name')
-    
+
+    def get_queryset(self):
+        return Profile.objects.filter(is_deleted=False)
+
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     __doc__ = docs.employees
@@ -48,6 +51,9 @@ class EmployeeViewSet(viewsets.ModelViewSet):
             return self.request.user.employee
         else:
             return super(EmployeeViewSet, self).get_object()
+
+    def get_queryset(self):
+        return Employee.objects.filter(profile__is_deleted=False)
 
 
 class VisitViewSet(viewsets.ModelViewSet):
