@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from rest_framework.decorators import list_route
 
-from api.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor
+from api.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor, IsReadOnlyOrPost
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 import django_filters
 
@@ -83,7 +83,7 @@ class DrugViewSet(viewsets.ModelViewSet):
 
 class MovementViewSet(viewsets.ModelViewSet):
     __doc__ = docs.movements
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsReadOnlyOrPost)
     queryset = Movement.objects.all()
     serializer_class = MovementSerializer
     filter_backends = (

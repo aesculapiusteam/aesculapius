@@ -56,3 +56,11 @@ class IsDoctor(permissions.BasePermission):
                 return False
             return True
         return False
+
+
+class IsReadOnlyOrPost(permissions.BasePermission):
+    """
+    Allows users to make post request or read, not delete nor edit.
+    """
+    def has_permission(self, request, view):
+        return request.method in permissions.SAFE_METHODS or request.method == 'POST'
