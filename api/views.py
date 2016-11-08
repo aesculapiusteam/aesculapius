@@ -64,6 +64,8 @@ class VisitViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('doctor', 'patient')
 
+    def get_queryset(self):
+        return Visit.objects.filter(is_deleted=False)
 
 class DrugViewSet(viewsets.ModelViewSet):
     __doc__ = docs.drugs

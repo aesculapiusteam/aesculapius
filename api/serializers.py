@@ -7,7 +7,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     employee = serializers.ReadOnlyField(
         source="employee.id", required=False, read_only=True
     )
-    is_deleted = serializers.HiddenField(default=False)
+    is_deleted = serializers.HiddenField(required=False, default=False)
 
     class Meta:
         model = Profile
@@ -77,7 +77,7 @@ class VisitSerializer(serializers.ModelSerializer):
     doctor_name = serializers.ReadOnlyField(source="doctor.__unicode__")
     patient_name = serializers.ReadOnlyField(source="patient.__unicode__")
     datetime = serializers.ReadOnlyField()
-    is_deleted = serializers.HiddenField(default=False)
+    is_deleted = serializers.HiddenField(required=False, default=False)
 
     class Meta:
         model = Visit
