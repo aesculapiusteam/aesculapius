@@ -4,17 +4,16 @@ from django.utils import timezone
 
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
-    # employee = serializers.ReadOnlyField(required=False, allow_null=True)
-    # employee = serializers.HyperlinkedRelatedField(view_name='api:employee-detail', required=False, read_only=True)
     employee = serializers.ReadOnlyField(
         source="employee.id", required=False, read_only=True
     )
+    is_deleted = serializers.HiddenField(default=False)
 
     class Meta:
         model = Profile
         fields = (
             'id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
-            'address', 'phone', 'cellphone', 'creation_date'
+            'address', 'phone', 'cellphone', 'creation_date', 'is_deleted'
         )
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
@@ -78,11 +77,13 @@ class VisitSerializer(serializers.ModelSerializer):
     doctor_name = serializers.ReadOnlyField(source="doctor.__unicode__")
     patient_name = serializers.ReadOnlyField(source="patient.__unicode__")
     datetime = serializers.ReadOnlyField()
+    is_deleted = serializers.HiddenField(default=False)
 
     class Meta:
         model = Visit
         fields = (
-            'id', 'patient', 'patient_name', 'doctor', 'doctor_name', 'datetime', 'detail'
+            'id', 'patient', 'patient_name', 'doctor', 'doctor_name',
+             'datetime', 'detail', 'is_deleted'
         )
 
     def create(self, validated_data):
