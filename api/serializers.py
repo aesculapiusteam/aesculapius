@@ -7,7 +7,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     employee = serializers.ReadOnlyField(
         source="employee.id", required=False, read_only=True
     )
-    is_deleted = serializers.HiddenField(required=False, default=False)
+    is_deleted = serializers.BooleanField(required=False)
 
     class Meta:
         model = Profile
@@ -65,6 +65,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         employee.profile.address = profile['address']
         employee.profile.phone = profile['phone']
         employee.profile.cellphone = profile['cellphone']
+        employee.profile.is_deleted = profile['is_deleted']
         employee.save()
         employee.assist_ed.clear()
         for i in assist_ed:
@@ -77,7 +78,7 @@ class VisitSerializer(serializers.ModelSerializer):
     doctor_name = serializers.ReadOnlyField(source="doctor.__unicode__")
     patient_name = serializers.ReadOnlyField(source="patient.__unicode__")
     datetime = serializers.ReadOnlyField()
-    is_deleted = serializers.HiddenField(required=False, default=False)
+    is_deleted = serializers.BooleanField(required=False)
 
     class Meta:
         model = Visit

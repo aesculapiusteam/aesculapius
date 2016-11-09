@@ -22,6 +22,10 @@ class Profile(models.Model):
             last = " " + self.last_name
         return self.first_name + last
 
+    def soft_delete(self):
+        self.is_deleted = True
+        self.save()
+
     def delete(self):
         """
         Delete the corresponding user of the profile (if it's a employee
@@ -87,6 +91,10 @@ class Employee(models.Model):
         self.user_id = self.user.id
         super(Employee, self).save(**kwargs)
 
+    def soft_delete(self):
+        self.profile.is_deleted = True
+        self.save()
+
     def delete(self):
         """
         Makes sure the User and the Profile of the employee are deleted too
@@ -102,6 +110,10 @@ class Visit(models.Model):
     datetime = models.DateTimeField(default=timezone.now)
     detail = models.TextField()
     is_deleted = models.BooleanField(default=False)
+
+    def soft_delete(self):
+        self.is_deleted = True
+        self.save()
 
     def __unicode__(self):
         return self.patient.__unicode__() + " visited " + self.doctor.__unicode__() + " on " + self.datetime.ctime()
