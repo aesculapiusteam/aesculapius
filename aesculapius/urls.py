@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from django.contrib import admin
-from rest_framework.authtoken import views
+from aesculapius import views
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
