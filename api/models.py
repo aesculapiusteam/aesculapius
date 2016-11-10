@@ -6,15 +6,15 @@ from django.utils import timezone
 
 class Profile(models.Model):
     first_name = models.CharField(max_length=128)
-    last_name = models.CharField(max_length=128, null=True)
-    email = models.CharField(max_length=128, null=True)
-    dni = models.IntegerField(null=True)
-    birth_date = models.DateField(null=True)
-    address = models.CharField(max_length=256, null=True)
-    phone = models.CharField(max_length=50, null=True)
-    cellphone = models.CharField(max_length=50, null=True)
-    creation_date = models.DateField(auto_now_add=True)
-    is_deleted = models.BooleanField(default=False)
+    last_name = models.CharField(max_length=128, null=True, blank=True)
+    email = models.CharField(max_length=128, null=True, blank=True)
+    dni = models.IntegerField(null=True, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    address = models.CharField(max_length=256, null=True, blank=True)
+    phone = models.CharField(max_length=50, null=True, blank=True)
+    cellphone = models.CharField(max_length=50, null=True, blank=True)
+    creation_date = models.DateField(auto_now_add=True, blank=True)
+    is_deleted = models.BooleanField(default=False, blank=True)
 
     def __unicode__(self):
         last = ""
