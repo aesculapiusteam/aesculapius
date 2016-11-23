@@ -133,6 +133,8 @@ class Movement(models.Model):
     profile = models.ForeignKey(Profile, related_name='movements')
     datetime = models.DateTimeField(default=timezone.now)
 
+    def __unicode__(self):
+        return str(self.id) + ' - ' + str(self.employee) + ' -> ' + str(self.profile)
 
 class MovementItem(models.Model):
     movement = models.ForeignKey(Movement, related_name='items')
