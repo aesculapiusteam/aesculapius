@@ -59,8 +59,13 @@ class IsDoctor(permissions.BasePermission):
 
 
 class IsReadOnlyOrPost(permissions.BasePermission):
-    """
-    Allows users to make post request or read, not delete nor edit.
-    """
+    "Allows users to make post request or read, not delete nor edit."
+
     def has_permission(self, request, view):
         return request.method in permissions.SAFE_METHODS or request.method == 'POST'
+
+class IsNotDeleted(permissions.BasePermission):
+    "Allows only users that have the property is_deleted=False"
+
+    def has_permission(self, request, view):
+        return not request.user.employee.profile.is_deleted

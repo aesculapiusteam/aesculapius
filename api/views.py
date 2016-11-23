@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from rest_framework.decorators import list_route
 
-from api.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor, IsReadOnlyOrPost
+from api.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor, IsReadOnlyOrPost, IsNotDeleted
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 import django_filters
 
@@ -19,7 +19,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     # __doc__ = docs.profiles
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly,)
+    permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly, IsNotDeleted)
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend)
     filter_fields = ('is_deleted',)
     search_fields = ('first_name', 'last_name', 'email', 'dni')
@@ -37,7 +37,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     # __doc__ = docs.employees
-    permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly,)
+    permission_classes = (IsAuthenticated, IsAdminOrOwnerOrReadOnly, IsNotDeleted)
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend,)
@@ -68,7 +68,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
 class VisitViewSet(viewsets.ModelViewSet):
     # __doc__ = docs.visits
-    permission_classes = (IsAuthenticated, IsDoctor)
+    permission_classes = (IsAuthenticated, IsDoctor, IsNotDeleted)
     queryset = Visit.objects.all()
     serializer_class = VisitSerializer
     filter_backends = (filters.DjangoFilterBackend,)
@@ -86,7 +86,7 @@ class VisitViewSet(viewsets.ModelViewSet):
 
 class DrugViewSet(viewsets.ModelViewSet):
     # __doc__ = docs.drugs
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsNotDeleted)
     queryset = Drug.objects.all()
     serializer_class = DrugSerializer
     filter_backends = (
@@ -100,7 +100,7 @@ class DrugViewSet(viewsets.ModelViewSet):
 
 class MovementViewSet(viewsets.ModelViewSet):
     # __doc__ = docs.movements
-    permission_classes = (IsAuthenticated, IsReadOnlyOrPost)
+    permission_classes = (IsAuthenticated, IsReadOnlyOrPost, IsNotDeleted)
     queryset = Movement.objects.all()
     serializer_class = MovementSerializer
     filter_backends = (

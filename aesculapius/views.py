@@ -5,7 +5,9 @@ from rest_framework.serializers import ValidationError
 
 
 class ObtainAuthToken(ObtainAuthToken):
-
+    """ This class overriddes the default login, and doesn't allow employees
+    with is_deleted=True to login with tokens """
+    
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
