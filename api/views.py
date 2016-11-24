@@ -8,7 +8,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import detail_route
 from rest_framework.decorators import list_route
 
-from api.permissions import IsAdminOrOwnerOrReadOnly, IsDoctor, IsReadOnlyOrPost, IsNotDeleted
+from api.permissions import (
+    IsAdminOrOwnerOrReadOnly, IsDoctor, IsReadOnlyOrPost, IsNotDeleted, IsLTOneWeekOld
+)
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 import django_filters
 
@@ -68,7 +70,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 
 class VisitViewSet(viewsets.ModelViewSet):
     # __doc__ = docs.visits
-    permission_classes = (IsAuthenticated, IsDoctor, IsNotDeleted)
+    permission_classes = (IsAuthenticated, IsDoctor, IsNotDeleted, IsLTOneWeekOld)
     queryset = Visit.objects.all()
     serializer_class = VisitSerializer
     filter_backends = (filters.DjangoFilterBackend,)
