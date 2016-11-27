@@ -144,7 +144,7 @@ class MovementItem(models.Model):
         choices=[(0, 'Medicamento'), (1, 'Dinero')], default=0
     )
     drug = models.ForeignKey(Drug, related_name='movement_items', null=True)
-    drug_quantity = models.IntegerField(null=True)
+    drug_quantity = models.PositiveSmallIntegerField(null=True)
     cash = models.FloatField(null=True)
 
     def save(self, **kwargs):

@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
+
 from rest_framework import serializers
 from api.models import Profile, Employee, Visit, Drug, Movement, MovementItem
 from django.utils import timezone
-
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     employee = serializers.ReadOnlyField(
@@ -108,6 +109,8 @@ class DrugSerializer(serializers.ModelSerializer):
 
 class MovementItemSerializer(serializers.ModelSerializer):
     drug_name = serializers.CharField(source='drug.name', read_only=True)
+    cash = serializers.FloatField(min_value=0, required=False)
+    drug_quantity = serializers.IntegerField(min_value=0, required=False)
 
     class Meta:
         model = MovementItem
@@ -132,6 +135,9 @@ class MovementSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
+        def error(error):
+            raise serializers.ValidationError({"details":error})
+
         movement = Movement(
             employee=self.context['request'].user.employee,
             profile=validated_data['profile']
@@ -139,7 +145,7 @@ class MovementSerializer(serializers.ModelSerializer):
         items_toadd = []
 
         if not (validated_data['items'] and len(validated_data['items']) > 0):
-            print("\n\n\tYou should pass at least one item\n\n")
+            error("Debes pasar al menso un item.")
             return
 
         for i in validated_data['items']:
@@ -149,13 +155,13 @@ class MovementSerializer(serializers.ModelSerializer):
             item.movement_type = i.get('movement_type', 0)
             if not item.movement_type:
                 if not ('drug' in i and 'drug_quantity' in i):
-                    print("\n\n\tYou should pass drug and drug_quantity properties\n\n")
+                    error("No especificó la droga, o la cantidad de esa droga.")
                     return
                 item.drug = i['drug']
                 item.drug_quantity = i['drug_quantity']
             else:
                 if not ('cash' in i):
-                    print("\n\n\tYou should pass cash property\n\n")
+                    error("No especificó la cantidad de dinero.")
                     return
                 item.cash = i['cash']
             items_toadd.append(item)
