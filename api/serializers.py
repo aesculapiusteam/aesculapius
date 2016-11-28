@@ -4,6 +4,9 @@ from rest_framework import serializers
 from api.models import Profile, Employee, Visit, Drug, Movement, MovementItem
 from django.utils import timezone
 
+def error(error):
+    raise serializers.ValidationError({"details": error})
+
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     employee = serializers.ReadOnlyField(
         source="employee.id", required=False, read_only=True
@@ -37,6 +40,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         profile = validated_data["profile"]
         user = validated_data["user"]
+        if Employee.objects.all().filter(user__username=user['username']).exists():
+            error('El nombre de usuario \"' + user['username'] + '\" ya ha sido utilizado.' )
         assist_ed = validated_data['assist_ed']
         employee = Employee().create(
             username=user['username'],
@@ -135,9 +140,6 @@ class MovementSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        def error(error):
-            raise serializers.ValidationError({"details":error})
-
         movement = Movement(
             employee=self.context['request'].user.employee,
             profile=validated_data['profile']
