@@ -114,7 +114,7 @@ class DrugSerializer(serializers.ModelSerializer):
 
 class MovementItemSerializer(serializers.ModelSerializer):
     drug_name = serializers.CharField(source='drug.name', read_only=True)
-    cash = serializers.FloatField(min_value=0, required=False)
+    cash = serializers.DecimalField(min_value=0, max_digits=10, decimal_places=2, required=False)
     drug_quantity = serializers.IntegerField(min_value=0, required=False)
 
     class Meta:
@@ -157,7 +157,7 @@ class MovementSerializer(serializers.ModelSerializer):
             item.movement_type = i.get('movement_type', 0)
             if not item.movement_type:
                 if not ('drug' in i and 'drug_quantity' in i):
-                    error("No especificó la droga, o la cantidad de esa droga.")
+                    error("No especificó el medicamento, o la cantidad del mismo.")
                     return
                 item.drug = i['drug']
                 item.drug_quantity = i['drug_quantity']
