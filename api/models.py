@@ -8,11 +8,14 @@ from django.utils import timezone
 class Aesculapius(models.Model):
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal(0.0))
 
+    def refresh_balance(self):
+        for i in MovementItem.objects.filter(movement_type=1):
+            self.balance += i.cash if i.is_donation else -(i.cash)
+
     def save(self, **kwargs):
         "Reads throw all movements and calculates the real balance."
-        if self.pk is None: # The object is being created
-            for i in MovementItem.objects.filter(movement_type=1):
-                self.balance += i.cash if i.is_donation else -(i.cash)
+        if self.pk is None: # The object is being saved for the first time (being created)
+            self.refresh_balance()
         super(Aesculapius, self).save(**kwargs)
 
 class Profile(models.Model):
