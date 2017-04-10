@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from rest_framework import serializers
-from api.models import Profile, Employee, Visit, Drug, Movement, MovementItem
+from api.models import Aesculapius, Profile, Employee, Visit, Drug, Movement, MovementItem
 from django.utils import timezone
 
 def error(error):
     raise serializers.ValidationError({"detail": error})
+
+class AesculapiusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Aesculapius
+        exclude = ('id',)
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     employee = serializers.ReadOnlyField(

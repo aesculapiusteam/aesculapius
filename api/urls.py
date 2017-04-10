@@ -3,6 +3,7 @@ from api import views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter(trailing_slash=False)
+router.register(r'aesculapius', views.AesculapiusViewSet)
 router.register(r'profiles', views.ProfileViewSet)
 router.register(r'employees', views.EmployeeViewSet)
 router.register(r'visits', views.VisitViewSet)
