@@ -1,8 +1,22 @@
 from __future__ import unicode_literals
+from decimal import Decimal
 from django.db import models
 from django.contrib.auth.models import User, UserManager
 from django.utils import timezone
 
+
+class Aesculapius(models.Model):
+    balance = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal(0.0))
+
+    def refresh_balance(self):
+        for i in MovementItem.objects.filter(movement_type=1):
+            self.balance += i.cash if i.is_donation else -(i.cash)
+
+    def save(self, **kwargs):
+        "Reads throw all movements and calculates the real balance."
+        if self.pk is None: # The object is being saved for the first time (being created)
+            self.refresh_balance()
+        super(Aesculapius, self).save(**kwargs)
 
 class Profile(models.Model):
     first_name = models.CharField(max_length=128)
@@ -145,15 +159,19 @@ class MovementItem(models.Model):
     )
     drug = models.ForeignKey(Drug, related_name='movement_items', null=True)
     drug_quantity = models.PositiveSmallIntegerField(null=True)
-    cash = models.FloatField(null=True)
+    cash = models.DecimalField(max_digits=10, decimal_places=2, null=True)
 
     def save(self, **kwargs):
-        # This line is necessary, can't modify self.drug correctly.
-        if self.movement_type == 0:
+        if self.movement_type == 0: # Drugs
+            # This line is necessary, can't modify self.drug correctly.
             drug = Drug.objects.get(pk=self.drug.pk)
             if self.is_donation:
                 drug.quantity += self.drug_quantity
             else:
                 drug.quantity -= self.drug_quantity
             drug.save()
+        if self.movement_type == 1: # Money
+            balance_singleton, new = Aesculapius.objects.get_or_create()
+            balance_singleton.balance += self.cash if self.is_donation else -(self.cash)
+            balance_singleton.save()
         super(MovementItem, self).save(**kwargs)

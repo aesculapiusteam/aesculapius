@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from rest_framework import serializers
-from api.models import Profile, Employee, Visit, Drug, Movement, MovementItem
+from api.models import Aesculapius, Profile, Employee, Visit, Drug, Movement, MovementItem
 from django.utils import timezone
 
 def error(error):
     raise serializers.ValidationError({"detail": error})
+
+class AesculapiusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Aesculapius
+        exclude = ('id',)
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     employee = serializers.ReadOnlyField(
@@ -114,7 +119,7 @@ class DrugSerializer(serializers.ModelSerializer):
 
 class MovementItemSerializer(serializers.ModelSerializer):
     drug_name = serializers.CharField(source='drug.name', read_only=True)
-    cash = serializers.FloatField(min_value=0, required=False)
+    cash = serializers.DecimalField(min_value=0, max_digits=10, decimal_places=2, required=False)
     drug_quantity = serializers.IntegerField(min_value=0, required=False)
 
     class Meta:
@@ -157,7 +162,7 @@ class MovementSerializer(serializers.ModelSerializer):
             item.movement_type = i.get('movement_type', 0)
             if not item.movement_type:
                 if not ('drug' in i and 'drug_quantity' in i):
-                    error("No especificó la droga, o la cantidad de esa droga.")
+                    error("No especificó el medicamento, o la cantidad del mismo.")
                     return
                 item.drug = i['drug']
                 item.drug_quantity = i['drug_quantity']

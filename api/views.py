@@ -1,7 +1,7 @@
-from api.models import Profile, Employee, Visit, Drug, Movement
+from api.models import Aesculapius, Profile, Employee, Visit, Drug, Movement
 from api.serializers import (
-    ProfileSerializer, EmployeeSerializer, VisitSerializer,
-    DrugSerializer, MovementSerializer
+    AesculapiusSerializer, ProfileSerializer, EmployeeSerializer,
+    VisitSerializer, DrugSerializer, MovementSerializer
 )
 from rest_framework import viewsets, permissions, filters
 from rest_framework.response import Response
@@ -15,6 +15,18 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 import django_filters
 
 import api.docs as docs
+
+class AesculapiusViewSet(viewsets.ReadOnlyModelViewSet):
+    # __doc__ = docs.aesculapius
+    queryset = Aesculapius.objects.all()
+    serializer_class = AesculapiusSerializer
+    pagination_class = None
+
+    def get_object(self):
+        if self.kwargs['pk'] == 'current':
+            return self.queryset.first()
+        else:
+            return super(AesculapiusViewSet, self).get_object()
 
 
 class ProfileViewSet(viewsets.ModelViewSet):

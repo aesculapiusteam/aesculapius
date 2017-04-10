@@ -1,3 +1,7 @@
+aesculapius = """
+Here you can see all the global variables of aesculapius with the method /current
+"""
+
 profiles = """
 # Permissions for Profile
 *All permissions listed below have to be true in order to give access to the
