@@ -56,7 +56,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     serializer_class = EmployeeSerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend,)
     search_fields = (
-        'profile__first_name', 'profile__last_name', 'profile__email'
+        'profile__first_name', 'profile__last_name', 'profile__email', 'user__username'
     )
     ordering_fields = (
         'profile__first_name', 'profile__last_name', 'charge',
