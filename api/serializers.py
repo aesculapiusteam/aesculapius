@@ -22,7 +22,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         model = Profile
         fields = (
             'id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
-            'address', 'phone', 'cellphone', 'creation_date', 'is_deleted'
+            'address', 'phone', 'cellphone', 'creation_date', 'is_deleted', 'healthcare',
         )
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
@@ -77,6 +77,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
         employee.profile.phone = profile['phone']
         employee.profile.cellphone = profile['cellphone']
         employee.profile.is_deleted = profile['is_deleted']
+        employee.profile.healthcare = profile['healthcare']
         employee.save()
         employee.assist_ed.clear()
         for i in assist_ed:
