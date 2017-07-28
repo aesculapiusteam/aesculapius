@@ -30,7 +30,7 @@ client*
 - address (CharField)
 - phone (CharField)
 - cellphone (CharField)
-- creation_date (TimestampField)
+- creation_datetime (TimestampField)
 - **employee** (IntegerField) If this profile is from an employee, this is
     the employee id
 # Profile SearchFilter and OrderingFilter

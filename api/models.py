@@ -27,7 +27,7 @@ class Profile(models.Model):
     address = models.CharField(max_length=256, null=True, blank=True)
     phone = models.CharField(max_length=50, null=True, blank=True)
     cellphone = models.CharField(max_length=50, null=True, blank=True)
-    creation_date = models.DateField(auto_now_add=True, blank=True)
+    creation_datetime = models.DateTimeField(auto_now_add=True, blank=True)
     is_deleted = models.BooleanField(default=False, blank=True)
     healthcare = models.CharField(max_length=256, null=True, blank=True)
 

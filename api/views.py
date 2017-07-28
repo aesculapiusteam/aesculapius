@@ -37,7 +37,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, filters.DjangoFilterBackend)
     filter_fields = ('is_deleted',)
     search_fields = ('first_name', 'last_name', 'email', 'dni', 'healthcare')
-    ordering_fields = ('first_name', 'last_name', 'creation_date')
+    ordering_fields = ('first_name', 'last_name', 'creation_datetime')
     ordering = ('first_name', 'last_name')
 
     def get_queryset(self):
@@ -60,7 +60,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     )
     ordering_fields = (
         'profile__first_name', 'profile__last_name', 'charge',
-        'profile__creation_date', 'profile__dni', 'profile__healthcare',
+        'profile__creation_datetime', 'profile__dni', 'profile__healthcare',
     )
     ordering = ('profile__first_name', 'profile__last_name')
     filter_fields = ('profile__is_deleted',)

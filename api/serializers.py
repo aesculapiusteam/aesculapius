@@ -22,7 +22,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         model = Profile
         fields = (
             'id', 'employee', 'first_name', 'last_name', 'email', 'dni', 'birth_date',
-            'address', 'phone', 'cellphone', 'creation_date', 'is_deleted', 'healthcare',
+            'address', 'phone', 'cellphone', 'creation_datetime', 'is_deleted', 'healthcare',
         )
         extra_kwargs = {'url': {'view_name': 'api:profile-detail'}}
 
