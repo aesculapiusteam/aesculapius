@@ -111,6 +111,9 @@ class DrugViewSet(viewsets.ModelViewSet):
     ordering_fields = ('name', 'description', 'quantity')
     ordering = ('name', 'description', 'quantity')
 
+    def perform_destroy(self, drug):
+        drug.soft_delete()
+
 
 class MovementViewSet(viewsets.ModelViewSet):
     # __doc__ = docs.movements

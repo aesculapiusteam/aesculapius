@@ -12,11 +12,11 @@ class Aesculapius(models.Model):
         for i in MovementItem.objects.filter(movement_type=1):
             self.balance += i.cash if i.is_donation else -(i.cash)
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         "Reads throw all movements and calculates the real balance."
         if self.pk is None: # The object is being saved for the first time (being created)
             self.refresh_balance()
-        super(Aesculapius, self).save(**kwargs)
+        super(Aesculapius, self).save(*args, **kwargs)
 
 class Profile(models.Model):
     first_name = models.CharField(max_length=128)
@@ -40,14 +40,14 @@ class Profile(models.Model):
         self.is_deleted = True
         self.save()
 
-    def delete(self):
+    def delete(self, *args, **kwargs):
         """
         Delete the corresponding user of the profile (if it's a employee
         profile) the Employee object is being automatically deleted
         """
         if hasattr(self, 'employee'):  # Is a employee profile
             User.objects.get(pk=self.employee.user.pk).delete()
-        super(Profile, self).delete()
+        super(Profile, self).delete(*args, **kwargs)
 
 
 class Employee(models.Model):
@@ -94,7 +94,7 @@ class Employee(models.Model):
         self.charge = charge
         return self
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         """
         Makes sure that the User and Profile of the employee are saved too
         after using the self.create() method.
@@ -103,7 +103,7 @@ class Employee(models.Model):
         self.user.save()
         self.profile_id = self.profile.id
         self.user_id = self.user.id
-        super(Employee, self).save(**kwargs)
+        super(Employee, self).save(*args, **kwargs)
 
     def soft_delete(self):
         self.profile.is_deleted = True
@@ -115,7 +115,7 @@ class Employee(models.Model):
         """
         User.objects.get(pk=self.user.pk).delete()
         Profile.objects.get(pk=self.profile.pk).delete()
-        super(Employee, self).delete()
+        super(Employee, self).delete(*args, **kwargs)
 
 
 class Visit(models.Model):
@@ -138,6 +138,11 @@ class Drug(models.Model):
     description = models.TextField(null=True, blank=True)
     quantity = models.IntegerField(default=0)
 
+    def soft_delete(self):
+        "If the drug is already in a movement_item, prohibit its deletion"
+        if not self.movement_items.exists():
+            super(Drug, self).delete()
+
     def __unicode__(self):
         return self.name + ': ' + str(self.quantity)
 
@@ -158,20 +163,19 @@ class MovementItem(models.Model):
         choices=[(0, 'Medicamento'), (1, 'Dinero')], default=0
     )
     drug = models.ForeignKey(Drug, related_name='movement_items', null=True)
+    # drug = models.ForeignKey(Drug, related_name='movement_items', null=True)
+    # drug_name = models.ForeignKey(Drug, related_name='movement_items', null=True)
     drug_quantity = models.PositiveSmallIntegerField(null=True)
     cash = models.DecimalField(max_digits=10, decimal_places=2, null=True)
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         if self.movement_type == 0: # Drugs
             # This line is necessary, can't modify self.drug correctly.
             drug = Drug.objects.get(pk=self.drug.pk)
-            if self.is_donation:
-                drug.quantity += self.drug_quantity
-            else:
-                drug.quantity -= self.drug_quantity
+            drug.quantity += self.drug_quantity if self.is_donation else -(self.drug_quantity)
             drug.save()
         if self.movement_type == 1: # Money
             balance_singleton, new = Aesculapius.objects.get_or_create()
             balance_singleton.balance += self.cash if self.is_donation else -(self.cash)
             balance_singleton.save()
-        super(MovementItem, self).save(**kwargs)
+        super(MovementItem, self).save(*args, **kwargs)
