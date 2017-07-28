@@ -176,3 +176,9 @@ class MovementItem(models.Model):
             balance_singleton.balance += self.cash if self.is_donation else -(self.cash)
             balance_singleton.save()
         super(MovementItem, self).save(**kwargs)
+
+class Issue(models.Model):
+    employee = models.ForeignKey(Employee, related_name='issues')
+    creation_datetime = models.DateTimeField(auto_now_add=True, blank=True)
+    title = models.CharField(max_length=256)
+    content = models.TextField(default="", blank=True)

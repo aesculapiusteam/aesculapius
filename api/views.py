@@ -1,7 +1,7 @@
-from api.models import Aesculapius, Profile, Employee, Visit, Drug, Movement
+from api.models import Aesculapius, Profile, Employee, Visit, Drug, Movement, Issue
 from api.serializers import (
     AesculapiusSerializer, ProfileSerializer, EmployeeSerializer,
-    VisitSerializer, DrugSerializer, MovementSerializer
+    VisitSerializer, DrugSerializer, MovementSerializer, IssueSerializer
 )
 from rest_framework import viewsets, permissions, filters
 from rest_framework.response import Response
@@ -124,3 +124,9 @@ class MovementViewSet(viewsets.ModelViewSet):
     'employee__profile__last_name', 'profile__last_name','items__drug__name', 'datetime')
     filter_fields = ('employee', 'profile')
     ordering = ('-datetime',)
+
+class IssueViewSet(viewsets.ModelViewSet):
+    # __doc__ = docs.issues
+    permission_classes = (IsAuthenticated, IsNotDeleted)
+    queryset = Issue.objects.all()
+    serializer_class = IssueSerializer

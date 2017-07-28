@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from rest_framework import serializers
-from api.models import Aesculapius, Profile, Employee, Visit, Drug, Movement, MovementItem
+from api.models import Aesculapius, Profile, Employee, Visit, Drug, Movement, MovementItem, Issue
 from django.utils import timezone
 
 def error(error):
@@ -184,3 +184,15 @@ class MovementSerializer(serializers.ModelSerializer):
     def update(self, movement, validated_data):
         # Don't allow updates on movements
         return movement
+
+
+class IssueSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Issue
+        fields = ('id', 'employee', 'creation_datetime', 'title', 'content')
+
+    def create(self, validated_data):
+        validated_data['employee'] = self.context['request'].user.employee
+        res = super(IssueSerializer, self).create(validated_data)
+        return res
