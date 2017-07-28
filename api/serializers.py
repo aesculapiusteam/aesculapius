@@ -187,6 +187,8 @@ class MovementSerializer(serializers.ModelSerializer):
 
 
 class IssueSerializer(serializers.ModelSerializer):
+    employee = serializers.ReadOnlyField(source="employee.id")
+    creation_datetime = serializers.ReadOnlyField()
 
     class Meta:
         model = Issue
