@@ -51,3 +51,6 @@ local/
 #Static files
 assets/
 static/
+
+#Backup folder
+backups/
