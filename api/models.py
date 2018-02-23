@@ -131,7 +131,7 @@ class Visit(models.Model):
         self.save()
 
     def __unicode__(self):
-        return self.patient.__unicode__() + " visited " + self.doctor.__unicode__() + " on " + self.datetime.ctime()
+        return unicode(self.patient) + " visited " + unicode(self.doctor) + " on " + self.datetime.ctime()
 
 
 class Drug(models.Model):
@@ -140,7 +140,7 @@ class Drug(models.Model):
     quantity = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return self.name + ': ' + str(self.quantity)
+        return self.name + ': ' + unicode(self.quantity)
 
 
 class Movement(models.Model):
@@ -149,7 +149,7 @@ class Movement(models.Model):
     datetime = models.DateTimeField(default=timezone.now)
 
     def __unicode__(self):
-        return str(self.id) + ' - ' + str(self.employee) + ' -> ' + str(self.profile)
+        return unicode(self.id) + ' - ' + unicode(self.employee) + ' -> ' + unicode(self.profile)
 
 class MovementItem(models.Model):
     movement = models.ForeignKey(Movement, related_name='items')
