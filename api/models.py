@@ -8,6 +8,9 @@ from django.utils import timezone
 class Aesculapius(models.Model):
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal(0.0))
 
+    class Meta:
+        verbose_name_plural = "Aesculapius Settings"
+
     def refresh_balance(self):
         for i in MovementItem.objects.filter(movement_type=1):
             self.balance += i.cash if i.is_donation else -(i.cash)
@@ -17,6 +20,9 @@ class Aesculapius(models.Model):
         if self.pk is None: # The object is being saved for the first time (being created)
             self.refresh_balance()
         super(Aesculapius, self).save(**kwargs)
+
+    def __unicode__(self):
+        return "Aesculapius Settings Singleton"
 
 class Profile(models.Model):
     first_name = models.CharField(max_length=128)
